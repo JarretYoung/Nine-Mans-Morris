@@ -10,9 +10,10 @@ public class Frame extends JFrame {
         super("Nine Man Morris");
         this.panel = new Panel(this);
         this.add(this.panel);
+        this.addMouseListener(Mouse.getInstance().getMouseListener());
         this.setFocusable(true);
         this.setResizable(false);
-        this.setSize(400,400);
+        this.setSize(400+16,400+39);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

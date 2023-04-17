@@ -42,7 +42,9 @@ public class Panel extends JPanel implements ActionListener {
     // run every frame
     @Override
     public void actionPerformed(ActionEvent e) {
+        Mouse.getInstance().tickStart(this.getFrame());
         this.currentPage.tick(); // run page specific stuff
+        Mouse.getInstance().tickEnd();
     }
 
     // draw everything onto the screen

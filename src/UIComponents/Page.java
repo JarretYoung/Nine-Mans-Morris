@@ -17,12 +17,10 @@ public abstract class Page {
 
     // draw everything
     public void paintComponent(Graphics g) {
-        System.out.println("paint!");
     }
 
     // run every frame
     public void tick() {
-        System.out.println("tick!");
     };
 
     public Panel getPanel() {return panel;}
