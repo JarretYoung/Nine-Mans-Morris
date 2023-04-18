@@ -1,6 +1,4 @@
-package UIComponents;
-
-import sun.applet.Main;
+package game.UIComponents;
 
 public class GamePage extends Page {
     public static final String ID = "game";

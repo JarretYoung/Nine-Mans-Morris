@@ -1,4 +1,4 @@
-package UIComponents;
+package game.UIComponents;
 
 
 

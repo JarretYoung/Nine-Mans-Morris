@@ -1,4 +1,4 @@
-package UIComponents;
+package game.UIComponents;
 
 import javax.swing.*;
 import java.awt.*;
