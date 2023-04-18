@@ -1,15 +1,19 @@
 package game.Actions;
 
-import game.Players.Player;
+import javax.swing.text.Position;
 
 public abstract class MoveAction extends Action {
-    protected int from;
-    protected int to;
+    protected Position startPosition;
+    protected Position endPosition;
 
-    public MoveAction(ActionType actionType, Player player, int from, int to) {
+    public MoveAction(ActionType actionType, Player player, int startPosition, int endPosition) {
         super(actionType, player);
-        this.from = from;
-        this.to = to;
+        this.startPosition = startPosition;
+        this.endPosition = endPosition;
     }
+
+    @Override
+    public abstract void performAction(GameState gameState);
 }
+
 

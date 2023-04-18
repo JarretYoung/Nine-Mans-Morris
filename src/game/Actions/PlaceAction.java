@@ -1,6 +1,9 @@
 package game.Actions;
+
+import javax.swing.text.Position;
+
 public class PlaceAction extends Action {
-    private int position;
+    private Position position;
 
     public PlaceAction(Player player, int position) {
         super(ActionType.PLACE, player);
@@ -8,13 +11,8 @@ public class PlaceAction extends Action {
     }
 
     @Override
-    public void execute(GameState gameState) {
+    public void performAction(GameState gameState) {
         gameState.placePiece(player, position);
-    }
-
-    @Override
-    public void undo(GameState gameState) {
-        gameState.removePiece(position);
     }
 }
 

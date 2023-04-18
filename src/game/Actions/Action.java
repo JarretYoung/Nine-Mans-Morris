@@ -12,23 +12,5 @@ public abstract class Action {
         this.timestamp = LocalDateTime.now();
     }
 
-    public abstract void execute(GameState gameState);
-    public abstract void undo(GameState gameState);
-
-    public ActionType getActionType() {
-        return actionType;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
+    public abstract void performAction(GameState gameState);
 }
-
-enum ActionType {
-    PLACE, DELETE, MOVE_ADJ, FLY
-}
-
