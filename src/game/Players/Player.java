@@ -52,13 +52,27 @@ abstract public class Player {
     /**
      *  Play the turn of this player
      */
-    public void playTurn() {
+    public boolean playTurn() {
         //check valid move
-        //check human status
-        //ask for user input
-        ////check user input vs valid moves
-        //////If valid allow move
-        //check gamerule
+        if (isHuman == true) {
+            int initialLocation = -1; // might need change type
+            int finalLocation = -1; // might need change type
+            //ask user input
+            boolean validMove = checkValidMove(initialLocation, finalLocation) ;
+            return validMove; // returns true when a valid move is made
+        }
+        return false;
+    }
+
+    public boolean checkValidMove(int initialLocation, int finalLocation) { //parameter subject to change
+        for (int i=0; i < allowableActions.size(); i++ ){
+            // check
+            if ((initialLocation == i) && (finalLocation == i)) { // change i  to initial and final
+                // check for valid moves
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
