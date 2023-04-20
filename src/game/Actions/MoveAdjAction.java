@@ -1,6 +1,8 @@
 package game.Actions;
 
-import javax.swing.text.Position;
+import game.Players.Player;
+
+import game.Drawables.Position;
 
 public class MoveAdjAction extends MoveAction {
     public MoveAdjAction(Player player, Position startPosition, Position endPosition) {

@@ -1,11 +1,13 @@
 package game.Actions;
 
-import javax.swing.text.Position;
+import game.Players.Player;
+
+import game.Drawables.Position;
 
 public class PlaceAction extends Action {
     private Position position;
 
-    public PlaceAction(Player player, int position) {
+    public PlaceAction(Player player, Position position) {
         super(ActionType.PLACE, player);
         this.position = position;
     }

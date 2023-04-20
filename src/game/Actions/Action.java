@@ -1,4 +1,6 @@
 package game.Actions;
+import game.Players.Player;
+
 import java.time.LocalDateTime;
 
 public abstract class Action {
