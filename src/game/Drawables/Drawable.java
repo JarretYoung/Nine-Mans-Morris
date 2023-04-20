@@ -3,24 +3,21 @@ package game.Drawables;
 import game.UIComponents.*;
 import java.awt.*;
 
-public class Drawable {
+public abstract class Drawable {
     private Page page;
 
     public Drawable(Page page) {
         this.page = page;
+        this.page.addDrawable(this);
     }
 
     public Page getPage() {return this.page;}
     
-    public void paint(Graphics2D g) {
-        //TODO: display
-    }
+    public abstract void paint(Graphics2D g);
 
-    public void tick() {
-        //TODO: run frame
-    }
+    public abstract void tick();
 
     public void delete() {
-        //TODO: delete the drawable
+        this.page.removeDrawable(this);
     }
 }

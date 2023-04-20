@@ -18,11 +18,11 @@ public class Sprite extends Drawable {
         this.width = width;
         this.height = height;
         this.baseImg = baseImage;
-        this.img = baseImage;
+        this.img = baseImg.getScaledInstance((int) this.getWidth(), (int) this.getHeight(), Image.SCALE_DEFAULT);
     }
 
     public void paint(Graphics2D g) {
-        //TODO:
+        g.drawImage(this.img,(int) (this.getX()-this.getWidth()/2),(int) (this.getY()-this.getHeight()/2), this.getPage().getPanel());
     }
     
     public void tick() {

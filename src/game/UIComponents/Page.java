@@ -2,12 +2,20 @@ package game.UIComponents;
 
 
 
+import game.Drawables.Drawable;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Page {
     private String id;
     private Panel panel;
-    // TODO: add a list of drawables
+    private ArrayList<Drawable> drawables = new ArrayList<>();
+
+    public void addDrawable(Drawable drawable) {
+        this.drawables.add(drawable);
+    }
+    public void removeDrawable(Drawable drawable) {this.drawables.remove(drawable);}
 
     public Page(Panel panel, String id) {
         this.panel = panel;
@@ -18,12 +26,17 @@ public abstract class Page {
 
     // draw everything
     public void paintComponent(Graphics g) {
-        // TODO: loop through every drawable
+        Graphics2D g2d = (Graphics2D) g;
+        for(Drawable drawable : drawables) {
+            drawable.paint(g2d);
+        }
     }
 
     // run every frame
     public void tick() {
-        // TODO: loop through every drawable
+        for(Drawable drawable : drawables) {
+            drawable.tick();
+        }
     };
 
     public Panel getPanel() {return panel;}
