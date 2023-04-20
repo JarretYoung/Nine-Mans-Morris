@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Position extends Sprite {
     // attributes
-    public final static double SIZE = 32;
+    public final static double SIZE = 16;
     public final static String IMG_PATH = "images/blackCircle.png";
     ArrayList<Position> neighbours = new ArrayList<Position>();
 

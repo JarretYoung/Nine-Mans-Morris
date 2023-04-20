@@ -21,7 +21,7 @@ public class Panel extends JPanel implements ActionListener {
         // start at main menu
         this.registerPage(new MainMenuPage(this));
         this.registerPage(new GamePage(this));
-        this.setCurrentPage(MainMenuPage.ID);
+        this.setCurrentPage(GamePage.ID); // goto game page directly for now
         // timer for running things every frame
         timer = new Timer(DELAY, this);
         timer.start();

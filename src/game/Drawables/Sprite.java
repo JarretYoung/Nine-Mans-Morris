@@ -22,7 +22,7 @@ public class Sprite extends Drawable {
     }
 
     public void paint(Graphics2D g) {
-        g.drawImage(this.img,(int) (this.getX()-this.getWidth()/2),(int) (this.getY()-this.getHeight()/2), this.getPage().getPanel());
+        g.drawImage(this.img,(int) this.getX1(),(int) this.getY1(), this.getPage().getPanel());
     }
     
     public void tick() {
@@ -73,6 +73,11 @@ public class Sprite extends Drawable {
     public double getHeight() {
         return this.height;
     }
+
+    public double getX1() {return this.getX() - this.getWidth()/2;}
+    public double getY1() {return this.getY() - this.getHeight()/2;}
+    public double getX2() {return this.getX() + this.getWidth()/2;}
+    public double getY2() {return this.getY() + this.getHeight()/2;}
 
     public Image getBaseImg() {
         return this.baseImg;

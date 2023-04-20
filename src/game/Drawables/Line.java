@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Line extends Sprite {
     // attributes
-    public static final double LINE_WIDTH = 16;
+    public static final double LINE_WIDTH = 8;
     public final static String IMG_PATH = "images/blackSquare.png";
     //Color color;
     public Line(Page page, double pos1, double pos2, double otherMidPoint,boolean isHorizontal) {
