@@ -18,7 +18,13 @@ public class Position extends Sprite {
         //More attributes soon
     }
 
-
+    @Override
+    public void tick() {
+        super.tick();
+        if(this.isHovered()) {
+            Mouse.getInstance().setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+    }
 
     public void addNeighbours(Position newPos) {
         this.neighbours.add(newPos);

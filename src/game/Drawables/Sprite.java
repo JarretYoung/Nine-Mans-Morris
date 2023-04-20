@@ -86,4 +86,15 @@ public class Sprite extends Drawable {
     public Image getImg() {
         return this.img;
     }
+
+    // check if a coordinate is within the sprite
+    public boolean intersectsPoint(double x, double y) {
+        return x >= this.getX1() && y >= this.getY1() && x <= this.getX2() && y <= this.getY2();
+    }
+    public boolean isHovered() {
+        return this.intersectsPoint(Mouse.getInstance().x(),Mouse.getInstance().y());
+    }
+    public boolean isClicked() {
+        return this.isHovered() && Mouse.getInstance().leftClicked();
+    }
 }

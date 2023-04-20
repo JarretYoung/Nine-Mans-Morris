@@ -6,6 +6,8 @@ import java.awt.*;
 public class Mouse {
     private double mousePosX;
     private double mousePosY;
+    private Cursor cursor;
+    private Panel panel;
 
     private static Mouse mouse = null;
     private MorrisMouseListener mouseListener;
@@ -28,6 +30,7 @@ public class Mouse {
 
     protected void tickEnd() {
         this.mouseListener.tick();
+        this.panel.setCursor(this.getCursor());
     }
 
     // 1 = left click, 2 = middle click, 3 = right click
@@ -40,4 +43,12 @@ public class Mouse {
     // mouse position
     public double x() {return mousePosX;}
     public double y() {return mousePosY;}
+
+    // mouse cursor
+    public Cursor getCursor() {return cursor;}
+    public void setCursor(Cursor cursor) {this.cursor = cursor;}
+
+    // set panel
+
+    public void setPanel(Panel panel) {this.panel = panel;}
 }

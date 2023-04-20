@@ -43,6 +43,8 @@ public class Panel extends JPanel implements ActionListener {
     // run every frame
     @Override
     public void actionPerformed(ActionEvent e) {
+        Mouse.getInstance().setCursor(new Cursor(Cursor.DEFAULT_CURSOR)); // by default the basic cursor should be used unless some code changes that
+
         Mouse.getInstance().tickStart(this.getFrame());
         this.currentPage.tick(); // run page specific stuff
         Mouse.getInstance().tickEnd();
