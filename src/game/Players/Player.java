@@ -1,5 +1,7 @@
 package game.Players;
 
+import game.Colours;
+
 import java.util.ArrayList;
 
 /**
@@ -19,7 +21,7 @@ abstract public class Player {
     //Number of pieces left over
     private int piecesLeft;
     //"Colours"
-    private Enum<?> colour;
+    private Enum<Colours> colour;
 
     /**
      * Constructor
@@ -28,7 +30,7 @@ abstract public class Player {
      * @param _isHuman      Status if this actor is a human or AI
      * @param _colour       "Colour" of the piece in control
      */
-    public Player(boolean _isHuman, Enum<?> _colour) {
+    public Player(boolean _isHuman, Enum<Colours> _colour) {
         this.isHuman = _isHuman;
         this.colour = _colour;
     }
@@ -42,7 +44,7 @@ abstract public class Player {
      * @param _pricesInHand Pieces that have yet to be placed on the board
      * @param _piecesLeft   Pieces that are left on the board / total pieces for this player
      */
-    public Player(boolean _isHuman, Enum<?> _colour, int _pricesInHand, int _piecesLeft) {
+    public Player(boolean _isHuman, Enum<Colours> _colour, int _pricesInHand, int _piecesLeft) {
         this.isHuman = _isHuman;
         this.colour = _colour;
         this.piecesInHand = _pricesInHand;
@@ -90,5 +92,9 @@ abstract public class Player {
      */
     public int checkPiecesLeft() {
         return piecesLeft;
+    }
+
+    public Enum<Colours> getColour() {
+        return colour;
     }
 }
