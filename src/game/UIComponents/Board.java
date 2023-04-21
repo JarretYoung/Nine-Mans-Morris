@@ -4,8 +4,10 @@ import com.sun.javaws.exceptions.InvalidArgumentException;
 import game.Drawables.Line;
 import game.Drawables.Position;
 import game.Drawables.Sprite;
+import javafx.geometry.Pos;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Board extends Sprite {
     public final static double SIZE = 200;
@@ -17,11 +19,20 @@ public class Board extends Sprite {
 
     private final Position[][] grid;
     private Page page;
+    private ArrayList<Position> positions = new ArrayList<>();
     public Board(Page page) {
         super(page,X,Y,SIZE,SIZE,(new ImageIcon(IMG_PATH)).getImage());
         this.page = page;
         this.grid = new Position[GRID_SIZE_X][GRID_SIZE_Y];
         this.initializeBoard();
+    }
+    public Position getClickedPosition() {
+        for(Position pos: positions) { // for each position
+            if(pos.isClicked()) { // if clicked
+                return pos; // return
+            }
+        }
+        return null; // no positions
     }
     private double gridPosXtoCoordX(int gridPosX) {
         return this.getX1() + gridPosX/((double) GRID_SIZE_X-1) * this.getWidth();
@@ -33,6 +44,7 @@ public class Board extends Sprite {
         double x = this.gridPosXtoCoordX(gridPosX);
         double y = this.gridPosYtoCoordY(gridPosY);
         this.grid[gridPosX][gridPosY] = new Position(this.getPage(),x,y);
+        positions.add(this.grid[gridPosX][gridPosY]);
     }
     private void addLine(int gridPosX1, int gridPosY1, int gridPosX2, int gridPosY2) {
         if(gridPosX1==gridPosX2)  { // vertical line
