@@ -21,7 +21,7 @@ public class Panel extends JPanel implements ActionListener {
         // start at main menu
         this.registerPage(new MainMenuPage(this));
         this.registerPage(new GamePage(this));
-        this.setCurrentPage(MainMenuPage.ID);
+        this.setCurrentPage(GamePage.ID); // goto game page directly for now
         // timer for running things every frame
         timer = new Timer(DELAY, this);
         timer.start();
@@ -43,6 +43,8 @@ public class Panel extends JPanel implements ActionListener {
     // run every frame
     @Override
     public void actionPerformed(ActionEvent e) {
+        Mouse.getInstance().setCursor(new Cursor(Cursor.DEFAULT_CURSOR)); // by default the basic cursor should be used unless some code changes that
+
         Mouse.getInstance().tickStart(this.getFrame());
         this.currentPage.tick(); // run page specific stuff
         Mouse.getInstance().tickEnd();

@@ -1,19 +1,24 @@
 package game.Drawables;
 
 import game.UIComponents.*;
+
+import javax.swing.*;
 import java.awt.*;
 
 public class Token extends Sprite {
     // attributes
-    boolean player; // false = enemy
-    public Token(Page page, double x, double y, double width, double height, Image baseImage, boolean player) {
-        super(page, x, y, width, height, baseImage);
+    public final static double SIZE = 64;
+    public final static String IMG_PATH_DUCK = "images/duck.png";
+    public final static String IMG_PATH_GOOSE = "images/goose.png";
+    boolean player; // false = goose
+    public Token(Page page, double x, double y, boolean player) {
+        super(page, x, y, SIZE, SIZE, (new ImageIcon(player ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
         this.player = player;
         //More attributes soon
     }
 
     public void paint(Graphics2D g) {
-        //TODO:
+        super.paint(g);
     }
     
     public void tick() {

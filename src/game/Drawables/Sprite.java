@@ -18,11 +18,11 @@ public class Sprite extends Drawable {
         this.width = width;
         this.height = height;
         this.baseImg = baseImage;
-        this.img = baseImage;
+        this.img = baseImg.getScaledInstance((int) this.getWidth(), (int) this.getHeight(), Image.SCALE_DEFAULT);
     }
 
     public void paint(Graphics2D g) {
-        //TODO:
+        g.drawImage(this.img,(int) this.getX1(),(int) this.getY1(), this.getPage().getPanel());
     }
     
     public void tick() {
@@ -74,11 +74,27 @@ public class Sprite extends Drawable {
         return this.height;
     }
 
+    public double getX1() {return this.getX() - this.getWidth()/2;}
+    public double getY1() {return this.getY() - this.getHeight()/2;}
+    public double getX2() {return this.getX() + this.getWidth()/2;}
+    public double getY2() {return this.getY() + this.getHeight()/2;}
+
     public Image getBaseImg() {
         return this.baseImg;
     }
 
     public Image getImg() {
         return this.img;
+    }
+
+    // check if a coordinate is within the sprite
+    public boolean intersectsPoint(double x, double y) {
+        return x >= this.getX1() && y >= this.getY1() && x <= this.getX2() && y <= this.getY2();
+    }
+    public boolean isHovered() {
+        return this.intersectsPoint(Mouse.getInstance().x(),Mouse.getInstance().y());
+    }
+    public boolean isClicked() {
+        return this.isHovered() && Mouse.getInstance().leftClicked();
     }
 }

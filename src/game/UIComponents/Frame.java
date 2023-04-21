@@ -11,6 +11,7 @@ public class Frame extends JFrame {
         this.panel = new Panel(this);
         this.add(this.panel);
         this.addMouseListener(Mouse.getInstance().getMouseListener());
+        Mouse.getInstance().setPanel(this.panel);
         this.setFocusable(true);
         this.setResizable(false);
         this.setSize(400+16,400+39);

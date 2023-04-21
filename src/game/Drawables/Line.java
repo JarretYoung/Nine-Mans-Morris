@@ -1,25 +1,28 @@
 package game.Drawables;
 
 import game.UIComponents.*;
+
+import javax.swing.*;
 import java.awt.*;
 
 public class Line extends Sprite {
     // attributes
-    Color color;
-    public Line(Page page, double x, double y, double width, double height, Image baseImage, Color color) {
-        super(page, x, y, width, height, baseImage);
-        this.color = color;
+    public static final double LINE_WIDTH = 8;
+    public final static String IMG_PATH = "images/blackSquare.png";
+    //Color color;
+    public Line(Page page, double pos1, double pos2, double otherMidPoint,boolean isHorizontal) {
+        super(page,
+                isHorizontal ? (pos1 + pos2)/2 : otherMidPoint,
+                !isHorizontal ? (pos1 + pos2)/2 : otherMidPoint,
+                isHorizontal ? pos2 - pos1 : LINE_WIDTH,
+                !isHorizontal ? pos2 - pos1 : LINE_WIDTH,
+                (new ImageIcon(IMG_PATH)).getImage());
+        //this.color = color;
         //More attributes soon
     }
 
-    public void paint(Graphics2D g) {
-        //TODO:
-    }
-    
-    public void tick() {
-        //TODO:
-    }
 
+    /*
     public void setColor(Color color) {
         this.color = color;
     }
@@ -27,4 +30,5 @@ public class Line extends Sprite {
     public Color getColor() {
         return this.color;
     }
+    */
 }
