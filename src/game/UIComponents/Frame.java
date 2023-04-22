@@ -14,7 +14,7 @@ public class Frame extends JFrame {
         Mouse.getInstance().setPanel(this.panel);
         this.setFocusable(true);
         this.setResizable(false);
-        this.setSize(400+16,400+39);
+        this.setSize(600+16,600+39);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
