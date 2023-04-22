@@ -26,12 +26,11 @@ abstract public class Player {
     //Number of pieces left over
     private int piecesLeft;
     //"Colours"
-    private Enum<?> colour;
+    private Enum<Colours> colour;
     // Initial Position
     private Position firstClickedLocation;
     // Final Position
     private Position secondClickedLocation;
-    private Enum<Colours> colour;
 
     /**
      * Constructor
@@ -100,11 +99,11 @@ abstract public class Player {
     }
 
     public Action checkValidMove(Position initialLocation, Position finalLocation) { //parameter subject to change
-        for (int i=0; i < allowableActions.size(); i++ ){
+        for (int i=0; i < this.allowableActions.size(); i++ ){
             // check
-            if ((allowableActions.get(i).getInitialPosition() == initialLocation) && (allowableActions.get(i).getFinalPosition() == finalLocation)) {
+            if (( (this.allowableActions.get(i).getInitialPosition()).equals(initialLocation)) && ( (this.allowableActions.get(i).getFinalPosition()).equals(finalLocation) )) {
                 // check for valid moves
-                return allowableActions.get(i);
+                return this.allowableActions.get(i);
             }
         }
         return null;
