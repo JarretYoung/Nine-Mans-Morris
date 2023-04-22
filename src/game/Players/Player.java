@@ -45,7 +45,7 @@ abstract public class Player {
     public Player(boolean _isHuman, Enum<Colours> _colour) {
         this.isHuman = _isHuman;
         this.colour = _colour;
-        this.piecesInHand = 9;
+        this.piecesInHand = 3;
         this.piecesLeft = 0;
     }
 
@@ -89,12 +89,22 @@ abstract public class Player {
                 } else {
                     if (this.firstClickedLocation == null) {
                         this.firstClickedLocation = pos;
+                        System.out.println("yas");
                         return null;
 
                     }
-                    if (this.secondClickedLocation == null) {
+                    else if (this.secondClickedLocation == null) {
+                        System.out.println("yos");
                         this.secondClickedLocation = pos;
-                        return checkValidMove(this.firstClickedLocation, this.secondClickedLocation);
+                        Action action = checkValidMove(this.firstClickedLocation, this.secondClickedLocation);
+                        this.firstClickedLocation = null;
+                        this.secondClickedLocation = null;
+                        return action;
+                    }
+                    else {
+                        System.out.println("nos");
+                        this.firstClickedLocation = null;
+                        this.secondClickedLocation = null;
                     }
                 }
             }
@@ -149,7 +159,8 @@ abstract public class Player {
     public int checkPiecesLeft() {
         return piecesLeft;
     }
-
+    public void changePiecesInHand(int change) {this.piecesInHand += change;}
+    public void changePiecesLeft(int change) {this.piecesLeft += change;}
     public Enum<Colours> getColour() {
         return colour;
     }

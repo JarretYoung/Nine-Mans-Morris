@@ -1,6 +1,7 @@
 package game.Drawables;
 
 import game.UIComponents.*;
+import javafx.geometry.Pos;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,5 +32,12 @@ public class Token extends Sprite {
 
     public boolean getPlayer() {
         return this.player;
+    }
+
+    public void moveSelf(Position startPos, Position endPos) {
+        startPos.setToken(null);
+        endPos.setToken(this);
+        this.setX(endPos.getX());
+        this.setY(endPos.getY());
     }
 }
