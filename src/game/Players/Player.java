@@ -87,22 +87,28 @@ abstract public class Player {
                 if (pos == null) {
                     return null;
                 } else {
-                    if (this.firstClickedLocation == null) {
+                    if (this.firstClickedLocation == null && pos.getToken()!=null) {
                         this.firstClickedLocation = pos;
-                        System.out.println("yas");
+                        if(this.firstClickedLocation.getToken()!=null) {
+                            this.firstClickedLocation.getToken().setSelected(true);
+                        }
                         return null;
 
                     }
-                    else if (this.secondClickedLocation == null) {
-                        System.out.println("yos");
+                    else if (this.firstClickedLocation != null && this.secondClickedLocation == null) {
                         this.secondClickedLocation = pos;
                         Action action = checkValidMove(this.firstClickedLocation, this.secondClickedLocation);
+                        if(this.firstClickedLocation.getToken()!=null) {
+                            this.firstClickedLocation.getToken().setSelected(false);
+                        }
                         this.firstClickedLocation = null;
                         this.secondClickedLocation = null;
                         return action;
                     }
                     else {
-                        System.out.println("nos");
+                        if(this.firstClickedLocation != null && this.firstClickedLocation.getToken()!=null) {
+                            this.firstClickedLocation.getToken().setSelected(false);
+                        }
                         this.firstClickedLocation = null;
                         this.secondClickedLocation = null;
                     }

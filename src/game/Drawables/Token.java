@@ -11,7 +11,10 @@ public class Token extends Sprite {
     public final static double SIZE = 64;
     public final static String IMG_PATH_DUCK = "images/duck.png";
     public final static String IMG_PATH_GOOSE = "images/goose.png";
+    public final static String IMG_PATH_DUCK_SELECTED = "images/duckSelected.png";
+    public final static String IMG_PATH_GOOSE_SELECTED = "images/gooseSelected.png";
     boolean player; // false = goose
+    private boolean selected = false;
     public Token(Page page, double x, double y, boolean player) {
         super(page, x, y, SIZE, SIZE, (new ImageIcon(player ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
         this.player = player;
@@ -39,5 +42,15 @@ public class Token extends Sprite {
         endPos.setToken(this);
         this.setX(endPos.getX());
         this.setY(endPos.getY());
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+        if(this.selected) {
+            this.setBaseImg((new ImageIcon(player ? IMG_PATH_DUCK_SELECTED : IMG_PATH_GOOSE_SELECTED)).getImage());
+        }
+        else {
+            this.setBaseImg((new ImageIcon(player ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
+        }
     }
 }
