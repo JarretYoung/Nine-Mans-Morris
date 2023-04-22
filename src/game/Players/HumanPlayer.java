@@ -15,7 +15,7 @@ public class HumanPlayer extends Player {
      * @param colour
      */
     public HumanPlayer(Colours colour) {
-        super(false, colour);
+        super(true, colour);
     }
 
     /**

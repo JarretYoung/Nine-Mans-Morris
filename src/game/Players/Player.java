@@ -1,11 +1,13 @@
 package game.Players;
 
+import game.Actions.FlyAction;
 import game.Actions.PlaceAction;
 import game.Colours;
 
 import game.Actions.Action;
 import game.Drawables.Position;
 import game.UIComponents.Board;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -43,6 +45,8 @@ abstract public class Player {
     public Player(boolean _isHuman, Enum<Colours> _colour) {
         this.isHuman = _isHuman;
         this.colour = _colour;
+        this.piecesInHand = 9;
+        this.piecesLeft = 0;
     }
 
     /**
@@ -67,7 +71,7 @@ abstract public class Player {
     public Action playTurn(Board board) {
         // temporary
         this.allowableActions = new ArrayList<>(); // temporary
-        this.allowableActions.add(new PlaceAction(this,board.getClickedPosition()));
+        this.allowableActions.add(null);
         // -----
         //check valid move
         if (isHuman == true) { // If player is human player
@@ -104,16 +108,31 @@ abstract public class Player {
     }
 
     public Action checkValidMove(Position initialLocation, Position finalLocation) { //parameter subject to change
-        for (int i=0; i < this.allowableActions.size(); i++ ){
-            // check
-            if (( (this.allowableActions.get(i).getInitialPosition()).equals(initialLocation)) && ( (this.allowableActions.get(i).getFinalPosition()).equals(finalLocation) )) {
-                // check for valid moves
-                return this.allowableActions.get(i);
-            }
-        }
-        return null;
+        // TODO: implement allowable actions
+        return getAction(initialLocation,finalLocation);
+
+//        for (int i=0; i < this.allowableActions.size(); i++ ){
+//            // check
+//            if (( (this.allowableActions.get(i).getInitialPosition()).equals(initialLocation)) && ( (this.allowableActions.get(i).getFinalPosition()).equals(finalLocation) )) {
+//                // check for valid moves
+//                return this.allowableActions.get(i);
+//            }
+//        }
+//        return null;
     }
 
+    // TODO: remove temporary function
+    public Action getAction(Position initialLocation, Position finalLocation) {
+        if(initialLocation==null && finalLocation!=null) {
+            return new PlaceAction(this,finalLocation);
+        }
+        else if(initialLocation!=null && finalLocation!=null) {
+            return new FlyAction(this,initialLocation,finalLocation);
+        }
+        else {
+            throw new NotImplementedException();
+        }
+    }
     /**
      *  Getter for the pieces that have yet to be placed on the board
      *
