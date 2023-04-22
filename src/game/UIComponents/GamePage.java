@@ -1,6 +1,7 @@
 package game.UIComponents;
 
 
+import game.Actions.Action;
 import game.Colours;
 import game.Players.HumanPlayer;
 import game.Players.Player;
@@ -33,9 +34,9 @@ public class GamePage extends Page {
     public void tick() {
         super.tick();
         if(this.gameIsRunning) {
-            boolean playedMove = this.currentPlayer.playTurn();
-            if(playedMove) {
-                this.nextTurn();
+            Action playedMove = this.currentPlayer.playTurn(this.board);
+            if(playedMove!=null) {
+                //this.nextTurn();
             }
             this.checkForEndOfGame();
         }

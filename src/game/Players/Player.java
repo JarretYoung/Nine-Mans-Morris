@@ -1,5 +1,6 @@
 package game.Players;
 
+import game.Actions.PlaceAction;
 import game.Colours;
 
 import game.Actions.Action;
@@ -53,7 +54,7 @@ abstract public class Player {
      * @param _pricesInHand Pieces that have yet to be placed on the board
      * @param _piecesLeft   Pieces that are left on the board / total pieces for this player
      */
-    public Player(boolean _isHuman, Enum<?> _colour, int _pricesInHand, int _piecesLeft) {
+    public Player(boolean _isHuman, Enum<Colours> _colour, int _pricesInHand, int _piecesLeft) {
         this.isHuman = _isHuman;
         this.colour = _colour;
         this.piecesInHand = _pricesInHand;
@@ -64,6 +65,10 @@ abstract public class Player {
      *  Play the turn of this player
      */
     public Action playTurn(Board board) {
+        // temporary
+        this.allowableActions = new ArrayList<>(); // temporary
+        this.allowableActions.add(new PlaceAction(this,board.getClickedPosition()));
+        // -----
         //check valid move
         if (isHuman == true) { // If player is human player
             if (this.piecesInHand > 0) { // Placing Phase
