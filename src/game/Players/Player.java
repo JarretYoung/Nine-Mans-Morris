@@ -45,7 +45,7 @@ abstract public class Player {
     public Player(boolean _isHuman, Enum<Colours> _colour) {
         this.isHuman = _isHuman;
         this.colour = _colour;
-        this.piecesInHand = 3;
+        this.piecesInHand = 9;
         this.piecesLeft = 0;
     }
 
