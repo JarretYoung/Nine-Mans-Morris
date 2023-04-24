@@ -1,10 +1,13 @@
 package game.Players;
 
+import game.Actions.FlyAction;
+import game.Actions.PlaceAction;
 import game.Colours;
 
 import game.Actions.Action;
 import game.Drawables.Position;
 import game.UIComponents.Board;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -42,6 +45,8 @@ abstract public class Player {
     public Player(boolean _isHuman, Enum<Colours> _colour) {
         this.isHuman = _isHuman;
         this.colour = _colour;
+        this.piecesInHand = 9;
+        this.piecesLeft = 0;
     }
 
     /**
@@ -53,7 +58,7 @@ abstract public class Player {
      * @param _pricesInHand Pieces that have yet to be placed on the board
      * @param _piecesLeft   Pieces that are left on the board / total pieces for this player
      */
-    public Player(boolean _isHuman, Enum<?> _colour, int _pricesInHand, int _piecesLeft) {
+    public Player(boolean _isHuman, Enum<Colours> _colour, int _pricesInHand, int _piecesLeft) {
         this.isHuman = _isHuman;
         this.colour = _colour;
         this.piecesInHand = _pricesInHand;
@@ -64,6 +69,10 @@ abstract public class Player {
      *  Play the turn of this player
      */
     public Action playTurn(Board board) {
+        // temporary
+        this.allowableActions = new ArrayList<>(); // temporary
+        this.allowableActions.add(null);
+        // -----
         //check valid move
         if (isHuman == true) { // If player is human player
             if (this.piecesInHand > 0) { // Placing Phase
@@ -78,14 +87,30 @@ abstract public class Player {
                 if (pos == null) {
                     return null;
                 } else {
-                    if (this.firstClickedLocation == null) {
+                    if (this.firstClickedLocation == null && pos.getToken()!=null) {
                         this.firstClickedLocation = pos;
+                        if(this.firstClickedLocation.getToken()!=null) {
+                            this.firstClickedLocation.getToken().setSelected(true);
+                        }
                         return null;
 
                     }
-                    if (this.secondClickedLocation == null) {
+                    else if (this.firstClickedLocation != null && this.secondClickedLocation == null) {
                         this.secondClickedLocation = pos;
-                        return checkValidMove(this.firstClickedLocation, this.secondClickedLocation);
+                        Action action = checkValidMove(this.firstClickedLocation, this.secondClickedLocation);
+                        if(this.firstClickedLocation.getToken()!=null) {
+                            this.firstClickedLocation.getToken().setSelected(false);
+                        }
+                        this.firstClickedLocation = null;
+                        this.secondClickedLocation = null;
+                        return action;
+                    }
+                    else {
+                        if(this.firstClickedLocation != null && this.firstClickedLocation.getToken()!=null) {
+                            this.firstClickedLocation.getToken().setSelected(false);
+                        }
+                        this.firstClickedLocation = null;
+                        this.secondClickedLocation = null;
                     }
                 }
             }
@@ -99,16 +124,31 @@ abstract public class Player {
     }
 
     public Action checkValidMove(Position initialLocation, Position finalLocation) { //parameter subject to change
-        for (int i=0; i < this.allowableActions.size(); i++ ){
-            // check
-            if (( (this.allowableActions.get(i).getInitialPosition()).equals(initialLocation)) && ( (this.allowableActions.get(i).getFinalPosition()).equals(finalLocation) )) {
-                // check for valid moves
-                return this.allowableActions.get(i);
-            }
-        }
-        return null;
+        // TODO: implement allowable actions
+        return getAction(initialLocation,finalLocation);
+
+//        for (int i=0; i < this.allowableActions.size(); i++ ){
+//            // check
+//            if (( (this.allowableActions.get(i).getInitialPosition()).equals(initialLocation)) && ( (this.allowableActions.get(i).getFinalPosition()).equals(finalLocation) )) {
+//                // check for valid moves
+//                return this.allowableActions.get(i);
+//            }
+//        }
+//        return null;
     }
 
+    // TODO: remove temporary function
+    public Action getAction(Position initialLocation, Position finalLocation) {
+        if(initialLocation==null && finalLocation!=null) {
+            return new PlaceAction(this,finalLocation);
+        }
+        else if(initialLocation!=null && finalLocation!=null) {
+            return new FlyAction(this,initialLocation,finalLocation);
+        }
+        else {
+            throw new NotImplementedException();
+        }
+    }
     /**
      *  Getter for the pieces that have yet to be placed on the board
      *
@@ -125,7 +165,8 @@ abstract public class Player {
     public int checkPiecesLeft() {
         return piecesLeft;
     }
-
+    public void changePiecesInHand(int change) {this.piecesInHand += change;}
+    public void changePiecesLeft(int change) {this.piecesLeft += change;}
     public Enum<Colours> getColour() {
         return colour;
     }

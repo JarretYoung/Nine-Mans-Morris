@@ -10,10 +10,10 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Board extends Sprite {
-    public final static double SIZE = 200;
+    public final static double SIZE = 400;
     public final static String IMG_PATH = "images/greenSquare.png";
-    public final static double X = 200;
-    public final static double Y = 200;
+    public final static double X = 300;
+    public final static double Y = 300;
     public final static int GRID_SIZE_X = 7;
     public final static int GRID_SIZE_Y = 7;
 

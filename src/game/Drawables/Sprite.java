@@ -52,6 +52,7 @@ public class Sprite extends Drawable {
 
     public void setBaseImg(Image baseImg) {
         this.baseImg = baseImg;
+        this.img = baseImg.getScaledInstance((int) this.getWidth(), (int) this.getHeight(), Image.SCALE_DEFAULT);
     }
 
     public void setImg(Image img) {

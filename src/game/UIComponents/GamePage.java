@@ -1,6 +1,8 @@
 package game.UIComponents;
 
 
+import UndoFunction.GameState;
+import game.Actions.Action;
 import game.Colours;
 import game.Players.HumanPlayer;
 import game.Players.Player;
@@ -12,9 +14,11 @@ public class GamePage extends Page {
     private Player player2;
     private Player currentPlayer;
     private boolean gameIsRunning;
+    private GameState gameState;
     public GamePage(Panel panel) {
         super(panel, ID);
         this.board = new Board(this);
+        this.gameState = new GameState(board);
         this.player1 = new HumanPlayer(Colours.WHITE);
         this.player2 = new HumanPlayer(Colours.BLACK);
         this.currentPlayer = this.player1;
@@ -33,8 +37,9 @@ public class GamePage extends Page {
     public void tick() {
         super.tick();
         if(this.gameIsRunning) {
-            boolean playedMove = this.currentPlayer.playTurn();
-            if(playedMove) {
+            Action playedMove = this.currentPlayer.playTurn(this.board);
+            if(playedMove!=null) {
+                playedMove.performAction(this.gameState);
                 this.nextTurn();
             }
             this.checkForEndOfGame();

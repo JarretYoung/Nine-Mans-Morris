@@ -11,6 +11,7 @@ public class Position extends Sprite {
     public final static double SIZE = 16;
     public final static String IMG_PATH = "images/blackCircle.png";
     ArrayList<Position> neighbours = new ArrayList<Position>();
+    private Token token = null;
 
     public Position(Page page, double x, double y) { // , ArrayList<Position> neighbours
         super(page, x, y, SIZE, SIZE, (new ImageIcon(IMG_PATH)).getImage());
@@ -33,4 +34,7 @@ public class Position extends Sprite {
     public ArrayList<Position> getNeighbours() {
         return this.neighbours;
     }
+
+    public void setToken(Token token) {this.token = token;}
+    public Token getToken() {return token;}
 }

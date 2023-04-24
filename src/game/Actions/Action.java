@@ -1,6 +1,8 @@
 package game.Actions;
 import UndoFunction.GameState;
+import game.Drawables.Position;
 import game.Players.Player;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDateTime;
 
@@ -16,4 +18,8 @@ public abstract class Action {
     }
 
     public abstract void performAction(GameState gameState);
+
+    public Position getInitialPosition() {throw new NotImplementedException();};
+
+    public Position getFinalPosition() {throw new NotImplementedException();};
 }
