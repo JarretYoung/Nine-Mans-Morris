@@ -4,6 +4,7 @@ package game.UIComponents;
 import UndoFunction.GameState;
 import game.Actions.Action;
 import game.Colours;
+import game.Drawables.Text;
 import game.Players.HumanPlayer;
 import game.Players.Player;
 
@@ -15,6 +16,12 @@ public class GamePage extends Page {
     private Player currentPlayer;
     private boolean gameIsRunning;
     private GameState gameState;
+    private Text turnText;
+    private Text duckLeftText;
+    private Text gooseLeftText;
+    public void setTurnTextStr(String strVal) {this.turnText.setTextStr(strVal);}
+    public void setDuckLeftStr(String strVal) {this.duckLeftText.setTextStr(strVal);}
+    public void setGooseLeftStr(String strVal) {this.gooseLeftText.setTextStr(strVal);}
     public GamePage(Panel panel) {
         super(panel, ID);
         this.board = new Board(this);
@@ -23,6 +30,9 @@ public class GamePage extends Page {
         this.player2 = new HumanPlayer(Colours.BLACK);
         this.currentPlayer = this.player1;
         this.gameIsRunning = true;
+        this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getColour()),20,20,false);
+        this.duckLeftText = new Text(this,"unplaced ducks: NA",20,50,false);;
+        this.gooseLeftText = new Text(this,"unplaced goose: NA",20,80,false);;
     }
     protected void nextTurn() {
         if(this.currentPlayer==this.player1) {
@@ -31,6 +41,7 @@ public class GamePage extends Page {
         else {
             this.currentPlayer = this.player1;
         }
+        this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getColour()));
     }
 
     @Override

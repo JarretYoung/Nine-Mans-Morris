@@ -1,9 +1,9 @@
 package game.UIComponents;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import game.Drawables.Line;
 import game.Drawables.Position;
 import game.Drawables.Sprite;
+import game.Drawables.Text;
 import javafx.geometry.Pos;
 
 import javax.swing.*;

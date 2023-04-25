@@ -1,5 +1,6 @@
 package game.Drawables;
 
+import game.Colours;
 import game.UIComponents.*;
 import javafx.geometry.Pos;
 
@@ -13,10 +14,10 @@ public class Token extends Sprite {
     public final static String IMG_PATH_GOOSE = "images/goose.png";
     public final static String IMG_PATH_DUCK_SELECTED = "images/duckSelected.png";
     public final static String IMG_PATH_GOOSE_SELECTED = "images/gooseSelected.png";
-    boolean player; // false = goose
+    Enum<Colours> player;
     private boolean selected = false;
-    public Token(Page page, double x, double y, boolean player) {
-        super(page, x, y, SIZE, SIZE, (new ImageIcon(player ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
+    public Token(Page page, double x, double y, Enum<Colours> team) {
+        super(page, x, y, SIZE, SIZE, (new ImageIcon(team==Colours.WHITE ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
         this.player = player;
         //More attributes soon
     }
@@ -29,11 +30,11 @@ public class Token extends Sprite {
         //TODO:
     }
 
-    public void setPlayer(boolean player) {
+    public void setPlayer(Enum<Colours> player) {
         this.player = player;
     }
 
-    public boolean getPlayer() {
+    public Enum<Colours> getPlayer() {
         return this.player;
     }
 
@@ -47,10 +48,10 @@ public class Token extends Sprite {
     public void setSelected(boolean selected) {
         this.selected = selected;
         if(this.selected) {
-            this.setBaseImg((new ImageIcon(player ? IMG_PATH_DUCK_SELECTED : IMG_PATH_GOOSE_SELECTED)).getImage());
+            this.setBaseImg((new ImageIcon(player==Colours.WHITE ? IMG_PATH_DUCK_SELECTED : IMG_PATH_GOOSE_SELECTED)).getImage());
         }
         else {
-            this.setBaseImg((new ImageIcon(player ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
+            this.setBaseImg((new ImageIcon(player==Colours.BLACK ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
         }
     }
 }

@@ -4,66 +4,52 @@ import game.UIComponents.*;
 import java.awt.*;
 
 public class Text extends Drawable {
-    Color color;
-    Font font;
-    String textStr;
-    double x;
-    double y;
-    
-    public Text(Page page, Color color, Font font, String textStr, double x, double y) {
+    private static Color defaultColor = new Color(255,255,255);
+    private static String defaultFontStr = "Arial";
+    private Color color;
+    private Font font;
+    private String textStr;
+    private double x;
+    private double y;
+    private boolean center;
+    public Text(Page page, String textStr, double x, double y,boolean center) {
         super(page);
-        this.color = color;
-        this.font = font;
+        this.font = new Font(defaultFontStr,Font.PLAIN,20);
+        this.color = defaultColor;
         this.textStr = textStr;
         this.x = x;
         this.y = y;
+        this.center = center;
+    }
+    // draw text
+    @Override
+    public void paint(Graphics2D g2d) {
+        g2d.setColor(this.color);
+        g2d.setFont(this.font);
+        if(this.center) { // if this text should be centered
+            Font f = g2d.getFont();
+            FontMetrics fm = g2d.getFontMetrics(f);
+            // get width of text
+            double width = fm.stringWidth(this.textStr);
+            // get height of text
+            double height = fm.getStringBounds(this.textStr, g2d).getHeight();
+            // center and draw
+            g2d.drawString(this.textStr,(int) (this.x - width/2),(int) (this.y + height/2));
+        }
+        else {
+            // draw
+            g2d.drawString(this.textStr,(int) this.x,(int) this.y);
+        }
+
     }
 
-    public void paint(Graphics2D g) {
-        //TODO:
-    }
-
+    @Override
     public void tick() {
-        //TODO:
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public void setFont(Font font) {
-        this.font = font;
-    }
-
-    public void setText(String text) {
-        this.textStr = text;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public Color getColor() {
-        return this.color;
-    }
-
-    public Font getFont() {
-        return this.font;
-    }
-
-    public String getText() {
-        return this.textStr;
-    }
-
-    public double getX() {
-        return this.x;
-    }
-
-    public double getY() {
-        return this.y;
+    public void setTextStr(String textStr) {
+        this.textStr = textStr;
     }
 }
+
+
