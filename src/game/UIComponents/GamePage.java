@@ -3,7 +3,7 @@ package game.UIComponents;
 
 import UndoFunction.GameState;
 import game.Actions.Action;
-import game.Colours;
+import game.Teams;
 import game.Drawables.Text;
 import game.Players.HumanPlayer;
 import game.Players.Player;
@@ -26,8 +26,8 @@ public class GamePage extends Page {
         super(panel, ID);
         this.board = new Board(this);
         this.gameState = new GameState(board);
-        this.player1 = new HumanPlayer(Colours.WHITE);
-        this.player2 = new HumanPlayer(Colours.BLACK);
+        this.player1 = new HumanPlayer(Teams.DUCK);
+        this.player2 = new HumanPlayer(Teams.GOOSE);
         this.currentPlayer = this.player1;
         this.gameIsRunning = true;
         this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getColour()),20,20,false);

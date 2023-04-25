@@ -1,6 +1,6 @@
 package game.Players;
 
-import game.Colours;
+import game.Teams;
 
 /**
  *  Class representing an AI player
@@ -14,6 +14,6 @@ public class ComputerPlayer extends Player{
      *  Constructor
      */
     public ComputerPlayer() {
-        super(false, Colours.WHITE);
+        super(false, Teams.DUCK);
     }
 }

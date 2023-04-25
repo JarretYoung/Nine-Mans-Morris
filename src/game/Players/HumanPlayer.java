@@ -1,5 +1,5 @@
 package game.Players;
-import game.Colours;
+import game.Teams;
 
 /**
  *  Class representing a human player
@@ -14,7 +14,7 @@ public class HumanPlayer extends Player {
      *
      * @param colour
      */
-    public HumanPlayer(Colours colour) {
+    public HumanPlayer(Teams colour) {
         super(true, colour);
     }
 
@@ -22,6 +22,6 @@ public class HumanPlayer extends Player {
      *  Constructor (lazy initialisation) where player's default colour is BLACK
      */
     public HumanPlayer() {
-        super(false, Colours.BLACK);
+        super(false, Teams.GOOSE);
     }
 }

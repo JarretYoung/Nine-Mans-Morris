@@ -1,8 +1,7 @@
 package game.Drawables;
 
-import game.Colours;
+import game.Teams;
 import game.UIComponents.*;
-import javafx.geometry.Pos;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,10 +13,10 @@ public class Token extends Sprite {
     public final static String IMG_PATH_GOOSE = "images/goose.png";
     public final static String IMG_PATH_DUCK_SELECTED = "images/duckSelected.png";
     public final static String IMG_PATH_GOOSE_SELECTED = "images/gooseSelected.png";
-    Enum<Colours> player;
+    Enum<Teams> player;
     private boolean selected = false;
-    public Token(Page page, double x, double y, Enum<Colours> team) {
-        super(page, x, y, SIZE, SIZE, (new ImageIcon(team==Colours.WHITE ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
+    public Token(Page page, double x, double y, Enum<Teams> team) {
+        super(page, x, y, SIZE, SIZE, (new ImageIcon(team== Teams.DUCK ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
         this.player = player;
         //More attributes soon
     }
@@ -30,11 +29,11 @@ public class Token extends Sprite {
         //TODO:
     }
 
-    public void setPlayer(Enum<Colours> player) {
+    public void setPlayer(Enum<Teams> player) {
         this.player = player;
     }
 
-    public Enum<Colours> getPlayer() {
+    public Enum<Teams> getPlayer() {
         return this.player;
     }
 
@@ -48,10 +47,10 @@ public class Token extends Sprite {
     public void setSelected(boolean selected) {
         this.selected = selected;
         if(this.selected) {
-            this.setBaseImg((new ImageIcon(player==Colours.WHITE ? IMG_PATH_DUCK_SELECTED : IMG_PATH_GOOSE_SELECTED)).getImage());
+            this.setBaseImg((new ImageIcon(player== Teams.DUCK ? IMG_PATH_DUCK_SELECTED : IMG_PATH_GOOSE_SELECTED)).getImage());
         }
         else {
-            this.setBaseImg((new ImageIcon(player==Colours.BLACK ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
+            this.setBaseImg((new ImageIcon(player== Teams.GOOSE ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
         }
     }
 }

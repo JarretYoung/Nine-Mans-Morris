@@ -1,6 +1,5 @@
 package UndoFunction;
 
-import game.Colours;
 import game.Drawables.Position;
 import game.Drawables.Token;
 import game.Players.Player;
