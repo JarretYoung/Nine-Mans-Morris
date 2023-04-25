@@ -30,7 +30,7 @@ public class GamePage extends Page {
         this.player2 = new HumanPlayer(Teams.GOOSE);
         this.currentPlayer = this.player1;
         this.gameIsRunning = true;
-        this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getColour()),20,20,false);
+        this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getTeam()),20,20,false);
         this.duckLeftText = new Text(this,"unplaced ducks: NA",20,50,false);;
         this.gooseLeftText = new Text(this,"unplaced goose: NA",20,80,false);;
     }
@@ -41,7 +41,7 @@ public class GamePage extends Page {
         else {
             this.currentPlayer = this.player1;
         }
-        this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getColour()));
+        this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getTeam()));
     }
 
     @Override

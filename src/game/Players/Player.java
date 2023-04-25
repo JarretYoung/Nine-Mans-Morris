@@ -29,7 +29,7 @@ abstract public class Player {
     //Number of pieces left over
     private int piecesLeft;
     //"Colours"
-    private Enum<Teams> colour;
+    private Enum<Teams> team;
     // Initial Position
     private Position firstClickedLocation;
     // Final Position
@@ -40,12 +40,12 @@ abstract public class Player {
      * Used when fresh creation
      *
      * @param _isHuman      Status if this actor is a human or AI
-     * @param _colour       "Colour" of the piece in control
+     * @param _team       "Colour" of the piece in control
      */
-    public Player(boolean _isHuman, Enum<Teams> _colour) {
+    public Player(boolean _isHuman, Enum<Teams> _team) {
         this.isHuman = _isHuman;
-        this.colour = _colour;
-        this.piecesInHand = 9;
+        this.team = _team;
+        this.piecesInHand = 3;
         this.piecesLeft = 0;
     }
 
@@ -60,7 +60,7 @@ abstract public class Player {
      */
     public Player(boolean _isHuman, Enum<Teams> _colour, int _pricesInHand, int _piecesLeft) {
         this.isHuman = _isHuman;
-        this.colour = _colour;
+        this.team = _colour;
         this.piecesInHand = _pricesInHand;
         this.piecesLeft = _piecesLeft;
     }
@@ -167,7 +167,7 @@ abstract public class Player {
     }
     public void changePiecesInHand(int change) {this.piecesInHand += change;}
     public void changePiecesLeft(int change) {this.piecesLeft += change;}
-    public Enum<Teams> getColour() {
-        return colour;
+    public Enum<Teams> getTeam() {
+        return team;
     }
 }

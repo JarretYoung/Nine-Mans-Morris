@@ -17,7 +17,7 @@ public class Token extends Sprite {
     private boolean selected = false;
     public Token(Page page, double x, double y, Enum<Teams> team) {
         super(page, x, y, SIZE, SIZE, (new ImageIcon(team== Teams.DUCK ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
-        this.player = player;
+        this.player = team;
         //More attributes soon
     }
 
@@ -50,7 +50,7 @@ public class Token extends Sprite {
             this.setBaseImg((new ImageIcon(player== Teams.DUCK ? IMG_PATH_DUCK_SELECTED : IMG_PATH_GOOSE_SELECTED)).getImage());
         }
         else {
-            this.setBaseImg((new ImageIcon(player== Teams.GOOSE ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
+            this.setBaseImg((new ImageIcon(player== Teams.DUCK ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
         }
     }
 }

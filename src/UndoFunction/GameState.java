@@ -13,7 +13,7 @@ public class GameState {
     }
 
     public void placePiece(Player player, Position position) {
-        position.setToken(new Token(position.getPage(),position.getX(),position.getY(),player.getColour()));
+        position.setToken(new Token(position.getPage(),position.getX(),position.getY(),player.getTeam()));
         player.changePiecesLeft(1);
         player.changePiecesInHand(-1);
     }
