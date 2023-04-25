@@ -55,6 +55,9 @@ public class GamePage extends Page {
             }
             this.checkForEndOfGame();
         }
+        this.setDuckLeftStr(String.format("unplaced ducks: %s",this.player1.checkPiecesInHand()));
+        this.setGooseLeftStr(String.format("unplaced geese: %s",this.player2.checkPiecesInHand()));
+
     }
 
     protected void checkForEndOfGame() {
