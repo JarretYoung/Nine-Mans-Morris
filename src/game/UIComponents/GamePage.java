@@ -4,6 +4,7 @@ package game.UIComponents;
 import UndoFunction.GameState;
 import game.Actions.Action;
 import game.Colours;
+import game.Drawables.Text;
 import game.Players.HumanPlayer;
 import game.Players.Player;
 
@@ -23,6 +24,7 @@ public class GamePage extends Page {
         this.player2 = new HumanPlayer(Colours.BLACK);
         this.currentPlayer = this.player1;
         this.gameIsRunning = true;
+        new Text(this,"beep boop",50,50,true);
     }
     protected void nextTurn() {
         if(this.currentPlayer==this.player1) {
