@@ -17,6 +17,16 @@ public abstract class MoveAction extends Action {
 
     @Override
     public abstract void performAction(GameState gameState);
+
+    @Override
+    public Position getInitialPosition() {
+        return this.startPosition;
+    }
+
+    @Override
+    public Position getFinalPosition() {
+        return this.endPosition;
+    }
 }
 
 

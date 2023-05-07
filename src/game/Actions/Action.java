@@ -19,7 +19,7 @@ public abstract class Action {
 
     public abstract void performAction(GameState gameState);
 
-    public Position getInitialPosition() {throw new NotImplementedException();};
+    public abstract Position getInitialPosition();
 
-    public Position getFinalPosition() {throw new NotImplementedException();};
+    public abstract Position getFinalPosition();
 }

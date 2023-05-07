@@ -2,6 +2,8 @@ package game.Players;
 
 import game.Actions.FlyAction;
 import game.Actions.PlaceAction;
+import game.GameRuleRegulation.GameRules;
+import game.GameRuleRegulation.LegalMoves;
 import game.Teams;
 
 import game.Actions.Action;
@@ -35,6 +37,8 @@ abstract public class Player {
     // Final Position
     private Position secondClickedLocation;
 
+    private LegalMoves legalMoves;
+
     /**
      * Constructor
      * Used when fresh creation
@@ -47,6 +51,7 @@ abstract public class Player {
         this.team = _team;
         this.piecesInHand = 3;
         this.piecesLeft = 0;
+        this.legalMoves = new LegalMoves();
     }
 
     /**
@@ -70,8 +75,7 @@ abstract public class Player {
      */
     public Action playTurn(Board board) {
         // temporary
-        this.allowableActions = new ArrayList<>(); // temporary
-        this.allowableActions.add(null);
+        this.allowableActions = this.legalMoves.getAllowableActions(this,board);
         // -----
         //check valid move
         if (isHuman == true) { // If player is human player
@@ -125,16 +129,19 @@ abstract public class Player {
 
     public Action checkValidMove(Position initialLocation, Position finalLocation) { //parameter subject to change
         // TODO: implement allowable actions
-        return getAction(initialLocation,finalLocation);
+        // return getAction(initialLocation,finalLocation);
 
-//        for (int i=0; i < this.allowableActions.size(); i++ ){
-//            // check
-//            if (( (this.allowableActions.get(i).getInitialPosition()).equals(initialLocation)) && ( (this.allowableActions.get(i).getFinalPosition()).equals(finalLocation) )) {
-//                // check for valid moves
-//                return this.allowableActions.get(i);
-//            }
-//        }
-//        return null;
+        for (Action action: this.allowableActions){
+            // check
+            Position initialPosition = action.getInitialPosition();
+            Position finalPosition = action.getFinalPosition();
+            if(
+                    ((initialPosition==null && initialPosition==initialLocation) || (initialPosition != null && initialPosition.equals(initialLocation)))
+            &&      ((finalPosition==null && finalPosition==finalLocation) || (finalPosition!=null && finalPosition.equals(finalLocation)))) {
+                return action;
+            }
+        }
+        return null;
     }
 
     // TODO: remove temporary function

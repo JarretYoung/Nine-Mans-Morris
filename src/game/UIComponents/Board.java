@@ -34,6 +34,9 @@ public class Board extends Sprite {
         }
         return null; // no positions
     }
+    public ArrayList<Position> getPositionsCopy() {
+        return (ArrayList<Position>) positions.clone();
+    }
     private double gridPosXtoCoordX(int gridPosX) {
         return this.getX1() + gridPosX/((double) GRID_SIZE_X-1) * this.getWidth();
     }

@@ -17,5 +17,15 @@ public class DeleteAction extends Action {
     public void performAction(GameState gameState) {
         gameState.removePiece(position);
     }
+
+    @Override
+    public Position getInitialPosition() {
+        return this.position;
+    }
+
+    @Override
+    public Position getFinalPosition() {
+        return null;
+    }
 }
 

@@ -17,5 +17,15 @@ public class PlaceAction extends Action {
     public void performAction(GameState gameState) {
         gameState.placePiece(player, position);
     }
+
+    @Override
+    public Position getInitialPosition() {
+        return null;
+    }
+
+    @Override
+    public Position getFinalPosition() {
+        return this.position;
+    }
 }
 
