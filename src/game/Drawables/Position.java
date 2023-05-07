@@ -27,14 +27,19 @@ public class Position extends Sprite {
         }
     }
 
-    public void addNeighbours(Position newPos) {
+    public void addNeighbour(Position newPos) {
         this.neighbours.add(newPos);
     }
 
-    public ArrayList<Position> getNeighbours() {
-        return this.neighbours;
+    public ArrayList<Position> getNeighboursCopy() {
+        return (ArrayList<Position>) this.neighbours.clone();
     }
 
     public void setToken(Token token) {this.token = token;}
     public Token getToken() {return token;}
+
+    @Override
+    public String toString() {
+        return String.format("Position<token=%s,x=%s,y=%s>",this.getToken(),this.getX(),this.getY());
+    }
 }

@@ -128,9 +128,6 @@ abstract public class Player {
     }
 
     public Action checkValidMove(Position initialLocation, Position finalLocation) { //parameter subject to change
-        // TODO: implement allowable actions
-        // return getAction(initialLocation,finalLocation);
-
         for (Action action: this.allowableActions){
             // check
             Position initialPosition = action.getInitialPosition();
@@ -144,18 +141,6 @@ abstract public class Player {
         return null;
     }
 
-    // TODO: remove temporary function
-    public Action getAction(Position initialLocation, Position finalLocation) {
-        if(initialLocation==null && finalLocation!=null) {
-            return new PlaceAction(this,finalLocation);
-        }
-        else if(initialLocation!=null && finalLocation!=null) {
-            return new FlyAction(this,initialLocation,finalLocation);
-        }
-        else {
-            throw new NotImplementedException();
-        }
-    }
     /**
      *  Getter for the pieces that have yet to be placed on the board
      *

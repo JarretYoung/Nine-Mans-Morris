@@ -55,12 +55,16 @@ public class Board extends Sprite {
             double y2 = this.gridPosYtoCoordY(gridPosY2);
             double x = this.gridPosXtoCoordX(gridPosX1);
             new Line(this.getPage(),y1,y2,x,false);
+            grid[gridPosX1][gridPosY1].addNeighbour(grid[gridPosX2][gridPosY2]);
+            grid[gridPosX2][gridPosY2].addNeighbour(grid[gridPosX1][gridPosY1]);
         }
         else if(gridPosY1==gridPosY2) { // horizontal line
             double x1 = this.gridPosXtoCoordX(gridPosX1);
             double x2 = this.gridPosXtoCoordX(gridPosX2);
             double y = this.gridPosYtoCoordY(gridPosY1);
             new Line(this.getPage(),x1,x2,y,true);
+            grid[gridPosX1][gridPosY1].addNeighbour(grid[gridPosX2][gridPosY2]);
+            grid[gridPosX2][gridPosY2].addNeighbour(grid[gridPosX1][gridPosY1]);
         }
         else {
             throw new IllegalArgumentException("line must either be vertical or horizontal");
