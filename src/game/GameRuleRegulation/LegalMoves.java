@@ -1,9 +1,6 @@
 package game.GameRuleRegulation;
 
-import game.Actions.Action;
-import game.Actions.FlyAction;
-import game.Actions.MoveAdjAction;
-import game.Actions.PlaceAction;
+import game.Actions.*;
 import game.Drawables.Position;
 import game.Players.Player;
 import game.UIComponents.Board;
@@ -14,8 +11,11 @@ import java.util.ArrayList;
 public class LegalMoves extends GameRules {
     public LegalMoves() {
     }
-    public ArrayList<Action> getAllowableActions(Player player, Board board) {
-        if(player.checkPiecesInHand()>0) {
+    public ArrayList<Action> getAllowableActions(Player player, Board board,boolean millFormed) {
+        if(millFormed) {
+            return this.getDeleteActions(player,board);
+        }
+        else if(player.checkPiecesInHand()>0) {
             return this.getPlacingActions(player,board);
         }
         else if(player.checkPiecesLeft()>3) {
@@ -39,7 +39,7 @@ public class LegalMoves extends GameRules {
         ArrayList<Action> actionList = new ArrayList<>();
         for(Position startPos : board.getPositionsCopy()) {
             if(startPos != null && startPos.getToken() != null
-                    && startPos.getToken().getPlayer() == player.getTeam()) { // if no token
+                    && startPos.getToken().getPlayer() == player.getTeam()) {
                 for(Position endPos : startPos.getNeighboursCopy()) {
                     if(endPos.getToken()==null) {
                         actionList.add(new MoveAdjAction(player,startPos,endPos));
@@ -54,12 +54,23 @@ public class LegalMoves extends GameRules {
         ArrayList<Action> actionList = new ArrayList<>();
         for(Position startPos : board.getPositionsCopy()) {
             if(startPos != null && startPos.getToken() != null
-                    && startPos.getToken().getPlayer() == player.getTeam()) { // if no token
+                    && startPos.getToken().getPlayer() == player.getTeam()) {
                 for(Position endPos : board.getPositionsCopy()) {
                     if(endPos.getToken()==null) {
                         actionList.add(new FlyAction(player,startPos,endPos));
                     }
                 }
+            }
+        }
+        return actionList;
+    }
+
+    private ArrayList<Action> getDeleteActions(Player player, Board board) {
+        ArrayList<Action> actionList = new ArrayList<>();
+        for(Position position : board.getPositionsCopy()) {
+            if(position != null && position.getToken() != null
+                    && position.getToken().getPlayer() != player.getTeam()) {
+                actionList.add(new DeleteAction(player,position));
             }
         }
         return actionList;

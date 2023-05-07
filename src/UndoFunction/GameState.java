@@ -23,5 +23,8 @@ public class GameState {
 
     }
 
-    public void removePiece(Position position) {}
+    public void removePiece(Position position) {
+        position.getToken().delete();
+        position.setToken(null);
+    }
 }

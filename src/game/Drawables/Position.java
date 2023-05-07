@@ -1,9 +1,11 @@
 package game.Drawables;
 
 import game.UIComponents.*;
+import javafx.geometry.Pos;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class Position extends Sprite {
@@ -41,5 +43,36 @@ public class Position extends Sprite {
     @Override
     public String toString() {
         return String.format("Position<token=%s,x=%s,y=%s>",this.getToken(),this.getX(),this.getY());
+    }
+
+    public ArrayList<Position> getPointsToRight(int pointsLeft) {
+//        System.out.println(String.format("points left: %s", pointsLeft));
+//        System.out.println(neighbours);
+        if(pointsLeft>0) { // there are still points left
+            for(Position pos: neighbours) {
+                if(pos.getX()>this.getX()) { // if the position is to the right of this position
+                    ArrayList<Position> positions = pos.getPointsToRight(pointsLeft-1);
+                    positions.add(this);
+                    return positions;
+                }
+            }
+        }
+        ArrayList<Position> positions = new ArrayList<>();
+        positions.add(this);
+        return positions;
+    }
+    public ArrayList<Position> getPointsToBottom(int pointsLeft) {
+        if(pointsLeft>0) { // there are still points left
+            for(Position pos: neighbours) {
+                if(pos.getY()>this.getY()) { // if the position is to the bottom of this position
+                    ArrayList<Position> positions = pos.getPointsToBottom(pointsLeft-1);
+                    positions.add(this);
+                    return positions;
+                }
+            }
+        }
+        ArrayList<Position> positions = new ArrayList<>();
+        positions.add(this);
+        return positions;
     }
 }

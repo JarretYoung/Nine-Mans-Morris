@@ -2,11 +2,11 @@ package game.UIComponents;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class MorrisMouseListener implements MouseListener {
-    private HashSet<Integer> heldSet = new HashSet<Integer>();
-    private HashSet<Integer> clickedSet = new HashSet<Integer>();
+    private ArrayList<Integer> heldSet = new ArrayList<Integer>();
+    private ArrayList<Integer> clickedSet = new ArrayList<Integer>();
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -18,12 +18,12 @@ public class MorrisMouseListener implements MouseListener {
         if(!this.heldSet.contains(e.getButton())) {
             this.clickedSet.add(e.getButton());
         }
-        this.heldSet.add(e.getButton());
+//        this.heldSet.add(e.getButton());
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.heldSet.remove(e.getButton());
+//        this.heldSet.remove(e.getButton());
     }
 
     @Override

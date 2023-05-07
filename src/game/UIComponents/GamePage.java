@@ -3,6 +3,8 @@ package game.UIComponents;
 
 import UndoFunction.GameState;
 import game.Actions.Action;
+import game.GameRuleRegulation.Mill;
+import game.GameRuleRegulation.MillCondition;
 import game.Teams;
 import game.Drawables.Text;
 import game.Players.HumanPlayer;
@@ -19,6 +21,8 @@ public class GamePage extends Page {
     private Text turnText;
     private Text duckLeftText;
     private Text gooseLeftText;
+    private MillCondition millCondition;
+    private Mill mill;
     public void setTurnTextStr(String strVal) {this.turnText.setTextStr(strVal);}
     public void setDuckLeftStr(String strVal) {this.duckLeftText.setTextStr(strVal);}
     public void setGooseLeftStr(String strVal) {this.gooseLeftText.setTextStr(strVal);}
@@ -33,6 +37,7 @@ public class GamePage extends Page {
         this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getTeam()),20,20,false);
         this.duckLeftText = new Text(this,"unplaced ducks: NA",20,50,false);;
         this.gooseLeftText = new Text(this,"unplaced goose: NA",20,80,false);;
+        this.millCondition = new MillCondition(board);
     }
     protected void nextTurn() {
         if(this.currentPlayer==this.player1) {
@@ -48,16 +53,21 @@ public class GamePage extends Page {
     public void tick() {
         super.tick();
         if(this.gameIsRunning) {
-            Action playedMove = this.currentPlayer.playTurn(this.board);
+            Action playedMove = this.currentPlayer.playTurn(this.board,this.mill!=null);
             if(playedMove!=null) {
                 playedMove.performAction(this.gameState);
-                this.nextTurn();
+                if(this.mill!=null) {
+                    this.mill.setHasBeenProcessed(true);
+                }
+                this.mill = this.millCondition.findFormedMill();
+                if(mill!=null) {
+                    this.nextTurn();
+                }
             }
             this.checkForEndOfGame();
         }
         this.setDuckLeftStr(String.format("unplaced ducks: %s",this.player1.checkPiecesInHand()));
         this.setGooseLeftStr(String.format("unplaced geese: %s",this.player2.checkPiecesInHand()));
-
     }
 
     protected void checkForEndOfGame() {

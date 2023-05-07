@@ -73,9 +73,9 @@ abstract public class Player {
     /**
      *  Play the turn of this player
      */
-    public Action playTurn(Board board) {
+    public Action playTurn(Board board, boolean millFormed) {
         // temporary
-        this.allowableActions = this.legalMoves.getAllowableActions(this,board);
+        this.allowableActions = this.legalMoves.getAllowableActions(this,board,millFormed);
         // -----
         //check valid move
         if (isHuman == true) { // If player is human player
