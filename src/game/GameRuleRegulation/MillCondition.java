@@ -21,9 +21,6 @@ public class MillCondition extends GameRules {
             if(mill.isMillFormed()) {
                 return mill;
             }
-            else {
-                mill.setHasBeenProcessed(false);
-            }
         }
         return null;
     }

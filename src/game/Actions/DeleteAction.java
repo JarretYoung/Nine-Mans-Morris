@@ -15,7 +15,7 @@ public class DeleteAction extends Action {
 
     @Override
     public void performAction(GameState gameState) {
-        gameState.removePiece(position);
+        gameState.removePiece(player,position);
     }
 
     @Override

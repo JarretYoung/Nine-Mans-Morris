@@ -18,17 +18,16 @@ public class Mill {
         if(positions.get(0).getToken()!=null) {
             Enum<Teams> team = positions.get(0).getToken().getPlayer();
             for(Position pos : positions) {
-                if(pos.getToken()==null && pos.getToken().getPlayer().equals(team)) {
-                    continue;
-                }
-                else {
+                if(pos.getToken()==null || !pos.getToken().getPlayer().equals(team)) {
+                    this.hasBeenProcessed = false;
                     return false;
                 }
             }
-            return true;
+            return !this.hasBeenProcessed; // only return true if the mill hasn't been handled yet
         }
         else {
-            return  false;
+            this.hasBeenProcessed = false;
+            return false;
         }
     }
     

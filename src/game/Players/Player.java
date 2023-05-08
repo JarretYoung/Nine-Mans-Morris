@@ -49,7 +49,7 @@ abstract public class Player {
     public Player(boolean _isHuman, Enum<Teams> _team) {
         this.isHuman = _isHuman;
         this.team = _team;
-        this.piecesInHand = 3;
+        this.piecesInHand = 5;
         this.piecesLeft = 0;
         this.legalMoves = new LegalMoves();
     }
@@ -79,15 +79,21 @@ abstract public class Player {
         // -----
         //check valid move
         if (isHuman == true) { // If player is human player
-            if (this.piecesInHand > 0) { // Placing Phase
-                Position pos =  board.getClickedPosition();
+            Position pos = board.getClickedPosition();
+            if(millFormed) { // Deleting phase
+                if (pos == null) {
+                    return null;
+                } else {
+                    return checkValidMove(pos, null);
+                }
+            }
+            else if (this.piecesInHand > 0) { // Placing Phase
                 if (pos == null) {
                     return null;
                 } else {
                     return checkValidMove(null, pos);
                 }
             } else { // Moving or Flying Phase
-                Position pos =  board.getClickedPosition();
                 if (pos == null) {
                     return null;
                 } else {
