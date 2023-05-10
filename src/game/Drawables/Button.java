@@ -1,20 +1,48 @@
 package game.Drawables;
 
+import game.Commands.Command;
+import game.Teams;
 import game.UIComponents.*;
+
+import javax.swing.*;
 import java.awt.*;
 
 public class Button extends Sprite {
     // attributes
-    public Button(Page page, double x, double y, double width, double height, Image baseImage) {
-        super(page, x, y, width, height, baseImage);
+    public final static String IMG_PATH = "images/redSquare.png";
+    private Command command;
+    private Text text;
+    private boolean hovered;
+    public Button(Page page, double x, double y, double width, double height, String textStr, Command command) {
+        super(page, x, y, width, height, (new ImageIcon(IMG_PATH)).getImage());
         //More attributes soon
+        this.command = command;
+        this.text = new Text(page,textStr,x,y,true);
+        this.hovered = false;
     }
 
-    public void paint(Graphics2D g) {
-        //TODO:
-    }
     
     public void tick() {
-        //TODO:
+        if(this.intersectsPoint(Mouse.getInstance().x(),Mouse.getInstance().y())) {
+            this.setHovered(true);
+            //this.getPage().getPanel().setCursor(new Cursor(Cursor.HAND_CURSOR));
+            if(Mouse.getInstance().leftClicked()) {
+                this.command.execute();
+            }
+        }
+        else {
+            this.setHovered(false);
+        }
+    }
+
+    public void setHovered(boolean hovered) {
+        if(this.hovered==hovered) {return;}
+        this.hovered = hovered;
+        if(!this.hovered) {
+            this.setBaseImg((new ImageIcon(IMG_PATH).getImage()));
+        }
+        else {
+            this.setBaseImg((new ImageIcon("images/greenSquare.png").getImage()));
+        }
     }
 }
