@@ -30,9 +30,9 @@ public class Text extends Drawable {
             Font f = g2d.getFont();
             FontMetrics fm = g2d.getFontMetrics(f);
             // get width of text
-            double width = fm.stringWidth(this.textStr);
+            double width = fm.getStringBounds(this.textStr,g2d).getWidth();
             // get height of text
-            double height = fm.getStringBounds(this.textStr, g2d).getHeight();
+            double height = fm.getStringBounds(this.textStr, g2d).getHeight()*0.6522; // constant calculated via trial and error
             // center and draw
             g2d.drawString(this.textStr,(int) (this.x - width/2),(int) (this.y + height/2));
         }
