@@ -24,6 +24,7 @@ public class Button extends Sprite {
     
     public void tick() {
         if(this.intersectsPoint(Mouse.getInstance().x(),Mouse.getInstance().y())) {
+            Mouse.getInstance().setCursor(new Cursor(Cursor.HAND_CURSOR));
             this.setHovered(true);
             //this.getPage().getPanel().setCursor(new Cursor(Cursor.HAND_CURSOR));
             if(Mouse.getInstance().leftClicked()) {
