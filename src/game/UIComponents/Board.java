@@ -28,7 +28,7 @@ public class Board extends Sprite {
     }
     public Position getClickedPosition() {
         for(Position pos: positions) { // for each position
-            if(pos.isClicked()) { // if clicked
+            if(pos.isClickedWithinRange(20)) { // if clicked
                 return pos; // return
             }
         }

@@ -24,7 +24,7 @@ public class Position extends Sprite {
     @Override
     public void tick() {
         super.tick();
-        if(this.isHovered()) {
+        if(this.isHoveredWithinRange(20)) {
             Mouse.getInstance().setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
     }

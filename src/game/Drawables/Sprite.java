@@ -92,10 +92,19 @@ public class Sprite extends Drawable {
     public boolean intersectsPoint(double x, double y) {
         return x >= this.getX1() && y >= this.getY1() && x <= this.getX2() && y <= this.getY2();
     }
+    public boolean intersectsPointWithinRange(double x, double y, double range) {
+        return x >= this.getX1()-range && y >= this.getY1()-range && x <= this.getX2()+range && y <= this.getY2()+range;
+    }
     public boolean isHovered() {
         return this.intersectsPoint(Mouse.getInstance().x(),Mouse.getInstance().y());
     }
+    public boolean isHoveredWithinRange(double range) {
+        return this.intersectsPointWithinRange(Mouse.getInstance().x(),Mouse.getInstance().y(),range);
+    }
     public boolean isClicked() {
         return this.isHovered() && Mouse.getInstance().leftClicked();
+    }
+    public boolean isClickedWithinRange(double range) {
+        return  this.isHoveredWithinRange(range) && Mouse.getInstance().leftClicked();
     }
 }
