@@ -1,6 +1,6 @@
 package game.Actions;
 
-import UndoFunction.GameState;
+import game.UndoFunction.GameState;
 import game.Players.Player;
 
 import game.Drawables.Position;

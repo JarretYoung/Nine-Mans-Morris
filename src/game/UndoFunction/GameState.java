@@ -1,11 +1,9 @@
-package UndoFunction;
+package game.UndoFunction;
 
 import game.Drawables.Position;
 import game.Drawables.Token;
 import game.Players.Player;
 import game.UIComponents.Board;
-
-import java.util.ArrayList;
 
 public class GameState {
     private Board board;

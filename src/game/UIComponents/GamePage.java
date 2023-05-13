@@ -1,10 +1,8 @@
 package game.UIComponents;
 
 
-import UndoFunction.GameState;
+import game.UndoFunction.GameState;
 import game.Actions.Action;
-import game.Commands.GotoGameCommand;
-import game.Drawables.Button;
 import game.GameRuleRegulation.Mill;
 import game.GameRuleRegulation.MillCondition;
 import game.Teams;
