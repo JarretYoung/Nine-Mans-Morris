@@ -75,7 +75,7 @@ abstract public class Player {
      */
     public Action playTurn(Board board, boolean millFormed) {
         // temporary
-        this.allowableActions = this.legalMoves.getAllowableActions(this,board,millFormed);
+        this.allowableActions = this.getAllowableActions(board,millFormed);
         // -----
         //check valid move
         if (isHuman == true) { // If player is human player
@@ -168,4 +168,5 @@ abstract public class Player {
     public Enum<Teams> getTeam() {
         return team;
     }
+    public ArrayList<Action> getAllowableActions(Board board, boolean millFormed) {return this.legalMoves.getAllowableActions(this,board,millFormed);}
 }
