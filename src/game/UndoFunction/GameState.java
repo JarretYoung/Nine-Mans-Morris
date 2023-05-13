@@ -6,7 +6,7 @@ import game.Players.Player;
 import game.UIComponents.Board;
 
 public class GameState {
-    private Board board;
+    private Position[][] grid;
     private Integer playerOnePieces;
     private Integer playerTwoPieces;
 
@@ -33,36 +33,37 @@ public class GameState {
         player.changePiecesLeft(-1);
     }
 
-    public void set(Board board, Integer playerOnePieces, Integer playerTwoPieces) {
-        this.board = board;
+    /** Maybe I should add the turn */
+    public void set(Position[][] grid, Integer playerOnePieces, Integer playerTwoPieces) {
+        this. grid = grid;
         this.playerOnePieces = playerOnePieces;
         this.playerTwoPieces = playerTwoPieces;
     }
 
     public Memento takeSnapshot() {
-        return new Memento(this.board, this.playerOnePieces, this.playerTwoPieces);
+        return new Memento(this.grid, this.playerOnePieces, this.playerTwoPieces);
     }
 
     public void restore(Memento memento) {
-        this.board = memento.getSavedBoardState();
+        this.grid = memento.getSavedBoardState();
         this.playerOnePieces = memento.getPlayerOnePieces();
         this.playerTwoPieces = memento.getPlayerTwoPieces();
     }
 
 
     public static class Memento {
-        private Board board;
+        private Position[][] grid;
         private Integer playerOnePieces;
         private Integer playerTwoPieces;
 
-        private Memento (Board _board, Integer playerOnePieces, Integer playerTwoPieces) {
-            this.board = _board;
+        private Memento (Position[][] grid, Integer playerOnePieces, Integer playerTwoPieces) {
+            this.grid = grid;
             this.playerOnePieces = playerOnePieces;
             this.playerTwoPieces = playerTwoPieces;
         }
 
-        private Board getSavedBoardState() {
-            return this.board;
+        private Position[][] getSavedBoardState() {
+            return this.grid;
         }
 
         private Integer getPlayerOnePieces() {

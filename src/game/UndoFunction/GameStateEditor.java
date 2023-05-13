@@ -15,7 +15,7 @@ public class GameStateEditor {
     }
 
     public void makeMove(Board board, Integer playerOnePieces, Integer playerTwoPieces) {
-        gameState.set(board, playerOnePieces, playerTwoPieces);
+        gameState.set(board.getGrid(), playerOnePieces, playerTwoPieces);
         stateHistory.add(gameState.takeSnapshot());
     }
 

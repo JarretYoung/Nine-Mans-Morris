@@ -152,4 +152,8 @@ public class Board extends Sprite {
         this.addLine(6,0,6,3);
         this.addLine(6,3,6,6);
     }
+
+    public Position[][] getGrid() {
+        return grid;
+    }
 }
