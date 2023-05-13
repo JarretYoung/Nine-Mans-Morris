@@ -4,6 +4,7 @@ import game.Drawables.Line;
 import game.Drawables.Position;
 import game.Drawables.Sprite;
 import game.Drawables.Text;
+import game.Teams;
 import javafx.geometry.Pos;
 
 import javax.swing.*;
@@ -155,5 +156,15 @@ public class Board extends Sprite {
 
     public Position[][] getGrid() {
         return grid;
+    }
+
+    public int getTokenCount(Enum<Teams> team) {
+        int total = 0;
+        for(Position pos : positions) {
+            if(pos.getToken()!=null && pos.getToken().getPlayer()==team) {
+                total += 1;
+            }
+        }
+        return total;
     }
 }

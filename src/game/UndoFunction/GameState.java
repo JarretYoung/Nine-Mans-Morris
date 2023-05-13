@@ -18,19 +18,16 @@ public class GameState {
 
     public void placePiece(Player player, Position position) {
         position.setToken(new Token(position.getPage(),position.getX(),position.getY(),player.getTeam()));
-        player.changePiecesLeft(1);
         player.changePiecesInHand(-1);
     }
 
     public void movePiece(Player player, Position startPos, Position endPos) {
         startPos.getToken().moveSelf(startPos,endPos);
-
     }
 
     public void removePiece(Player player, Position position) {
         position.getToken().delete();
         position.setToken(null);
-        player.changePiecesLeft(-1);
     }
 
     /** Maybe I should add the turn */

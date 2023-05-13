@@ -74,9 +74,10 @@ abstract public class Player {
      *  Play the turn of this player
      */
     public Action playTurn(Board board, boolean millFormed) {
-        // temporary
+        // get a list of allowed actions
         this.allowableActions = this.getAllowableActions(board,millFormed);
-        // -----
+        // find the number of pieces on the board
+        this.piecesLeft = board.getTokenCount(this.team);
         //check valid move
         if (isHuman == true) { // If player is human player
             Position pos = board.getClickedPosition();
