@@ -40,6 +40,12 @@ public class GameState {
         this.playerTwoPieces = playerTwoPieces;
     }
 
+    public void set(Board board, Integer playerOnePieces, Integer playerTwoPieces) {
+        this. grid = board.getGrid();
+        this.playerOnePieces = playerOnePieces;
+        this.playerTwoPieces = playerTwoPieces;
+    }
+
     public Memento takeSnapshot() {
         return new Memento(this.grid, this.playerOnePieces, this.playerTwoPieces);
     }
