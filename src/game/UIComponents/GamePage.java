@@ -31,7 +31,7 @@ public class GamePage extends Page {
     public GamePage(Panel panel) {
         super(panel, ID);
         this.board = new Board(this);
-        this.gameState = new GameState(board);
+        this.gameState = new GameState();
         this.player1 = new HumanPlayer(Teams.DUCK);
         this.player2 = new HumanPlayer(Teams.GOOSE);
         this.currentPlayer = this.player1;
