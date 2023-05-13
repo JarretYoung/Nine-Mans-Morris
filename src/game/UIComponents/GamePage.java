@@ -56,6 +56,7 @@ public class GamePage extends Page {
         else {
             this.currentPlayer = this.player1;
         }
+        this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
         this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getTeam()));
     }
 
