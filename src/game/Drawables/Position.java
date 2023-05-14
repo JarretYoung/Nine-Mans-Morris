@@ -12,8 +12,11 @@ public class Position extends Sprite {
     // attributes
     public final static double SIZE = 16;
     public final static String IMG_PATH = "images/blackCircle.png";
+    public final static String IMG_PATH_ALLOWED = "images/blackCircleHighlight.png";
     ArrayList<Position> neighbours = new ArrayList<Position>();
     private Token token = null;
+    private boolean allowed = false;
+    private boolean newAllowed = false;
 
     public Position(Page page, double x, double y) { // , ArrayList<Position> neighbours
         super(page, x, y, SIZE, SIZE, (new ImageIcon(IMG_PATH)).getImage());
@@ -26,6 +29,19 @@ public class Position extends Sprite {
         super.tick();
         if(this.isHoveredWithinRange(20)) {
             Mouse.getInstance().setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+
+        if(this.newAllowed!=this.allowed) { // only allow for allowed to be updated once per frame
+            this.allowed = this.newAllowed;
+            if(this.allowed) {
+                this.setBaseImg((new ImageIcon(IMG_PATH_ALLOWED)).getImage());
+            }
+            else {
+                this.setBaseImg((new ImageIcon(IMG_PATH)).getImage());
+            }
+            if(this.token!=null) {
+                this.token.setAllowed(this.allowed);
+            }
         }
     }
 
@@ -74,5 +90,9 @@ public class Position extends Sprite {
         ArrayList<Position> positions = new ArrayList<>();
         positions.add(this);
         return positions;
+    }
+
+    public void setAllowed(boolean allowed) {
+        this.newAllowed = allowed;
     }
 }

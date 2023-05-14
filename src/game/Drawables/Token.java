@@ -13,6 +13,9 @@ public class Token extends Sprite {
     public final static String IMG_PATH_GOOSE = "images/goose.png";
     public final static String IMG_PATH_DUCK_SELECTED = "images/duckSelected.png";
     public final static String IMG_PATH_GOOSE_SELECTED = "images/gooseSelected.png";
+    public final static String IMG_PATH_DUCK_ALLOWED = "images/duckHighlight.png";
+    public final static String IMG_PATH_GOOSE_ALLOWED = "images/gooseHighlight.png";
+    private boolean allowed = false;
     Enum<Teams> player;
     private boolean selected = false;
     public Token(Page page, double x, double y, Enum<Teams> team) {
@@ -46,11 +49,25 @@ public class Token extends Sprite {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+        this.updateImg();
+    }
+
+    public void setAllowed(boolean allowed) {
+        this.allowed = allowed;
+        this.updateImg();
+    }
+
+    public void updateImg() {
         if(this.selected) {
             this.setBaseImg((new ImageIcon(player== Teams.DUCK ? IMG_PATH_DUCK_SELECTED : IMG_PATH_GOOSE_SELECTED)).getImage());
         }
         else {
-            this.setBaseImg((new ImageIcon(player== Teams.DUCK ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
+            if(allowed) {
+                this.setBaseImg((new ImageIcon(player== Teams.DUCK ? IMG_PATH_DUCK_ALLOWED: IMG_PATH_GOOSE_ALLOWED)).getImage());
+            }
+            else {
+                this.setBaseImg((new ImageIcon(player== Teams.DUCK ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
+            }
         }
     }
 }

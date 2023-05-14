@@ -151,6 +151,10 @@ public class Board extends Sprite {
 
         this.addLine(6,0,6,3);
         this.addLine(6,3,6,6);
+
+        for(Position pos : this.positions) {
+            this.getPage().moveToFront(pos);
+        }
     }
 
     public Position[][] getGrid() {
@@ -168,5 +172,10 @@ public class Board extends Sprite {
     }
     public void updateBoardFromCurrentTeam(Enum<Teams> team) {
         this.setBaseImg(team==Teams.DUCK ? ((new ImageIcon(IMG_PATH_DUCK)).getImage()) : ((new ImageIcon(IMG_PATH_GOOSE)).getImage()));
+    }
+    public void resetPositionAllowed() {
+        for(Position pos : positions) {
+            pos.setAllowed(false);
+        }
     }
 }

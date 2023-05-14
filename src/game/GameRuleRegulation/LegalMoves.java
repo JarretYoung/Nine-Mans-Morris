@@ -29,6 +29,7 @@ public class LegalMoves {
         for(Position position : board.getPositionsCopy()) {
             if(position.getToken()==null) { // if no token
                 actionList.add(new PlaceAction(player,position));
+                position.setAllowed(true);
             }
         }
         return actionList;
@@ -42,6 +43,8 @@ public class LegalMoves {
                 for(Position endPos : startPos.getNeighboursCopy()) {
                     if(endPos.getToken()==null) {
                         actionList.add(new MoveAdjAction(player,startPos,endPos));
+                        startPos.setAllowed(true);
+                        endPos.setAllowed(true);
                     }
                 }
             }
@@ -57,6 +60,8 @@ public class LegalMoves {
                 for(Position endPos : board.getPositionsCopy()) {
                     if(endPos.getToken()==null) {
                         actionList.add(new FlyAction(player,startPos,endPos));
+                        startPos.setAllowed(true);
+                        endPos.setAllowed(true);
                     }
                 }
             }
@@ -70,6 +75,7 @@ public class LegalMoves {
             if(position != null && position.getToken() != null
                     && position.getToken().getPlayer() != player.getTeam()) {
                 actionList.add(new DeleteAction(player,position));
+                position.setAllowed(true);
             }
         }
         return actionList;

@@ -71,7 +71,7 @@ public class GamePage extends Page {
 
     @Override
     public void tick() {
-        super.tick();
+        this.board.resetPositionAllowed();
         if(this.gameIsRunning) {
             Action playedMove = this.currentPlayer.playTurn(this.board,this.mill!=null);
             if(playedMove!=null) {
@@ -97,6 +97,7 @@ public class GamePage extends Page {
         this.setDuckLeftStr(String.format("unplaced ducks: %s",this.player1.checkPiecesInHand()));
         this.setGooseLeftStr(String.format("unplaced geese: %s",this.player2.checkPiecesInHand()));
         this.updateTurnText();
+        super.tick();
 //        this.setMillFormedTextStr(this.mill==null ? "no mills formed" : "mill formed!");
     }
 
