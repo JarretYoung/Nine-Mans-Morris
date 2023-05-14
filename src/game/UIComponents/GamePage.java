@@ -1,6 +1,7 @@
 package game.UIComponents;
 
 
+import game.GameRuleRegulation.WinCondition;
 import game.UndoFunction.GameState;
 import game.Actions.Action;
 import game.GameRuleRegulation.Mill;
@@ -22,12 +23,15 @@ public class GamePage extends Page {
     private Text duckLeftText;
     private Text gooseLeftText;
     private Text millFormedText;
+    private Text gameEndText;
     private MillCondition millCondition;
     private Mill mill;
+    private WinCondition winCondition;
     public void setTurnTextStr(String strVal) {this.turnText.setTextStr(strVal);}
     public void setDuckLeftStr(String strVal) {this.duckLeftText.setTextStr(strVal);}
     public void setGooseLeftStr(String strVal) {this.gooseLeftText.setTextStr(strVal);}
     public void setMillFormedTextStr(String strVal) {this.millFormedText.setTextStr(strVal);}
+    public void setGameEndTextStr(String strVal) {this.gameEndText.setTextStr(strVal);}
     public GamePage(Panel panel) {
         super(panel, ID);
         this.board = new Board(this);
@@ -36,11 +40,14 @@ public class GamePage extends Page {
         this.player2 = new HumanPlayer(Teams.GOOSE);
         this.currentPlayer = this.player1;
         this.gameIsRunning = true;
-        this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getTeam()),20,20,false);
-        this.duckLeftText = new Text(this,"unplaced ducks: NA",20,50,false);
-        this.gooseLeftText = new Text(this,"unplaced goose: NA",20,80,false);
-        this.millFormedText = new Text(this,"no mills formed",400,20,false);
+        this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getTeam()),300,50,true);
+        this.duckLeftText = new Text(this,"unplaced ducks: NA",100,20,true);
+        this.gooseLeftText = new Text(this,"unplaced goose: NA",500,20,true);
+//        this.millFormedText = new Text(this,"no mills formed",400,50,false);
+        this.gameEndText = new Text(this,"",300,560,true);
+
         this.millCondition = new MillCondition(board);
+        this.winCondition = new WinCondition();
     }
     protected void nextTurn() {
         if(this.currentPlayer==this.player1) {
@@ -49,7 +56,17 @@ public class GamePage extends Page {
         else {
             this.currentPlayer = this.player1;
         }
-        this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getTeam()));
+        this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
+        this.updateTurnText();
+    }
+    protected void updateTurnText() {
+        if(this.mill==null) {
+            this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getTeam()));
+        }
+        else {
+            this.setTurnTextStr(String.format("%s has formed a mill!",this.currentPlayer.getTeam()));
+
+        }
     }
 
     @Override
@@ -65,28 +82,22 @@ public class GamePage extends Page {
                 this.mill = this.millCondition.findFormedMill();
                 if(this.mill==null) {
                     this.nextTurn();
+                    if(this.winCondition.checkStalemate(currentPlayer,this.board,this.mill!=null)) {
+                        this.setGameEndTextStr("game over! stalemate occurred");
+                        this.gameIsRunning = false;
+                    }
+                    Enum<Teams> winner = this.winCondition.getWinnerIfAny(player1,player2);
+                    if(winner!=null) {
+                        this.setGameEndTextStr(String.format("game over! %s wins!",winner));
+                        this.gameIsRunning = false;
+                    }
                 }
             }
-            this.checkForEndOfGame();
         }
         this.setDuckLeftStr(String.format("unplaced ducks: %s",this.player1.checkPiecesInHand()));
         this.setGooseLeftStr(String.format("unplaced geese: %s",this.player2.checkPiecesInHand()));
-        this.setMillFormedTextStr(this.mill==null ? "no mills formed" : "mill formed!");
+        this.updateTurnText();
+//        this.setMillFormedTextStr(this.mill==null ? "no mills formed" : "mill formed!");
     }
 
-    protected void checkForEndOfGame() {
-        // TODO: game over screen
-        if(this.player1.checkPiecesInHand()==0 && this.player1.checkPiecesLeft()<=2) { // player 2 wins
-            System.out.println("team black wins gg"); // placeholder
-            this.gameIsRunning = false;
-        }
-        else if(this.player2.checkPiecesInHand()==0 && this.player2.checkPiecesLeft()<=2) { // player 1 wins
-            System.out.println("team white wins pog"); // placeholder
-            this.gameIsRunning = false;
-        }
-        else if(false) { // TODO: check for stalemate
-            System.out.println("nobody wins :("); // placeholder
-            this.gameIsRunning = false;
-        }
-    }
 }

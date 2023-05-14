@@ -3,15 +3,15 @@ package game.UIComponents;
 import game.Drawables.Line;
 import game.Drawables.Position;
 import game.Drawables.Sprite;
-import game.Drawables.Text;
-import javafx.geometry.Pos;
+import game.Teams;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
 public class Board extends Sprite {
     public final static double SIZE = 400;
-    public final static String IMG_PATH = "images/greenSquare.png";
+    public final static String IMG_PATH_DUCK = "images/greenSquare.png";
+    public final static String IMG_PATH_GOOSE = "images/redSquare.png";
     public final static double X = 300;
     public final static double Y = 300;
     public final static int GRID_SIZE_X = 7;
@@ -21,7 +21,7 @@ public class Board extends Sprite {
     private Page page;
     private ArrayList<Position> positions = new ArrayList<>();
     public Board(Page page) {
-        super(page,X,Y,SIZE,SIZE,(new ImageIcon(IMG_PATH)).getImage());
+        super(page,X,Y,SIZE,SIZE,(new ImageIcon(IMG_PATH_DUCK)).getImage());
         this.page = page;
         this.grid = new Position[GRID_SIZE_X][GRID_SIZE_Y];
         this.initializeBoard();
@@ -155,5 +155,18 @@ public class Board extends Sprite {
 
     public Position[][] getGrid() {
         return grid;
+    }
+
+    public int getTokenCount(Enum<Teams> team) {
+        int total = 0;
+        for(Position pos : positions) {
+            if(pos.getToken()!=null && pos.getToken().getPlayer()==team) {
+                total += 1;
+            }
+        }
+        return total;
+    }
+    public void updateBoardFromCurrentTeam(Enum<Teams> team) {
+        this.setBaseImg(team==Teams.DUCK ? ((new ImageIcon(IMG_PATH_DUCK)).getImage()) : ((new ImageIcon(IMG_PATH_GOOSE)).getImage()));
     }
 }
