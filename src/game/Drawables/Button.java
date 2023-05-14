@@ -9,7 +9,8 @@ import java.awt.*;
 
 public class Button extends Sprite {
     // attributes
-    public final static String IMG_PATH = "images/redSquare.png";
+    public final static String IMG_PATH = "images/button.png";
+    public final static String IMG_PATH_HOVER = "images/buttonLight.png";
     private Command command;
     private Text text;
     private boolean hovered;
@@ -43,7 +44,7 @@ public class Button extends Sprite {
             this.setBaseImg((new ImageIcon(IMG_PATH).getImage()));
         }
         else {
-            this.setBaseImg((new ImageIcon("images/greenSquare.png").getImage()));
+            this.setBaseImg((new ImageIcon(IMG_PATH_HOVER).getImage()));
         }
     }
 }

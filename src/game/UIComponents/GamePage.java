@@ -40,10 +40,10 @@ public class GamePage extends Page {
         this.player2 = new HumanPlayer(Teams.GOOSE);
         this.currentPlayer = this.player1;
         this.gameIsRunning = true;
-        this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getTeam()),20,20,false);
-        this.duckLeftText = new Text(this,"unplaced ducks: NA",20,50,false);
-        this.gooseLeftText = new Text(this,"unplaced goose: NA",20,80,false);
-        this.millFormedText = new Text(this,"no mills formed",400,20,false);
+        this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getTeam()),300,50,true);
+        this.duckLeftText = new Text(this,"unplaced ducks: NA",100,20,true);
+        this.gooseLeftText = new Text(this,"unplaced goose: NA",500,20,true);
+//        this.millFormedText = new Text(this,"no mills formed",400,50,false);
         this.gameEndText = new Text(this,"",300,560,true);
 
         this.millCondition = new MillCondition(board);
@@ -57,7 +57,16 @@ public class GamePage extends Page {
             this.currentPlayer = this.player1;
         }
         this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
-        this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getTeam()));
+        this.updateTurnText();
+    }
+    protected void updateTurnText() {
+        if(this.mill==null) {
+            this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getTeam()));
+        }
+        else {
+            this.setTurnTextStr(String.format("%s has formed a mill!",this.currentPlayer.getTeam()));
+
+        }
     }
 
     @Override
@@ -87,7 +96,8 @@ public class GamePage extends Page {
         }
         this.setDuckLeftStr(String.format("unplaced ducks: %s",this.player1.checkPiecesInHand()));
         this.setGooseLeftStr(String.format("unplaced geese: %s",this.player2.checkPiecesInHand()));
-        this.setMillFormedTextStr(this.mill==null ? "no mills formed" : "mill formed!");
+        this.updateTurnText();
+//        this.setMillFormedTextStr(this.mill==null ? "no mills formed" : "mill formed!");
     }
 
 }
