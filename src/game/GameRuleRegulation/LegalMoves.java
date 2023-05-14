@@ -4,11 +4,10 @@ import game.Actions.*;
 import game.Drawables.Position;
 import game.Players.Player;
 import game.UIComponents.Board;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 
-public class LegalMoves extends GameRules {
+public class LegalMoves {
     public LegalMoves() {
     }
     public ArrayList<Action> getAllowableActions(Player player, Board board,boolean millFormed) {

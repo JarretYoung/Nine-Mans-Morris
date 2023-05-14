@@ -1,15 +1,11 @@
 package game.Players;
 
-import game.Actions.FlyAction;
-import game.Actions.PlaceAction;
-import game.GameRuleRegulation.GameRules;
 import game.GameRuleRegulation.LegalMoves;
 import game.Teams;
 
 import game.Actions.Action;
 import game.Drawables.Position;
 import game.UIComponents.Board;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Random;

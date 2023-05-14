@@ -2,12 +2,10 @@ package game.GameRuleRegulation;
 
 import game.Drawables.Position;
 import game.UIComponents.Board;
-import javafx.geometry.Pos;
 
 import java.util.ArrayList;
-import java.util.ArrayList;
 
-public class MillCondition extends GameRules {
+public class MillCondition {
     public static final int MILL_SIZE = 3;
     private ArrayList<Mill> millList = new ArrayList<>();
     private Board board;
