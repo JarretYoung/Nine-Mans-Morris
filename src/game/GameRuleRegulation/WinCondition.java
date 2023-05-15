@@ -7,10 +7,10 @@ import game.UIComponents.Board;
 public class WinCondition {
     public Enum<Teams> getWinnerIfAny(Player player1, Player player2) {
         if(player1.checkPiecesLeft()<3 && player1.checkPiecesInHand()<=0) {
-            return player1.getTeam();
+            return player2.getTeam();
         }
         else if(player2.checkPiecesLeft()<3 && player2.checkPiecesInHand()<=0) {
-            return player2.getTeam();
+            return player1.getTeam();
         }
         else {
             return null;

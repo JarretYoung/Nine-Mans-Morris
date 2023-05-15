@@ -17,6 +17,11 @@ public abstract class Page {
     }
     public void removeDrawable(Drawable drawable) {this.drawables.remove(drawable);}
 
+    public void moveToFront(Drawable drawable) {
+        this.removeDrawable(drawable);
+        this.addDrawable(drawable);
+    }
+
     public Page(Panel panel, String id) {
         this.panel = panel;
         this.id = id;

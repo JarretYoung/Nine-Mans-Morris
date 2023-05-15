@@ -45,7 +45,7 @@ abstract public class Player {
     public Player(boolean _isHuman, Enum<Teams> _team) {
         this.isHuman = _isHuman;
         this.team = _team;
-        this.piecesInHand = 5;
+        this.piecesInHand = 9;
         this.piecesLeft = 0;
         this.legalMoves = new LegalMoves();
     }
@@ -73,7 +73,6 @@ abstract public class Player {
         // get a list of allowed actions
         this.allowableActions = this.getAllowableActions(board,millFormed);
         // find the number of pieces on the board
-        this.piecesLeft = board.getTokenCount(this.team);
         //check valid move
         if (isHuman == true) { // If player is human player
             Position pos = board.getClickedPosition();
@@ -129,7 +128,9 @@ abstract public class Player {
         }
         return null;
     }
-
+    public void updateTokenCount(Board board) {
+        this.piecesLeft = board.getTokenCount(this.team);
+    }
     public Action checkValidMove(Position initialLocation, Position finalLocation) { //parameter subject to change
         for (Action action: this.allowableActions){
             // check
