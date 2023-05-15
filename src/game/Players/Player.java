@@ -45,7 +45,7 @@ abstract public class Player {
     public Player(boolean _isHuman, Enum<Teams> _team) {
         this.isHuman = _isHuman;
         this.team = _team;
-        this.piecesInHand = 4;
+        this.piecesInHand = 9;
         this.piecesLeft = 0;
         this.legalMoves = new LegalMoves();
     }

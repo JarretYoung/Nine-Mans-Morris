@@ -1,6 +1,8 @@
 package game.UIComponents;
 
 
+import game.Drawables.Sprite;
+import game.Drawables.Token;
 import game.GameRuleRegulation.WinCondition;
 import game.UndoFunction.GameState;
 import game.Actions.Action;
@@ -10,6 +12,8 @@ import game.Teams;
 import game.Drawables.Text;
 import game.Players.HumanPlayer;
 import game.Players.Player;
+
+import javax.swing.*;
 
 public class GamePage extends Page {
     public static final String ID = "game";
@@ -22,15 +26,15 @@ public class GamePage extends Page {
     private Text turnText;
     private Text duckLeftText;
     private Text gooseLeftText;
-    private Text millFormedText;
     private Text gameEndText;
+    private SpriteLine duckSpriteLine;
+    private SpriteLine gooseSpriteLine;
     private MillCondition millCondition;
     private Mill mill;
     private WinCondition winCondition;
     public void setTurnTextStr(String strVal) {this.turnText.setTextStr(strVal);}
     public void setDuckLeftStr(String strVal) {this.duckLeftText.setTextStr(strVal);}
     public void setGooseLeftStr(String strVal) {this.gooseLeftText.setTextStr(strVal);}
-    public void setMillFormedTextStr(String strVal) {this.millFormedText.setTextStr(strVal);}
     public void setGameEndTextStr(String strVal) {this.gameEndText.setTextStr(strVal);}
     public GamePage(Panel panel) {
         super(panel, ID);
@@ -48,6 +52,10 @@ public class GamePage extends Page {
 
         this.millCondition = new MillCondition(board);
         this.winCondition = new WinCondition();
+        this.duckSpriteLine = new SpriteLine(this,50,220, Token.SIZE, Token.SIZE,
+                (new ImageIcon(Token.IMG_PATH_DUCK)).getImage(),20,this.player1.checkPiecesInHand(),0,1);
+        this.gooseSpriteLine = new SpriteLine(this,550,220, Token.SIZE, Token.SIZE,
+                (new ImageIcon(Token.IMG_PATH_GOOSE)).getImage(),20,this.player2.checkPiecesInHand(),0,1);
     }
     protected void nextTurn() {
         if(this.currentPlayer==this.player1) {
@@ -100,6 +108,8 @@ public class GamePage extends Page {
         }
         this.setDuckLeftStr(String.format("unplaced ducks: %s",this.player1.checkPiecesInHand()));
         this.setGooseLeftStr(String.format("unplaced geese: %s",this.player2.checkPiecesInHand()));
+        this.duckSpriteLine.setSpriteCount(this.player1.checkPiecesInHand());
+        this.gooseSpriteLine.setSpriteCount(this.player2.checkPiecesInHand());
         this.updateTurnText();
         super.tick();
 //        this.setMillFormedTextStr(this.mill==null ? "no mills formed" : "mill formed!");
