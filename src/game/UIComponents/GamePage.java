@@ -58,6 +58,16 @@ public class GamePage extends Page {
         }
         this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
         this.updateTurnText();
+
+        if(this.winCondition.checkStalemate(currentPlayer,this.board,this.mill!=null)) {
+            this.setGameEndTextStr("game over! stalemate occurred");
+            this.gameIsRunning = false;
+        }
+        Enum<Teams> winner = this.winCondition.getWinnerIfAny(player1,player2);
+        if(winner!=null) {
+            this.setGameEndTextStr(String.format("game over! %s wins!",winner));
+            this.gameIsRunning = false;
+        }
     }
     protected void updateTurnText() {
         if(this.mill==null) {
@@ -76,21 +86,14 @@ public class GamePage extends Page {
             Action playedMove = this.currentPlayer.playTurn(this.board,this.mill!=null);
             if(playedMove!=null) {
                 playedMove.performAction(this.gameState);
+                player1.updateTokenCount(this.board);
+                player2.updateTokenCount(this.board);
                 if(this.mill!=null) {
                     this.mill.setHasBeenProcessed(true);
                 }
                 this.mill = this.millCondition.findFormedMill();
                 if(this.mill==null) {
                     this.nextTurn();
-                    if(this.winCondition.checkStalemate(currentPlayer,this.board,this.mill!=null)) {
-                        this.setGameEndTextStr("game over! stalemate occurred");
-                        this.gameIsRunning = false;
-                    }
-                    Enum<Teams> winner = this.winCondition.getWinnerIfAny(player1,player2);
-                    if(winner!=null) {
-                        this.setGameEndTextStr(String.format("game over! %s wins!",winner));
-                        this.gameIsRunning = false;
-                    }
                 }
             }
         }
