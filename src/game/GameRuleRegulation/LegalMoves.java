@@ -73,7 +73,8 @@ public class LegalMoves {
         ArrayList<Action> actionList = new ArrayList<>();
         for(Position position : board.getPositionsCopy()) {
             if(position != null && position.getToken() != null
-                    && position.getToken().getPlayer() != player.getTeam()) {
+                    && position.getToken().getPlayer() != player.getTeam()
+                    && position.isMillExists()==false) {
                 actionList.add(new DeleteAction(player,position));
                 position.setAllowed(true);
             }

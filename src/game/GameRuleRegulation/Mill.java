@@ -11,22 +11,29 @@ public class Mill {
     private boolean hasBeenProcessed;
     public Mill(ArrayList<Position> positions) {
         this.positions = positions;
-        this.hasBeenProcessed = false;
+        this.setHasBeenProcessed(false);
     }
-
-    public boolean isMillFormed() {
+    public boolean millExists() {
         if(positions.get(0).getToken()!=null) {
             Enum<Teams> team = positions.get(0).getToken().getPlayer();
             for(Position pos : positions) {
                 if(pos.getToken()==null || !pos.getToken().getPlayer().equals(team)) {
-                    this.hasBeenProcessed = false;
                     return false;
                 }
             }
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public boolean isMillFormed() {
+        boolean exists = this.millExists();
+        if(exists) {
             return !this.hasBeenProcessed; // only return true if the mill hasn't been handled yet
         }
         else {
-            this.hasBeenProcessed = false;
+            this.setHasBeenProcessed(false);
             return false;
         }
     }
@@ -36,5 +43,10 @@ public class Mill {
     }
     public boolean hasBeenProcessed() {
         return hasBeenProcessed;
+    }
+    public void updatePositionMillExists(boolean millExists) {
+        for(Position pos : this.positions) {
+            pos.setMillExists(millExists);
+        }
     }
 }

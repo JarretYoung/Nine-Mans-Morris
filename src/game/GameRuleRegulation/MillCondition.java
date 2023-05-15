@@ -22,6 +22,16 @@ public class MillCondition {
         }
         return null;
     }
+    public void updatePositionsViaMills() {
+        for(Mill mill : millList) {
+            mill.updatePositionMillExists(false);
+        }
+        for(Mill mill : millList) {
+            if(mill.millExists()) {
+                mill.updatePositionMillExists(true);
+            }
+        }
+    }
     private void genMillCombos() {
         this.millList = new ArrayList<>();
         for(Position pos : board.getPositionsCopy()) {

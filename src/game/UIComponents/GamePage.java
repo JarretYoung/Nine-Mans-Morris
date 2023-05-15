@@ -88,6 +88,7 @@ public class GamePage extends Page {
                 playedMove.performAction(this.gameState);
                 player1.updateTokenCount(this.board);
                 player2.updateTokenCount(this.board);
+                this.millCondition.updatePositionsViaMills();
                 if(this.mill!=null) {
                     this.mill.setHasBeenProcessed(true);
                 }

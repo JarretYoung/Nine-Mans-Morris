@@ -17,6 +17,7 @@ public class Position extends Sprite {
     private Token token = null;
     private boolean allowed = false;
     private boolean newAllowed = false;
+    boolean millExists = false;
 
     public Position(Page page, double x, double y) { // , ArrayList<Position> neighbours
         super(page, x, y, SIZE, SIZE, (new ImageIcon(IMG_PATH)).getImage());
@@ -95,4 +96,8 @@ public class Position extends Sprite {
     public void setAllowed(boolean allowed) {
         this.newAllowed = allowed;
     }
+
+    public void setMillExists(boolean millExists) {this.millExists = millExists;}
+
+    public boolean isMillExists() {return millExists;}
 }
