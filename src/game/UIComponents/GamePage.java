@@ -1,6 +1,10 @@
 package game.UIComponents;
 
 
+import game.Commands.GotoGameCommand;
+import game.Commands.GotoMenuCommand;
+import game.Commands.SaveCommand;
+import game.Drawables.Button;
 import game.Drawables.Sprite;
 import game.Drawables.Token;
 import game.GameRuleRegulation.WinCondition;
@@ -56,6 +60,9 @@ public class GamePage extends Page {
                 (new ImageIcon(Token.IMG_PATH_DUCK)).getImage(),20,this.player1.checkPiecesInHand(),0,1);
         this.gooseSpriteLine = new SpriteLine(this,550,220, Token.SIZE, Token.SIZE,
                 (new ImageIcon(Token.IMG_PATH_GOOSE)).getImage(),20,this.player2.checkPiecesInHand(),0,1);
+        new Button(this,100,560,180,60,"MAIN MENU",new GotoMenuCommand(this.getPanel()));
+        new Button(this,500,560,180,60,"SAVE",new SaveCommand(this.getPanel()));
+
     }
     protected void nextTurn() {
         if(this.currentPlayer==this.player1) {
