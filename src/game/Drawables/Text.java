@@ -21,6 +21,17 @@ public class Text extends Drawable {
         this.y = y;
         this.center = center;
     }
+
+    public Text(Page page, String textStr, double x, double y, boolean center, Color color, String font, int size) {
+        super(page);
+        this.font = new Font(font,Font.BOLD,size);
+        this.color = color;
+        this.textStr = textStr;
+        this.x = x;
+        this.y = y;
+        this.center = center;
+    }
+
     // draw text
     @Override
     public void paint(Graphics2D g2d) {
