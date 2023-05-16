@@ -51,8 +51,7 @@ public class GamePage extends Page {
         this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getTeam()),300,50,true);
         this.duckLeftText = new Text(this,"unplaced ducks: NA",100,20,true);
         this.gooseLeftText = new Text(this,"unplaced goose: NA",500,20,true);
-//        this.millFormedText = new Text(this,"no mills formed",400,50,false);
-        this.gameEndText = new Text(this,"",300,560,true);
+        this.gameEndText = new Text(this,"",300,80,true);
 
         this.millCondition = new MillCondition(board);
         this.winCondition = new WinCondition();
