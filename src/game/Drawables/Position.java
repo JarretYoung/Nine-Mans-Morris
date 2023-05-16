@@ -10,36 +10,38 @@ import java.util.ArrayList;
 
 public class Position extends Sprite {
     // attributes
-    public final static double SIZE = 16;
-    public final static String IMG_PATH = "images/blackCircle.png";
-    public final static String IMG_PATH_ALLOWED = "images/blackCircleHighlight.png";
-    ArrayList<Position> neighbours = new ArrayList<Position>();
-    private Token token = null;
-    private boolean allowed = false;
-    private boolean newAllowed = false;
-    boolean millExists = false;
+    public final static double SIZE = 16; // width and height of the position
+    public final static String IMG_PATH = "images/blackCircle.png"; // default image
+    public final static String IMG_PATH_ALLOWED = "images/blackCircleHighlight.png"; // image when the player can click on the position
+    ArrayList<Position> neighbours = new ArrayList<Position>(); // adjacent positions
+    private Token token = null; // token occupying the position, or null if there aren't any
+    private boolean allowed = false; // can the player click on the position to do an action?
+    private boolean newAllowed = false; // to avoid the allowed variable being changed constantly, newAllowed is used
+    boolean millExists = false; // is this position part of a mill?
 
     public Position(Page page, double x, double y) { // , ArrayList<Position> neighbours
         super(page, x, y, SIZE, SIZE, (new ImageIcon(IMG_PATH)).getImage());
-        //this.neighbours = neighbours;
-        //More attributes soon
     }
 
     @Override
     public void tick() {
         super.tick();
+        // extra leeway in clicking for usability reasons
         if(this.isHoveredWithinRange(20)) {
+            // set cursor to show that the position can be clicked
             Mouse.getInstance().setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
 
-        if(this.newAllowed!=this.allowed) { // only allow for allowed to be updated once per frame
+        if(this.newAllowed!=this.allowed) { // only allow for allowed to be updated once per frame to avoid flickering
             this.allowed = this.newAllowed;
+            // highlight image if allowed, otherwise don't
             if(this.allowed) {
                 this.setBaseImg((new ImageIcon(IMG_PATH_ALLOWED)).getImage());
             }
             else {
                 this.setBaseImg((new ImageIcon(IMG_PATH)).getImage());
             }
+            // also update the token accordingly
             if(this.token!=null) {
                 this.token.setAllowed(this.allowed);
             }
@@ -49,7 +51,7 @@ public class Position extends Sprite {
     public void addNeighbour(Position newPos) {
         this.neighbours.add(newPos);
     }
-
+    // returns a copy to avoid a leak
     public ArrayList<Position> getNeighboursCopy() {
         return (ArrayList<Position>) this.neighbours.clone();
     }
@@ -61,10 +63,8 @@ public class Position extends Sprite {
     public String toString() {
         return String.format("Position<token=%s,x=%s,y=%s>",this.getToken(),this.getX(),this.getY());
     }
-
+    // recursively gets horizontal points for the purpose of mill identification
     public ArrayList<Position> getPointsToRight(int pointsLeft) {
-//        System.out.println(String.format("points left: %s", pointsLeft));
-//        System.out.println(neighbours);
         if(pointsLeft>0) { // there are still points left
             for(Position pos: neighbours) {
                 if(pos.getX()>this.getX()) { // if the position is to the right of this position
@@ -78,6 +78,7 @@ public class Position extends Sprite {
         positions.add(this);
         return positions;
     }
+    // recursively gets vertical points for the purpose of mill identification
     public ArrayList<Position> getPointsToBottom(int pointsLeft) {
         if(pointsLeft>0) { // there are still points left
             for(Position pos: neighbours) {
@@ -92,7 +93,7 @@ public class Position extends Sprite {
         positions.add(this);
         return positions;
     }
-
+    // update newAllowed instead of allowed; allowed is updated in the tick function
     public void setAllowed(boolean allowed) {
         this.newAllowed = allowed;
     }

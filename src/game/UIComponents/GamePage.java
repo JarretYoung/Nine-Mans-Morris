@@ -58,19 +58,23 @@ public class GamePage extends Page {
                 (new ImageIcon(Token.IMG_PATH_GOOSE)).getImage(),20,this.player2.checkPiecesInHand(),0,1);
     }
     protected void nextTurn() {
+        // set current player
         if(this.currentPlayer==this.player1) {
             this.currentPlayer = this.player2;
         }
         else {
             this.currentPlayer = this.player1;
         }
+        // set UI elements
         this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
         this.updateTurnText();
 
+        // check if a stalemate is occurring
         if(this.winCondition.checkStalemate(currentPlayer,this.board,this.mill!=null)) {
             this.setGameEndTextStr("game over! stalemate occurred");
             this.gameIsRunning = false;
         }
+        // check if either side has won
         Enum<Teams> winner = this.winCondition.getWinnerIfAny(player1,player2);
         if(winner!=null) {
             this.setGameEndTextStr(String.format("game over! %s wins!",winner));
@@ -89,23 +93,33 @@ public class GamePage extends Page {
 
     @Override
     public void tick() {
+        // set allowable positions to false by default
         this.board.resetPositionAllowed();
         if(this.gameIsRunning) {
+            // get action if any
             Action playedMove = this.currentPlayer.playTurn(this.board,this.mill!=null);
+            // if an action is selected
             if(playedMove!=null) {
+                // do the action
                 playedMove.performAction(this.gameState);
+                // update player tokens accordingly
                 player1.updateTokenCount(this.board);
                 player2.updateTokenCount(this.board);
+                // update mills accordingly
                 this.millCondition.updatePositionsViaMills();
+                // if a mill has just been processed, update accordingly
                 if(this.mill!=null) {
                     this.mill.setHasBeenProcessed(true);
                 }
+                // get mills if any
                 this.mill = this.millCondition.findFormedMill();
+                // go to the next turn
                 if(this.mill==null) {
                     this.nextTurn();
                 }
             }
         }
+        // update UI
         this.setDuckLeftStr(String.format("unplaced ducks: %s",this.player1.checkPiecesInHand()));
         this.setGooseLeftStr(String.format("unplaced geese: %s",this.player2.checkPiecesInHand()));
         this.duckSpriteLine.setSpriteCount(this.player1.checkPiecesInHand());

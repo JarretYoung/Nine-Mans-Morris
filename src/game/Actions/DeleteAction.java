@@ -4,7 +4,7 @@ import game.UndoFunction.GameState;
 import game.Players.Player;
 
 import game.Drawables.Position;
-
+// action representing the deletion of a token
 public class DeleteAction extends Action {
     private Position position;
 
@@ -12,7 +12,7 @@ public class DeleteAction extends Action {
         super(ActionType.DELETE, player);
         this.position = position;
     }
-
+    // remove the token
     @Override
     public void performAction(GameState gameState) {
         gameState.removePiece(player,position);

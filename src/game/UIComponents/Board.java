@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 public class Board extends Sprite {
     public final static double SIZE = 400;
-    public final static String IMG_PATH_DUCK = "images/greenSquare.png";
-    public final static String IMG_PATH_GOOSE = "images/redSquare.png";
-    public final static double X = 300;
-    public final static double Y = 300;
+    public final static String IMG_PATH_DUCK = "images/greenSquare.png"; // background when it is the duck's turn
+    public final static String IMG_PATH_GOOSE = "images/redSquare.png"; // background when it is the goose's turn
+    public final static double X = 300; // base board width
+    public final static double Y = 300; // base board height
     public final static int GRID_SIZE_X = 7;
     public final static int GRID_SIZE_Y = 7;
 
@@ -44,25 +44,33 @@ public class Board extends Sprite {
         return this.getY1() + gridPosY/((double) GRID_SIZE_Y-1) * this.getHeight();
     }
     private void addPoint(int gridPosX,int gridPosY) {
+        // convert grid positions to game coordinates
         double x = this.gridPosXtoCoordX(gridPosX);
         double y = this.gridPosYtoCoordY(gridPosY);
+        // create position accordingly
         this.grid[gridPosX][gridPosY] = new Position(this.getPage(),x,y);
         positions.add(this.grid[gridPosX][gridPosY]);
     }
     private void addLine(int gridPosX1, int gridPosY1, int gridPosX2, int gridPosY2) {
         if(gridPosX1==gridPosX2)  { // vertical line
+            // get coordinates
             double y1 = this.gridPosYtoCoordY(gridPosY1);
             double y2 = this.gridPosYtoCoordY(gridPosY2);
             double x = this.gridPosXtoCoordX(gridPosX1);
+            // create line
             new Line(this.getPage(),y1,y2,x,false);
+            // add neighbours
             grid[gridPosX1][gridPosY1].addNeighbour(grid[gridPosX2][gridPosY2]);
             grid[gridPosX2][gridPosY2].addNeighbour(grid[gridPosX1][gridPosY1]);
         }
         else if(gridPosY1==gridPosY2) { // horizontal line
+            // get coordinates
             double x1 = this.gridPosXtoCoordX(gridPosX1);
             double x2 = this.gridPosXtoCoordX(gridPosX2);
             double y = this.gridPosYtoCoordY(gridPosY1);
+            // create line
             new Line(this.getPage(),x1,x2,y,true);
+            // add neighbours
             grid[gridPosX1][gridPosY1].addNeighbour(grid[gridPosX2][gridPosY2]);
             grid[gridPosX2][gridPosY2].addNeighbour(grid[gridPosX1][gridPosY1]);
         }
@@ -170,6 +178,7 @@ public class Board extends Sprite {
         }
         return total;
     }
+    // update background image of board
     public void updateBoardFromCurrentTeam(Enum<Teams> team) {
         this.setBaseImg(team==Teams.DUCK ? ((new ImageIcon(IMG_PATH_DUCK)).getImage()) : ((new ImageIcon(IMG_PATH_GOOSE)).getImage()));
     }

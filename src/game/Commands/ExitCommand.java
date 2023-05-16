@@ -4,7 +4,7 @@ import game.UIComponents.GamePage;
 import game.UIComponents.Panel;
 
 import java.awt.event.WindowEvent;
-
+// command to close the game
 public class ExitCommand implements Command {
     private Panel panel;
     public ExitCommand(Panel panel) {

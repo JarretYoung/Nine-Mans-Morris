@@ -4,7 +4,7 @@ import game.UndoFunction.GameState;
 import game.Players.Player;
 
 import game.Drawables.Position;
-
+// abstract action handling movements for tokens from one place to another
 public abstract class MoveAction extends Action {
     protected Position startPosition;
     protected Position endPosition;

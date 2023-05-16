@@ -4,12 +4,12 @@ import game.UIComponents.*;
 import java.awt.*;
 
 public class Sprite extends Drawable {
-    double x;
-    double y;
+    double x; // horizontal midpoint
+    double y; // vertical midpoint
     double width;
     double height;
-    Image baseImg;
-    Image img;
+    Image baseImg; // image before transformations
+    Image img; // image after transformations
 
     public Sprite(Page page, double x, double y, double width, double height, Image baseImage) {
         super(page);
@@ -25,14 +25,7 @@ public class Sprite extends Drawable {
         g.drawImage(this.img,(int) this.getX1(),(int) this.getY1(), this.getPage().getPanel());
     }
     
-    public void tick() {
-        //TODO:
-    }
-
-    public void transform(Image baseImg) {
-        //TODO: some transformation then store to img
-        this.img = baseImg;
-    }
+    public void tick() {}
 
     public void setX(double x) {
         this.x = x;
@@ -49,7 +42,7 @@ public class Sprite extends Drawable {
     public void setHeight(double height) {
         this.height = height;
     }
-
+    // resize the img according to the width and height of the sprite
     public void setBaseImg(Image baseImg) {
         this.baseImg = baseImg;
         this.img = baseImg.getScaledInstance((int) this.getWidth(), (int) this.getHeight(), Image.SCALE_DEFAULT);
@@ -92,12 +85,15 @@ public class Sprite extends Drawable {
     public boolean intersectsPoint(double x, double y) {
         return x >= this.getX1() && y >= this.getY1() && x <= this.getX2() && y <= this.getY2();
     }
+    // check if a coordinate is within the sprite + a given range
     public boolean intersectsPointWithinRange(double x, double y, double range) {
         return x >= this.getX1()-range && y >= this.getY1()-range && x <= this.getX2()+range && y <= this.getY2()+range;
     }
+    // check if the mouse is hovering over the sprite
     public boolean isHovered() {
         return this.intersectsPoint(Mouse.getInstance().x(),Mouse.getInstance().y());
     }
+    // check if the mouse is hovering over the sprite + a given range
     public boolean isHoveredWithinRange(double range) {
         return this.intersectsPointWithinRange(Mouse.getInstance().x(),Mouse.getInstance().y(),range);
     }
