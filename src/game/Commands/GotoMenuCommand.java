@@ -1,5 +1,9 @@
 package game.Commands;
 
+import game.UIComponents.GamePage;
+import game.UIComponents.MainMenuPage;
+import game.UIComponents.Panel;
+
 /**
  *  Class of Command to return to the menu
  *
@@ -7,8 +11,13 @@ package game.Commands;
  * @version 1.0 18/4/2023
  */
 public class GotoMenuCommand implements Command{
+    private Panel panel;
+    public GotoMenuCommand(Panel panel) {
+        this.panel = panel;
+    }
+
     @Override
     public void execute() {
-
+        this.panel.setCurrentPage(MainMenuPage.ID);
     }
 }
