@@ -8,7 +8,9 @@ public class SaveCommand implements Command{
     public SaveCommand(Panel panel) {
         this.panel = panel;
     }
-
+    /**
+     * run the command
+     */
     @Override
     public void execute() {
         //do smtg

@@ -20,6 +20,10 @@ public class MainMenuPage extends Page {
     public DecorativeSprite duck;
     public DecorativeSprite goose;
 
+    /**
+     *
+     * @param panel
+     */
     public MainMenuPage(Panel panel) {
         super(panel, ID);
         this.duck = new DecorativeSprite(this, 100, 110, IMG_PATH_DUCK);
@@ -32,6 +36,9 @@ public class MainMenuPage extends Page {
         new Button(this,300,475,180,60,"EXIT",new ExitCommand(this.getPanel()));
     }
 
+    /**
+     *
+     */
     @Override
     public void tick() {
         super.tick();

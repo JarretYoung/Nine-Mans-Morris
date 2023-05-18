@@ -9,6 +9,9 @@ public class GotoConfirmCommand implements Command {
     public GotoConfirmCommand(Panel panel) {
         this.panel = panel;
     }
+    /**
+     * run the command
+     */
     @Override
     public void execute() {
         this.panel.setCurrentPage(ConfirmPage.ID);

@@ -9,11 +9,20 @@ import java.util.Optional;
 public class Mill {
     ArrayList<Position> positions;
     private boolean hasBeenProcessed; // represents whether a token has already been deleted because of the mill
+
+    /**
+     *
+     * @param positions
+     */
     public Mill(ArrayList<Position> positions) {
         this.positions = positions;
         this.setHasBeenProcessed(false);
     }
     // is this a valid mill? (aka all three positions are the same)
+    /**
+     *
+     * @return
+     */
     public boolean millExists() {
         if(positions.get(0).getToken()!=null) {
             Enum<Teams> team = positions.get(0).getToken().getPlayer();
@@ -30,6 +39,10 @@ public class Mill {
             return false;
         }
     }
+    /**
+     *
+     * @return
+     */
     public boolean isMillFormed() {
         boolean exists = this.millExists();
         if(exists) {
@@ -40,13 +53,24 @@ public class Mill {
             return false;
         }
     }
-    
+    /**
+     *
+     * @param hasBeenProcessed
+     */
     public void setHasBeenProcessed(boolean hasBeenProcessed) {
         this.hasBeenProcessed = hasBeenProcessed;
     }
+    /**
+     *
+     * @return
+     */
     public boolean hasBeenProcessed() {
         return hasBeenProcessed;
     }
+    /**
+     *
+     * @param millExists
+     */
     public void updatePositionMillExists(boolean millExists) {
         // update every position according to the state of this mill
         for(Position pos : this.positions) {

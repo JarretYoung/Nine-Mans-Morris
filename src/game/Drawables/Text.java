@@ -12,6 +12,15 @@ public class Text extends Drawable {
     private double x;
     private double y;
     private boolean center;
+
+    /**
+     *
+     * @param page
+     * @param textStr
+     * @param x
+     * @param y
+     * @param center
+     */
     public Text(Page page, String textStr, double x, double y,boolean center) {
         super(page);
         this.font = new Font(defaultFontStr,Font.PLAIN,20);
@@ -22,6 +31,17 @@ public class Text extends Drawable {
         this.center = center;
     }
 
+    /**
+     *
+     * @param page
+     * @param textStr
+     * @param x
+     * @param y
+     * @param center
+     * @param color
+     * @param font
+     * @param size
+     */
     public Text(Page page, String textStr, double x, double y, boolean center, Color color, String font, int size) {
         super(page);
         this.font = new Font(font,Font.BOLD,size);
@@ -33,6 +53,10 @@ public class Text extends Drawable {
     }
 
     // draw text
+    /**
+     *
+     * @param g2d
+     */
     @Override
     public void paint(Graphics2D g2d) {
         g2d.setColor(this.color);
@@ -54,10 +78,17 @@ public class Text extends Drawable {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void tick() {
     }
 
+    /**
+     *
+     * @param textStr
+     */
     public void setTextStr(String textStr) {
         this.textStr = textStr;
     }

@@ -8,7 +8,9 @@ public class LoadCommand implements Command {
     public LoadCommand(Panel panel) {
         this.panel = panel;
     }
-
+    /**
+     * run the command
+     */
     @Override
     public void execute() {
         // do something

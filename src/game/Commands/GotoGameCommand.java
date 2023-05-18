@@ -14,6 +14,9 @@ public class GotoGameCommand implements Command {
     public GotoGameCommand(Panel panel) {
         this.panel = panel;
     }
+    /**
+     * run the command
+     */
     @Override
     public void execute() {
         this.panel.setCurrentPage(GamePage.ID);

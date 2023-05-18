@@ -18,28 +18,55 @@ public class Token extends Sprite {
     private boolean allowed = false; // can this token do anything this turn?
     Enum<Teams> player; // side that the token is on
     private boolean selected = false; // is this token in the process of being moved?
+
+    /**
+     *
+     * @param page
+     * @param x
+     * @param y
+     * @param team
+     */
     public Token(Page page, double x, double y, Enum<Teams> team) {
         super(page, x, y, SIZE, SIZE, (new ImageIcon(team== Teams.DUCK ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
         this.player = team;
         //More attributes soon
     }
 
+    /**
+     *
+     * @param g
+     */
     public void paint(Graphics2D g) {
         super.paint(g);
     }
-    
+
+    /**
+     *
+     */
     public void tick() {
-        //TODO:
     }
 
+    /**
+     *
+     * @param player
+     */
     public void setPlayer(Enum<Teams> player) {
         this.player = player;
     }
 
+    /**
+     *
+     * @return
+     */
     public Enum<Teams> getPlayer() {
         return this.player;
     }
 
+    /**
+     *
+     * @param startPos
+     * @param endPos
+     */
     public void moveSelf(Position startPos, Position endPos) {
         startPos.setToken(null);
         endPos.setToken(this);
@@ -47,16 +74,27 @@ public class Token extends Sprite {
         this.setY(endPos.getY());
     }
 
+    /**
+     *
+     * @param selected
+     */
     public void setSelected(boolean selected) {
         this.selected = selected;
         this.updateImg();
     }
 
+    /**
+     *
+     * @param allowed
+     */
     public void setAllowed(boolean allowed) {
         this.allowed = allowed;
         this.updateImg();
     }
 
+    /**
+     *
+     */
     public void updateImg() {
         // if selected, show accordingly
         if(this.selected) {

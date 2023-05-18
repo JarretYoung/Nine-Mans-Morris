@@ -6,10 +6,20 @@ import game.Players.Player;
 import game.Drawables.Position;
 // action representing a token moving only to adjacent locations
 public class MoveAdjAction extends MoveAction {
+    /**
+     *
+     * @param player
+     * @param startPosition
+     * @param endPosition
+     */
     public MoveAdjAction(Player player, Position startPosition, Position endPosition) {
         super(ActionType.MOVE_ADJ, player, startPosition, endPosition);
     }
 
+    /**
+     *
+     * @param gameState state of the game
+     */
     @Override
     public void performAction(GameState gameState) {
         gameState.movePiece(player, startPosition, endPosition);

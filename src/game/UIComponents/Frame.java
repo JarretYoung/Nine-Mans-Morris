@@ -5,7 +5,9 @@ import javax.swing.*;
 public class Frame extends JFrame {
     private Panel panel;
 
-
+    /**
+     *
+     */
     public Frame() {
         super("Nine Man Morris");
         this.panel = new Panel(this);

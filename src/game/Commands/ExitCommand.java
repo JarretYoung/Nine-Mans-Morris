@@ -10,6 +10,9 @@ public class ExitCommand implements Command {
     public ExitCommand(Panel panel) {
         this.panel = panel;
     }
+    /**
+     * run the command
+     */
     @Override
     public void execute() {
         this.panel.getFrame().dispatchEvent(new WindowEvent(this.panel.getFrame(), WindowEvent.WINDOW_CLOSING));

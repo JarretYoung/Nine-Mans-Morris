@@ -17,6 +17,19 @@ public class SpriteLine {
     private ArrayList<Sprite> sprites; // array of sprites
     private int horMod; // how far to horizontally displace the sprite by spacing
     private int vertMod; // how far to vertically displace the sprite by spacing
+    /**
+     *
+     * @param page
+     * @param startX
+     * @param startY
+     * @param width
+     * @param height
+     * @param baseImg
+     * @param spacing
+     * @param spriteCount
+     * @param horMod
+     * @param vertMod
+     */
     public SpriteLine(Page page, double startX, double startY, double width, double height, Image baseImg, double spacing, int spriteCount, int horMod, int vertMod) {
         this.page = page;
         this.startX = startX;
@@ -32,6 +45,10 @@ public class SpriteLine {
 
     }
 
+    /**
+     *
+     * @param spriteCount
+     */
     public void setSpriteCount(int spriteCount) {
         // don't do anything if the sprite count hasn't changed
         if(this.spriteCount==spriteCount) {return;}

@@ -20,12 +20,22 @@ public class Board extends Sprite {
     private final Position[][] grid;
     private Page page;
     private ArrayList<Position> positions = new ArrayList<>();
+
+    /**
+     *
+     * @param page
+     */
     public Board(Page page) {
         super(page,X,Y,SIZE,SIZE,(new ImageIcon(IMG_PATH_DUCK)).getImage());
         this.page = page;
         this.grid = new Position[GRID_SIZE_X][GRID_SIZE_Y];
         this.initializeBoard();
     }
+
+    /**
+     *
+     * @return
+     */
     public Position getClickedPosition() {
         for(Position pos: positions) { // for each position
             if(pos.isClickedWithinRange(20)) { // if clicked
@@ -34,15 +44,38 @@ public class Board extends Sprite {
         }
         return null; // no positions
     }
+
+    /**
+     *
+     * @return
+     */
     public ArrayList<Position> getPositionsCopy() {
         return (ArrayList<Position>) positions.clone();
     }
+
+    /**
+     *
+     * @param gridPosX
+     * @return
+     */
     private double gridPosXtoCoordX(int gridPosX) {
         return this.getX1() + gridPosX/((double) GRID_SIZE_X-1) * this.getWidth();
     }
+
+    /**
+     *
+     * @param gridPosY
+     * @return
+     */
     private double gridPosYtoCoordY(int gridPosY) {
         return this.getY1() + gridPosY/((double) GRID_SIZE_Y-1) * this.getHeight();
     }
+
+    /**
+     *
+     * @param gridPosX
+     * @param gridPosY
+     */
     private void addPoint(int gridPosX,int gridPosY) {
         // convert grid positions to game coordinates
         double x = this.gridPosXtoCoordX(gridPosX);
@@ -51,6 +84,14 @@ public class Board extends Sprite {
         this.grid[gridPosX][gridPosY] = new Position(this.getPage(),x,y);
         positions.add(this.grid[gridPosX][gridPosY]);
     }
+
+    /**
+     *
+     * @param gridPosX1
+     * @param gridPosY1
+     * @param gridPosX2
+     * @param gridPosY2
+     */
     private void addLine(int gridPosX1, int gridPosY1, int gridPosX2, int gridPosY2) {
         if(gridPosX1==gridPosX2)  { // vertical line
             // get coordinates
@@ -78,6 +119,10 @@ public class Board extends Sprite {
             throw new IllegalArgumentException("line must either be vertical or horizontal");
         }
     }
+
+    /**
+     *
+     */
     private void initializeBoard() {
         // top row
         this.addPoint(0,0);
@@ -165,10 +210,19 @@ public class Board extends Sprite {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Position[][] getGrid() {
         return grid;
     }
 
+    /**
+     *
+     * @param team
+     * @return
+     */
     public int getTokenCount(Enum<Teams> team) {
         int total = 0;
         for(Position pos : positions) {
@@ -179,9 +233,18 @@ public class Board extends Sprite {
         return total;
     }
     // update background image of board
+
+    /**
+     *
+     * @param team
+     */
     public void updateBoardFromCurrentTeam(Enum<Teams> team) {
         this.setBaseImg(team==Teams.DUCK ? ((new ImageIcon(IMG_PATH_DUCK)).getImage()) : ((new ImageIcon(IMG_PATH_GOOSE)).getImage()));
     }
+
+    /**
+     *
+     */
     public void resetPositionAllowed() {
         for(Position pos : positions) {
             pos.setAllowed(false);

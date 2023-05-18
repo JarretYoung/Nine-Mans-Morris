@@ -19,10 +19,19 @@ public class Position extends Sprite {
     private boolean newAllowed = false; // to avoid the allowed variable being changed constantly, newAllowed is used
     boolean millExists = false; // is this position part of a mill?
 
+    /**
+     *
+     * @param page
+     * @param x
+     * @param y
+     */
     public Position(Page page, double x, double y) { // , ArrayList<Position> neighbours
         super(page, x, y, SIZE, SIZE, (new ImageIcon(IMG_PATH)).getImage());
     }
 
+    /**
+     *
+     */
     @Override
     public void tick() {
         super.tick();
@@ -48,22 +57,48 @@ public class Position extends Sprite {
         }
     }
 
+    /**
+     *
+     * @param newPos
+     */
     public void addNeighbour(Position newPos) {
         this.neighbours.add(newPos);
     }
     // returns a copy to avoid a leak
+    /**
+     *
+     * @return
+     */
     public ArrayList<Position> getNeighboursCopy() {
         return (ArrayList<Position>) this.neighbours.clone();
     }
 
+    /**
+     *
+     * @param token
+     */
     public void setToken(Token token) {this.token = token;}
+
+    /**
+     *
+     * @return
+     */
     public Token getToken() {return token;}
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return String.format("Position<token=%s,x=%s,y=%s>",this.getToken(),this.getX(),this.getY());
     }
     // recursively gets horizontal points for the purpose of mill identification
+    /**
+     *
+     * @param pointsLeft
+     * @return
+     */
     public ArrayList<Position> getPointsToRight(int pointsLeft) {
         if(pointsLeft>0) { // there are still points left
             for(Position pos: neighbours) {
@@ -79,6 +114,11 @@ public class Position extends Sprite {
         return positions;
     }
     // recursively gets vertical points for the purpose of mill identification
+    /**
+     *
+     * @param pointsLeft
+     * @return
+     */
     public ArrayList<Position> getPointsToBottom(int pointsLeft) {
         if(pointsLeft>0) { // there are still points left
             for(Position pos: neighbours) {
@@ -94,11 +134,21 @@ public class Position extends Sprite {
         return positions;
     }
     // update newAllowed instead of allowed; allowed is updated in the tick function
+    /**
+     *
+     * @param allowed
+     */
     public void setAllowed(boolean allowed) {
         this.newAllowed = allowed;
     }
-
+    /**
+     *
+     * @param millExists
+     */
     public void setMillExists(boolean millExists) {this.millExists = millExists;}
-
+    /**
+     *
+     * @return
+     */
     public boolean isMillExists() {return millExists;}
 }

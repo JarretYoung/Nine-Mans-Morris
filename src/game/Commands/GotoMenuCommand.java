@@ -15,7 +15,9 @@ public class GotoMenuCommand implements Command{
     public GotoMenuCommand(Panel panel) {
         this.panel = panel;
     }
-
+    /**
+     * run the command
+     */
     @Override
     public void execute() {
         this.panel.registerPage(new GamePage(this.panel));

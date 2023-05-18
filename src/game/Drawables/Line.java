@@ -9,7 +9,15 @@ public class Line extends Sprite {
     // attributes
     public static final double LINE_WIDTH = 8; // how large the line is
     public final static String IMG_PATH = "images/blackSquare.png";
-    //Color color;
+
+    /**
+     *
+     * @param page
+     * @param pos1
+     * @param pos2
+     * @param otherMidPoint
+     * @param isHorizontal
+     */
     public Line(Page page, double pos1, double pos2, double otherMidPoint,boolean isHorizontal) {
         super(page,
                 isHorizontal ? (pos1 + pos2)/2 : otherMidPoint, // x

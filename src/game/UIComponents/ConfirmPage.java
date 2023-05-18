@@ -8,6 +8,10 @@ import game.Drawables.Text;
 public class ConfirmPage extends Page {
     public static final String ID = "confirm";
 
+    /**
+     *
+     * @param panel
+     */
     public ConfirmPage(Panel panel) {
         super(panel, ID);
         new Text(this,"confirm going back to the main menu?",300,250,true);

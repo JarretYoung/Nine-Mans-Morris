@@ -7,5 +7,8 @@ package game.Commands;
  * @version 1.0 18/4/2023
  */
 public interface Command {
+    /**
+     * run the command
+     */
     void execute();
 }

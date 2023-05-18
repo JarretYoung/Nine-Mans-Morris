@@ -13,6 +13,10 @@ public class Panel extends JPanel implements ActionListener {
     private Frame frame;
     private Timer timer;
 
+    /**
+     *
+     * @param frame
+     */
     public Panel(Frame frame) {
         this.frame = frame;
         setBackground(new Color(128,128,128));
@@ -27,11 +31,23 @@ public class Panel extends JPanel implements ActionListener {
         timer = new Timer(DELAY, this);
         timer.start();
     }
+    /**
+     *
+     * @return
+     */
     public Frame getFrame() {return frame;}
 
     // add page into registry
+    /**
+     *
+     * @param page
+     */
     public void registerPage(Page page) {this.pageHash.put(page.getId(),page);}
     // set page based on ID
+    /**
+     *
+     * @param id
+     */
     public void setCurrentPage(String id) {
         Page s = this.pageHash.get(id);
         if(s==null) {
@@ -42,6 +58,10 @@ public class Panel extends JPanel implements ActionListener {
         }
     }
     // run every frame
+    /**
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Mouse.getInstance().setCursor(new Cursor(Cursor.DEFAULT_CURSOR)); // by default the basic cursor should be used unless some code changes that
@@ -52,6 +72,10 @@ public class Panel extends JPanel implements ActionListener {
     }
 
     // draw everything onto the screen
+    /**
+     *
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

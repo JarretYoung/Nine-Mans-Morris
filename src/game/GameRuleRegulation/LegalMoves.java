@@ -10,6 +10,14 @@ import java.util.ArrayList;
 public class LegalMoves {
 
     // method to get a list of actions that are valid for the player to choose from
+
+    /**
+     *
+     * @param player
+     * @param board
+     * @param millFormed
+     * @return
+     */
     public ArrayList<Action> getAllowableActions(Player player, Board board,boolean millFormed) {
         if(millFormed) { // is there a mill that the player needs to handle?
             return this.getDeleteActions(player,board);
@@ -25,6 +33,13 @@ public class LegalMoves {
         }
     }
     // method to get actions corresponding to locations where tokens can be placed
+
+    /**
+     *
+     * @param player
+     * @param board
+     * @return
+     */
     private ArrayList<Action> getPlacingActions(Player player, Board board) {
         ArrayList<Action> actionList = new ArrayList<>();
         // for each position on the board
@@ -39,6 +54,12 @@ public class LegalMoves {
         return actionList;
     }
     // method to get actions corresponding to locations where tokens can be moved to
+    /**
+     *
+     * @param player
+     * @param board
+     * @return
+     */
     private ArrayList<Action> getMovingActions(Player player, Board board) {
         ArrayList<Action> actionList = new ArrayList<>();
         // for each position on the board
@@ -61,6 +82,12 @@ public class LegalMoves {
         return actionList;
     }
     // method to get actions corresponding to locations where tokens can be moved to
+    /**
+     *
+     * @param player
+     * @param board
+     * @return
+     */
     private ArrayList<Action> getFlyingActions(Player player, Board board) {
         ArrayList<Action> actionList = new ArrayList<>();
         // for each position on the board
@@ -83,6 +110,12 @@ public class LegalMoves {
         return actionList;
     }
     // method to get actions corresponding to locations with tokens that can be deleted
+    /**
+     *
+     * @param player
+     * @param board
+     * @return
+     */
     private ArrayList<Action> getDeleteActions(Player player, Board board) {
         ArrayList<Action> actionList = new ArrayList<>();
         // for each position on the board

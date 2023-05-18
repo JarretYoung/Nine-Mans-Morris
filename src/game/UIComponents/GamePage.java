@@ -41,6 +41,11 @@ public class GamePage extends Page {
     public void setDuckLeftStr(String strVal) {this.duckLeftText.setTextStr(strVal);}
     public void setGooseLeftStr(String strVal) {this.gooseLeftText.setTextStr(strVal);}
     public void setGameEndTextStr(String strVal) {this.gameEndText.setTextStr(strVal);}
+
+    /**
+     *
+     * @param panel
+     */
     public GamePage(Panel panel) {
         super(panel, ID);
         this.board = new Board(this);
@@ -64,6 +69,10 @@ public class GamePage extends Page {
         new Button(this,500,560,180,60,"SAVE",new SaveCommand(this.getPanel()));
 
     }
+
+    /**
+     *
+     */
     protected void nextTurn() {
         // set current player
         if(this.currentPlayer==this.player1) {
@@ -88,6 +97,10 @@ public class GamePage extends Page {
             this.gameIsRunning = false;
         }
     }
+
+    /**
+     *
+     */
     protected void updateTurnText() {
         if(this.mill==null) {
             this.setTurnTextStr(String.format("%s's turn",this.currentPlayer.getTeam()));
@@ -98,6 +111,9 @@ public class GamePage extends Page {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void tick() {
         // set allowable positions to false by default
