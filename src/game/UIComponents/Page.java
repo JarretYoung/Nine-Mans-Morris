@@ -12,21 +12,21 @@ public abstract class Page {
     private Panel panel;
     private ArrayList<Drawable> drawables = new ArrayList<>();
     /**
-     *
-     * @param drawable
+     * add drawable
+     * @param drawable drawable
      */
     public void addDrawable(Drawable drawable) {
         this.drawables.add(drawable);
     }
     /**
-     *
-     * @param drawable
+     * remove drawable
+     * @param drawable drawable
      */
     public void removeDrawable(Drawable drawable) {this.drawables.remove(drawable);}
 
     /**
-     *
-     * @param drawable
+     * draw the drawable first each frame
+     * @param drawable drawable
      */
     public void moveToFront(Drawable drawable) {
         this.removeDrawable(drawable);
@@ -34,9 +34,9 @@ public abstract class Page {
     }
 
     /**
-     *
-     * @param panel
-     * @param id
+     * constructor
+     * @param panel game panel
+     * @param id page id
      */
     public Page(Panel panel, String id) {
         this.panel = panel;
@@ -44,15 +44,14 @@ public abstract class Page {
     }
 
     /**
-     *
-     * @return
+     * getter
+     * @return id
      */
     public String getId() {return id;}
 
-    // draw everything
     /**
-     *
-     * @param g
+     * draw all drawables
+     * @param g graphic object
      */
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -61,9 +60,8 @@ public abstract class Page {
         }
     }
 
-    // run every frame
     /**
-     *
+     * run drawable info every frame
      */
     public void tick() {
         for(Drawable drawable : drawables) {
@@ -71,8 +69,8 @@ public abstract class Page {
         }
     };
     /**
-     *
-     * @return
+     * getter
+     * @return panel
      */
     public Panel getPanel() {return panel;}
 }

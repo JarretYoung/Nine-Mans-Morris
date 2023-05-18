@@ -20,17 +20,17 @@ public class Position extends Sprite {
     boolean millExists = false; // is this position part of a mill?
 
     /**
-     *
-     * @param page
-     * @param x
-     * @param y
+     * constructor
+     * @param page page that the sprite is on
+     * @param x horizontal coordinate position of the sprite
+     * @param y vertical coordinate position of the sprite
      */
     public Position(Page page, double x, double y) { // , ArrayList<Position> neighbours
         super(page, x, y, SIZE, SIZE, (new ImageIcon(IMG_PATH)).getImage());
     }
 
     /**
-     *
+     * updating cursor and position image according to circumstances
      */
     @Override
     public void tick() {
@@ -58,46 +58,44 @@ public class Position extends Sprite {
     }
 
     /**
-     *
-     * @param newPos
+     * adding a neighbour to the position
+     * @param newPos a neighbouring position
      */
     public void addNeighbour(Position newPos) {
         this.neighbours.add(newPos);
     }
-    // returns a copy to avoid a leak
     /**
-     *
-     * @return
+     * get neighbours (returns a copy to avoid a leak)
+     * @return a copy of the position's neighbour list
      */
     public ArrayList<Position> getNeighboursCopy() {
         return (ArrayList<Position>) this.neighbours.clone();
     }
 
     /**
-     *
-     * @param token
+     * setter
+     * @param token token
      */
     public void setToken(Token token) {this.token = token;}
 
     /**
-     *
-     * @return
+     * getter
+     * @return token
      */
     public Token getToken() {return token;}
 
     /**
-     *
-     * @return
+     * to string
+     * @return str representing the position
      */
     @Override
     public String toString() {
         return String.format("Position<token=%s,x=%s,y=%s>",this.getToken(),this.getX(),this.getY());
     }
-    // recursively gets horizontal points for the purpose of mill identification
     /**
-     *
-     * @param pointsLeft
-     * @return
+     * recursively gets horizontal points for the purpose of mill identification
+     * @param pointsLeft number of iterations left to go through
+     * @return list of positions to the right including this position
      */
     public ArrayList<Position> getPointsToRight(int pointsLeft) {
         if(pointsLeft>0) { // there are still points left
@@ -113,11 +111,10 @@ public class Position extends Sprite {
         positions.add(this);
         return positions;
     }
-    // recursively gets vertical points for the purpose of mill identification
     /**
-     *
-     * @param pointsLeft
-     * @return
+     * recursively gets vertical points for the purpose of mill identification
+     * @param pointsLeft  number of iterations left to go through
+     * @return list of positions to the bottom including this position
      */
     public ArrayList<Position> getPointsToBottom(int pointsLeft) {
         if(pointsLeft>0) { // there are still points left
@@ -133,22 +130,21 @@ public class Position extends Sprite {
         positions.add(this);
         return positions;
     }
-    // update newAllowed instead of allowed; allowed is updated in the tick function
     /**
-     *
-     * @param allowed
+     * update newAllowed instead of allowed; allowed is updated in the tick function
+     * @param allowed allowed
      */
     public void setAllowed(boolean allowed) {
         this.newAllowed = allowed;
     }
     /**
-     *
-     * @param millExists
+     * setter
+     * @param millExists whether this position is part of a mill
      */
     public void setMillExists(boolean millExists) {this.millExists = millExists;}
     /**
-     *
-     * @return
+     * getter
+     * @return whether this position is part of a mill
      */
     public boolean isMillExists() {return millExists;}
 }

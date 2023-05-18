@@ -43,8 +43,8 @@ public class GamePage extends Page {
     public void setGameEndTextStr(String strVal) {this.gameEndText.setTextStr(strVal);}
 
     /**
-     *
-     * @param panel
+     * constructor
+     * @param panel game panel
      */
     public GamePage(Panel panel) {
         super(panel, ID);
@@ -71,7 +71,7 @@ public class GamePage extends Page {
     }
 
     /**
-     *
+     * handle everything related to changing the turn
      */
     protected void nextTurn() {
         // set current player
@@ -99,7 +99,7 @@ public class GamePage extends Page {
     }
 
     /**
-     *
+     * update text to reflect whose side's turn it is
      */
     protected void updateTurnText() {
         if(this.mill==null) {
@@ -112,7 +112,7 @@ public class GamePage extends Page {
     }
 
     /**
-     *
+     * handle the game
      */
     @Override
     public void tick() {

@@ -9,9 +9,9 @@ public class PlaceAction extends Action {
     private Position position;
 
     /**
-     *
-     * @param player
-     * @param position
+     * constructor
+     * @param player player that will place the token
+     * @param position position to place the token on
      */
     public PlaceAction(Player player, Position position) {
         super(ActionType.PLACE, player);
@@ -19,7 +19,7 @@ public class PlaceAction extends Action {
     }
 
     /**
-     * \
+     * does the action
      * @param gameState state of the game
      */
     @Override
@@ -28,8 +28,8 @@ public class PlaceAction extends Action {
     }
 
     /**
-     *
-     * @return
+     * the starting position of the token (or null if the token doesn't exist yet)
+     * @return initial position
      */
     @Override
     public Position getInitialPosition() {
@@ -37,8 +37,8 @@ public class PlaceAction extends Action {
     }
 
     /**
-     *
-     * @return
+     * the final position of the token (or null if the token will be deleted)
+     * @return final position
      */
     @Override
     public Position getFinalPosition() {

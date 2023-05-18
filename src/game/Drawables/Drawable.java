@@ -8,8 +8,8 @@ public abstract class Drawable {
     private Page page;
 
     /**
-     *
-     * @param page
+     * constructor
+     * @param page page that the drawable is on
      */
     public Drawable(Page page) {
         this.page = page;

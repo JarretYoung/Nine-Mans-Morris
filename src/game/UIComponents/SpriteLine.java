@@ -18,17 +18,17 @@ public class SpriteLine {
     private int horMod; // how far to horizontally displace the sprite by spacing
     private int vertMod; // how far to vertically displace the sprite by spacing
     /**
-     *
-     * @param page
-     * @param startX
-     * @param startY
-     * @param width
-     * @param height
-     * @param baseImg
-     * @param spacing
-     * @param spriteCount
-     * @param horMod
-     * @param vertMod
+     * constructor
+     * @param page page the sprite line is on
+     * @param startX start x position of where to draw sprites
+     * @param startY start y position of where to draw sprites
+     * @param width width of each sprite
+     * @param height  height of each sprite
+     * @param baseImg image of each sprite
+     * @param spacing gap between each sprite
+     * @param spriteCount number of sprites to draw
+     * @param horMod how far to horizontally displace the sprite by spacing
+     * @param vertMod how far to vertically displace the sprite by spacing
      */
     public SpriteLine(Page page, double startX, double startY, double width, double height, Image baseImg, double spacing, int spriteCount, int horMod, int vertMod) {
         this.page = page;
@@ -46,8 +46,8 @@ public class SpriteLine {
     }
 
     /**
-     *
-     * @param spriteCount
+     * setter
+     * @param spriteCount set sprite count and update sprite line accordingly
      */
     public void setSpriteCount(int spriteCount) {
         // don't do anything if the sprite count hasn't changed

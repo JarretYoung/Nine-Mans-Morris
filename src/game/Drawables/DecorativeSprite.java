@@ -10,11 +10,11 @@ public class DecorativeSprite extends Sprite {
     Image img;
 
     /**
-     *
-     * @param page
-     * @param x
-     * @param y
-     * @param IMG_PATH
+     * constructor
+     * @param page page that the sprite is on
+     * @param x horizontal coordinate position of the sprite
+     * @param y vertical coordinate position of the sprite
+     * @param IMG_PATH path where the image is stored
      */
     public DecorativeSprite(Page page, double x, double y, String IMG_PATH) {
         super(page, x, y, SIZE, SIZE, (new ImageIcon(IMG_PATH)).getImage());
@@ -22,8 +22,8 @@ public class DecorativeSprite extends Sprite {
     }
 
     /**
-     *
-     * @param g
+     * paint
+     * @param g graphic object
      */
     public void paint(Graphics2D g) {
         super.paint(g);

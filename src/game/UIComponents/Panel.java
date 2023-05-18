@@ -14,8 +14,8 @@ public class Panel extends JPanel implements ActionListener {
     private Timer timer;
 
     /**
-     *
-     * @param frame
+     * constructor
+     * @param frame frame
      */
     public Panel(Frame frame) {
         this.frame = frame;
@@ -32,21 +32,19 @@ public class Panel extends JPanel implements ActionListener {
         timer.start();
     }
     /**
-     *
-     * @return
+     * getter
+     * @return frame
      */
     public Frame getFrame() {return frame;}
 
-    // add page into registry
     /**
-     *
-     * @param page
+     * add page into registry
+     * @param page page
      */
     public void registerPage(Page page) {this.pageHash.put(page.getId(),page);}
-    // set page based on ID
     /**
-     *
-     * @param id
+     * set page based on ID
+     * @param id page id
      */
     public void setCurrentPage(String id) {
         Page s = this.pageHash.get(id);
@@ -57,10 +55,10 @@ public class Panel extends JPanel implements ActionListener {
             this.currentPage = s;
         }
     }
-    // run every frame
+
     /**
-     *
-     * @param e
+     * run every frame
+     * @param e event object
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -71,9 +69,9 @@ public class Panel extends JPanel implements ActionListener {
         Mouse.getInstance().tickEnd();
     }
 
-    // draw everything onto the screen
+
     /**
-     *
+     * draw everything onto the screen
      * @param g the <code>Graphics</code> object to protect
      */
     @Override

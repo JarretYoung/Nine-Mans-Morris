@@ -9,9 +9,9 @@ public class DeleteAction extends Action {
     private Position position;
 
     /**
-     *
-     * @param player
-     * @param position
+     * constructor
+     * @param player player that formed the mill
+     * @param position position of the token to ddelete
      */
     public DeleteAction(Player player, Position position) {
         super(ActionType.DELETE, player);
@@ -20,7 +20,7 @@ public class DeleteAction extends Action {
     // remove the token
 
     /**
-     *
+     * does the action
      * @param gameState state of the game
      */
     @Override
@@ -29,8 +29,8 @@ public class DeleteAction extends Action {
     }
 
     /**
-     *
-     * @return
+     * the starting position of the token (or null if the token doesn't exist yet)
+     * @return initial position
      */
     @Override
     public Position getInitialPosition() {
@@ -38,8 +38,8 @@ public class DeleteAction extends Action {
     }
 
     /**
-     *
-     * @return
+     * the final position of the token (or null if the token will be deleted)
+     * @return final position
      */
     @Override
     public Position getFinalPosition() {
