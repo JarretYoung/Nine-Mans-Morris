@@ -14,12 +14,12 @@ public class Text extends Drawable {
     private boolean center;
 
     /**
-     *
-     * @param page
-     * @param textStr
-     * @param x
-     * @param y
-     * @param center
+     * constructor
+     * @param page page that the sprite is on
+     * @param textStr content of the text
+     * @param x horizontal coordinate position of the sprite
+     * @param y vertical coordinate position of the sprite
+     * @param center whether the text is left aligned or center aligned
      */
     public Text(Page page, String textStr, double x, double y,boolean center) {
         super(page);
@@ -32,15 +32,15 @@ public class Text extends Drawable {
     }
 
     /**
-     *
-     * @param page
-     * @param textStr
-     * @param x
-     * @param y
-     * @param center
-     * @param color
-     * @param font
-     * @param size
+     * constructor
+     * @param page page that the sprite is on
+     * @param textStr content of the text
+     * @param x horizontal coordinate position of the sprite
+     * @param y vertical coordinate position of the sprite
+     * @param center whether the text is left aligned or center aligned
+     * @param color text colour
+     * @param font text font
+     * @param size text font size
      */
     public Text(Page page, String textStr, double x, double y, boolean center, Color color, String font, int size) {
         super(page);
@@ -52,10 +52,9 @@ public class Text extends Drawable {
         this.center = center;
     }
 
-    // draw text
     /**
-     *
-     * @param g2d
+     * drawing the text on the screen
+     * @param g2d graphic object
      */
     @Override
     public void paint(Graphics2D g2d) {
@@ -79,15 +78,15 @@ public class Text extends Drawable {
     }
 
     /**
-     *
+     * do nothing
      */
     @Override
     public void tick() {
     }
 
     /**
-     *
-     * @param textStr
+     * setter
+     * @param textStr string of text
      */
     public void setTextStr(String textStr) {
         this.textStr = textStr;

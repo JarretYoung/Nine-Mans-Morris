@@ -9,8 +9,8 @@ public class ConfirmPage extends Page {
     public static final String ID = "confirm";
 
     /**
-     *
-     * @param panel
+     * constructor
+     * @param panel game panel
      */
     public ConfirmPage(Panel panel) {
         super(panel, ID);

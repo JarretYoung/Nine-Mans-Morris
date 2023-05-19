@@ -10,18 +10,17 @@ public class MorrisMouseListener implements MouseListener {
     private HashSet<Integer> clickedSet = new HashSet<Integer>();
 
     /**
-     *
-     * @param e
+     * unused mandatory function
+     * @param e event object
      */
     @Override
     public void mouseClicked(MouseEvent e) {
     }
 
     /**
-     *
-     * @param e
+     * calculates whether the mouse has been clicked or held
+     * @param e event object
      */
-    // calculates whether the mouse has been clicked or held
     @Override
     public void mousePressed(MouseEvent e) {
         if(!this.heldSet.contains(e.getButton())) {
@@ -31,8 +30,8 @@ public class MorrisMouseListener implements MouseListener {
     }
 
     /**
-     *
-     * @param e
+     * unused mandatory function
+     * @param e event object
      */
     @Override
     public void mouseReleased(MouseEvent e) {
@@ -40,39 +39,38 @@ public class MorrisMouseListener implements MouseListener {
     }
 
     /**
-     *
-     * @param e
+     * unused mandatory function
+     * @param e event object
      */
     @Override
     public void mouseEntered(MouseEvent e) {
     }
 
     /**
-     *
-     * @param e
+     * unused mandatory function
+     * @param e event object
      */
     @Override
     public void mouseExited(MouseEvent e) {
     }
 
-    // clicking should only last a single frame
     /**
-     *
+     * clear clicked set so that clicking only lasts a single frame
      */
     public void tick() {
         this.clickedSet.clear();
     }
 
     /**
-     *
-     * @param button
-     * @return
+     * check whether a mouse click occurred
+     * @param button 1 = left, 2 = middle, 3 = right
+     * @return whether a mouse click occurred
      */
     public boolean clicked(int button) {return clickedSet.contains(button);}
     /**
-     *
-     * @param button
-     * @return
+     * check whether the mouse is being held
+     * @param button 1 = left, 2 = middle, 3 = right
+     * @return whether the mouse is being held
      */
     public boolean held(int button) {return heldSet.contains(button);}
 }

@@ -21,8 +21,8 @@ public class MainMenuPage extends Page {
     public DecorativeSprite goose;
 
     /**
-     *
-     * @param panel
+     * constructor
+     * @param panel game panel
      */
     public MainMenuPage(Panel panel) {
         super(panel, ID);
@@ -37,7 +37,7 @@ public class MainMenuPage extends Page {
     }
 
     /**
-     *
+     * run every frame
      */
     @Override
     public void tick() {

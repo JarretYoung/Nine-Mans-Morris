@@ -10,11 +10,11 @@ public abstract class MoveAction extends Action {
     protected Position endPosition;
 
     /**
-     *
-     * @param actionType
-     * @param player
-     * @param startPosition
-     * @param endPosition
+     * constructor
+     * @param actionType type of action
+     * @param player player doing the action
+     * @param startPosition starting move position
+     * @param endPosition ending move position
      */
     public MoveAction(ActionType actionType, Player player, Position startPosition, Position endPosition) {
         super(actionType, player);
@@ -23,15 +23,15 @@ public abstract class MoveAction extends Action {
     }
 
     /**
-     *
+     * does the action
      * @param gameState state of the game
      */
     @Override
     public abstract void performAction(GameState gameState);
 
     /**
-     *
-     * @return
+     * the starting position of the token (or null if the token doesn't exist yet)
+     * @return initial position
      */
     @Override
     public Position getInitialPosition() {
@@ -39,8 +39,8 @@ public abstract class MoveAction extends Action {
     }
 
     /**
-     *
-     * @return
+     * the final position of the token (or null if the token will be deleted)
+     * @return final position
      */
     @Override
     public Position getFinalPosition() {

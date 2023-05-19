@@ -13,14 +13,14 @@ public class Mouse {
     private MorrisMouseListener mouseListener;
 
     /**
-     *
-     * @return
+     * getter
+     * @return mouse listener
      */
     public MorrisMouseListener getMouseListener() {return mouseListener;}
 
     /**
-     *
-     * @return
+     * singleton function
+     * @return self
      */
     public static Mouse getInstance() {
         if(Mouse.mouse==null) {Mouse.mouse = new Mouse();}
@@ -28,15 +28,15 @@ public class Mouse {
     }
 
     /**
-     *
+     * constructor
      */
     private Mouse() {
         this.mouseListener = new MorrisMouseListener();
     }
 
     /**
-     *
-     * @param frame
+     * calculate mouse position
+     * @param frame game frame
      */
     protected void tickStart(Frame frame) {
         Point p = MouseInfo.getPointerInfo().getLocation();
@@ -46,64 +46,62 @@ public class Mouse {
     }
 
     /**
-     *
+     * update cursor and mouse listener
      */
     protected void tickEnd() {
         this.mouseListener.tick();
         this.panel.setCursor(this.getCursor());
     }
 
-    // 1 = left click, 2 = middle click, 3 = right click
+
     /**
-     *
-     * @param button
-     * @return
+     * check whether a mouse click occurred
+     * @param button 1 = left, 2 = middle, 3 = right
+     * @return whether a mouse click occurred
      */
     public boolean clicked(int button) {return this.mouseListener.clicked(button);}
 
     /**
-     *
-     * @param button
-     * @return
+     * check whether the mouse is being held
+     * @param button 1 = left, 2 = middle, 3 = right
+     * @return whether the mouse is being held
      */
     public boolean held(int button) {return this.mouseListener.held(button);}
 
-    // left click
     /**
-     *
-     * @return
+     * check whether a mouse click occurred
+     * @return whether a mouse click occurred
      */
     public boolean leftClicked() {return this.clicked(1);}
 
-    // mouse position
+
     /**
-     *
-     * @return
+     * get mouse x pos
+     * @return mouse x pos
      */
     public double x() {return mousePosX;}
     /**
-     *
-     * @return
+     * get mouse y pos
+     * @return mouse y pos
      */
     public double y() {return mousePosY;}
 
-    // mouse cursor
+
     /**
-     *
-     * @return
+     * get cursor
+     * @return cursor
      */
     public Cursor getCursor() {return cursor;}
 
     /**
-     *
-     * @param cursor
+     * set cursor
+     * @param cursor cursor
      */
     public void setCursor(Cursor cursor) {this.cursor = cursor;}
 
-    // set panel
     /**
-     *
-     * @param panel
+     * set panel
+     * @param panel panel
      */
     public void setPanel(Panel panel) {this.panel = panel;}
 }

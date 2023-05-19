@@ -11,17 +11,16 @@ public class MillCondition {
     private Board board;
 
     /**
-     *
-     * @param board
+     * constructor
+     * @param board board of the game
      */
     public MillCondition(Board board) {
         this.board = board;
         this.genMillCombos();
     }
-    // is there an activated mill that hasn't been handled yet?
     /**
-     *
-     * @return
+     * is there an activated mill that hasn't been handled yet?
+     * @return activated mill
      */
     public Mill findFormedMill() {
         for(Mill mill : millList) {
@@ -31,9 +30,8 @@ public class MillCondition {
         }
         return null;
     }
-    // set all positions with activated mills as true, and everything else as false
     /**
-     *
+     * set all positions with activated mills as true, and everything else as false
      */
     public void updatePositionsViaMills() {
         for(Mill mill : millList) {
@@ -45,9 +43,9 @@ public class MillCondition {
             }
         }
     }
-    // go through the board to find all possible mills
+
     /**
-     *
+     * go through the board to find all possible mills
      */
     private void genMillCombos() {
         this.millList = new ArrayList<>();

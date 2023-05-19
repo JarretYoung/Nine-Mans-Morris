@@ -7,7 +7,7 @@ import game.Drawables.Position;
 // action representing a token moving anywhere
 public class FlyAction extends MoveAction {
     /**
-     *
+     * constructor
      * @param player
      * @param startPosition
      * @param endPosition
@@ -17,7 +17,7 @@ public class FlyAction extends MoveAction {
     }
 
     /**
-     *
+     * does the action
      * @param gameState state of the game
      */
     @Override

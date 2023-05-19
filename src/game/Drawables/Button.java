@@ -16,14 +16,14 @@ public class Button extends Sprite {
     private boolean hovered; // is there a mouse hovering on the button?
 
     /**
-     *
-     * @param page
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param textStr
-     * @param command
+     * constructor
+     * @param page page that the sprite is on
+     * @param x horizontal coordinate position of the sprite
+     * @param y vertical coordinate position of the sprite
+     * @param width horizontal size of the sprite in pixels
+     * @param height vertical size of the sprite in pixels
+     * @param textStr text to show on the button
+     * @param command function to run upon click
      */
     public Button(Page page, double x, double y, double width, double height, String textStr, Command command) {
         super(page, x, y, width, height, (new ImageIcon(IMG_PATH)).getImage());
@@ -35,7 +35,7 @@ public class Button extends Sprite {
 
 
     /**
-     *
+     * check if clicked, and run function if so
      */
     public void tick() {
         // is the mouse hovering over the button?
@@ -55,8 +55,8 @@ public class Button extends Sprite {
     }
 
     /**
-     *
-     * @param hovered
+     * setter, with associated image change
+     * @param hovered whether the mouse is over the button
      */
     public void setHovered(boolean hovered) {
         // don't do anything if the hover status hasn't changed

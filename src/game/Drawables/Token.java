@@ -20,11 +20,11 @@ public class Token extends Sprite {
     private boolean selected = false; // is this token in the process of being moved?
 
     /**
-     *
-     * @param page
-     * @param x
-     * @param y
-     * @param team
+     * constructor
+     * @param page page that the sprite is on
+     * @param x horizontal coordinate position of the sprite
+     * @param y vertical coordinate position of the sprite
+     * @param team team that the token is a part of
      */
     public Token(Page page, double x, double y, Enum<Teams> team) {
         super(page, x, y, SIZE, SIZE, (new ImageIcon(team== Teams.DUCK ? IMG_PATH_DUCK : IMG_PATH_GOOSE)).getImage());
@@ -33,39 +33,39 @@ public class Token extends Sprite {
     }
 
     /**
-     *
-     * @param g
+     * draw the token on the screen
+     * @param g graphics object
      */
     public void paint(Graphics2D g) {
         super.paint(g);
     }
 
     /**
-     *
+     * do nothing each frame
      */
     public void tick() {
     }
 
     /**
-     *
-     * @param player
+     * setter
+     * @param player team that the token is on
      */
     public void setPlayer(Enum<Teams> player) {
         this.player = player;
     }
 
     /**
-     *
-     * @return
+     * getter
+     * @return team that the token is on
      */
     public Enum<Teams> getPlayer() {
         return this.player;
     }
 
     /**
-     *
-     * @param startPos
-     * @param endPos
+     * move token
+     * @param startPos start position
+     * @param endPos end position
      */
     public void moveSelf(Position startPos, Position endPos) {
         startPos.setToken(null);
@@ -75,8 +75,8 @@ public class Token extends Sprite {
     }
 
     /**
-     *
-     * @param selected
+     * setter
+     * @param selected whether the token is being moved by the player
      */
     public void setSelected(boolean selected) {
         this.selected = selected;
@@ -84,8 +84,8 @@ public class Token extends Sprite {
     }
 
     /**
-     *
-     * @param allowed
+     * setter
+     * @param allowed whether the player can select this token
      */
     public void setAllowed(boolean allowed) {
         this.allowed = allowed;
@@ -93,7 +93,7 @@ public class Token extends Sprite {
     }
 
     /**
-     *
+     * update image according to current conditions
      */
     public void updateImg() {
         // if selected, show accordingly

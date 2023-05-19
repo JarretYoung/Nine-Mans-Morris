@@ -5,12 +5,12 @@ import game.Teams;
 import game.UIComponents.Board;
 
 public class WinCondition {
-    // find a winner if any
+
     /**
-     *
-     * @param player1
-     * @param player2
-     * @return
+     * find a winner if any
+     * @param player1 first player
+     * @param player2 second player
+     * @return winning side, or null if the game hasn't ended
      */
     public Enum<Teams> getWinnerIfAny(Player player1, Player player2) {
         if(player1.checkPiecesLeft()<3 && player1.checkPiecesInHand()<=0) {
@@ -23,13 +23,13 @@ public class WinCondition {
             return null;
         }
     }
-    // check if a stalemate occurs
+
     /**
-     *
-     * @param currentPlayer
-     * @param board
-     * @param millFormed
-     * @return
+     * check if a stalemate occurs
+     * @param currentPlayer this turn's player
+     * @param board board of the game
+     * @param millFormed whether there is a mill
+     * @return whether a stalemate has occurred
      */
     public boolean checkStalemate(Player currentPlayer, Board board, boolean millFormed) {
         return currentPlayer.getAllowableActions(board,millFormed).size()==0;

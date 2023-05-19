@@ -11,17 +11,16 @@ public class Mill {
     private boolean hasBeenProcessed; // represents whether a token has already been deleted because of the mill
 
     /**
-     *
-     * @param positions
+     * constructor
+     * @param positions positions associated with the mill
      */
     public Mill(ArrayList<Position> positions) {
         this.positions = positions;
         this.setHasBeenProcessed(false);
     }
-    // is this a valid mill? (aka all three positions are the same)
     /**
-     *
-     * @return
+     * is this a valid mill? (aka all three positions are the same team)
+     * @return whether this is a mill
      */
     public boolean millExists() {
         if(positions.get(0).getToken()!=null) {
@@ -40,8 +39,8 @@ public class Mill {
         }
     }
     /**
-     *
-     * @return
+     * should an enemy piece be deleted because of this mill?
+     * @return whether this is a mill and whether it hasn't been handled yet
      */
     public boolean isMillFormed() {
         boolean exists = this.millExists();
@@ -54,22 +53,22 @@ public class Mill {
         }
     }
     /**
-     *
-     * @param hasBeenProcessed
+     * setter
+     * @param hasBeenProcessed whether the mill has been processed yet
      */
     public void setHasBeenProcessed(boolean hasBeenProcessed) {
         this.hasBeenProcessed = hasBeenProcessed;
     }
     /**
-     *
-     * @return
+     * getter
+     * @return whether the mill has been processed yet
      */
     public boolean hasBeenProcessed() {
         return hasBeenProcessed;
     }
     /**
-     *
-     * @param millExists
+     * update the positions based on the mill's existence
+     * @param millExists whether this mill exists
      */
     public void updatePositionMillExists(boolean millExists) {
         // update every position according to the state of this mill

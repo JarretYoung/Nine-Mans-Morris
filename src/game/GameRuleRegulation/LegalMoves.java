@@ -9,13 +9,11 @@ import java.util.ArrayList;
 
 public class LegalMoves {
 
-    // method to get a list of actions that are valid for the player to choose from
-
     /**
-     *
-     * @param player
-     * @param board
-     * @param millFormed
+     * constructor
+     * @param player current turn's player
+     * @param board board of the game
+     * @param millFormed whether a mill has been formed
      * @return
      */
     public ArrayList<Action> getAllowableActions(Player player, Board board,boolean millFormed) {
@@ -32,13 +30,12 @@ public class LegalMoves {
             return this.getFlyingActions(player,board);
         }
     }
-    // method to get actions corresponding to locations where tokens can be placed
 
     /**
-     *
-     * @param player
-     * @param board
-     * @return
+     * method to get actions corresponding to locations where tokens can be placed
+     * @param player current turn's player
+     * @param board board of the game
+     * @return list of actions that can be taken by the player
      */
     private ArrayList<Action> getPlacingActions(Player player, Board board) {
         ArrayList<Action> actionList = new ArrayList<>();
@@ -53,12 +50,12 @@ public class LegalMoves {
         }
         return actionList;
     }
-    // method to get actions corresponding to locations where tokens can be moved to
+
     /**
-     *
-     * @param player
-     * @param board
-     * @return
+     * method to get actions corresponding to locations where tokens can be moved to
+     * @param player current turn's player
+     * @param board board of the game
+     * @return list of actions that can be taken by the player
      */
     private ArrayList<Action> getMovingActions(Player player, Board board) {
         ArrayList<Action> actionList = new ArrayList<>();
@@ -81,12 +78,12 @@ public class LegalMoves {
         }
         return actionList;
     }
-    // method to get actions corresponding to locations where tokens can be moved to
+
     /**
-     *
-     * @param player
-     * @param board
-     * @return
+     * method to get actions corresponding to locations where tokens can be moved to
+     * @param player current turn's player
+     * @param board board of the game
+     * @return list of actions that can be taken by the player
      */
     private ArrayList<Action> getFlyingActions(Player player, Board board) {
         ArrayList<Action> actionList = new ArrayList<>();
@@ -109,12 +106,12 @@ public class LegalMoves {
         }
         return actionList;
     }
-    // method to get actions corresponding to locations with tokens that can be deleted
+
     /**
-     *
-     * @param player
-     * @param board
-     * @return
+     * method to get actions corresponding to locations with tokens that can be deleted
+     * @param player current turn's player
+     * @param board board of the game
+     * @return list of actions that can be taken by the player
      */
     private ArrayList<Action> getDeleteActions(Player player, Board board) {
         ArrayList<Action> actionList = new ArrayList<>();
