@@ -2,79 +2,82 @@ package game.UndoFunction;
 
 import game.Drawables.Position;
 import game.Drawables.Token;
+import game.GameRuleRegulation.MillCondition;
 import game.Players.Player;
+import game.Teams;
 import game.UIComponents.Board;
+import game.UIComponents.GamePage;
+
+import java.util.Optional;
 
 public class GameState {
     private Position[][] grid;
     private Integer playerOnePieces;
     private Integer playerTwoPieces;
+    private MillCondition millCondition;
 
 //    public GameState(Board board, Integer playerOnePieces, Integer playerTwoPieces) {
 //        this.board = board;
 //        this.playerOnePieces = playerOnePieces;
 //        this.playerTwoPieces = playerTwoPieces;
 //    }
-
-    public void placePiece(Player player, Position position) {
-        position.setToken(new Token(position.getPage(),position.getX(),position.getY(),player.getTeam()));
-        player.changePiecesInHand(-1);
+    public GameState(MillCondition millCondition) {
+        this.millCondition = millCondition;
     }
 
-    public void movePiece(Player player, Position startPos, Position endPos) {
+    public void placePiece(Enum<Teams> team, Position position) {
+        position.setToken(new Token(position.getPage(),position.getX(),position.getY(),team));
+    }
+
+    public void movePiece(Position startPos, Position endPos) {
         startPos.getToken().moveSelf(startPos,endPos);
     }
 
-    public void removePiece(Player player, Position position) {
+    public void removePiece(Position position) {
         position.getToken().delete();
         position.setToken(null);
     }
 
-    /** Maybe I should add the turn */
-    public void set(Position[][] grid, Integer playerOnePieces, Integer playerTwoPieces) {
-        this. grid = grid;
-        this.playerOnePieces = playerOnePieces;
-        this.playerTwoPieces = playerTwoPieces;
-    }
-
-    public void set(Board board, Integer playerOnePieces, Integer playerTwoPieces) {
-        this. grid = board.getGrid();
-        this.playerOnePieces = playerOnePieces;
-        this.playerTwoPieces = playerTwoPieces;
-    }
-
-    public Memento takeSnapshot() {
-        return new Memento(this.grid, this.playerOnePieces, this.playerTwoPieces);
+    public Memento takeSnapshot(Player player, Position startPosition, Position endPosition) {
+        return new Memento(player,startPosition,endPosition,this.millCondition);
     }
 
     public void restore(Memento memento) {
-        this.grid = memento.getSavedBoardState();
-        this.playerOnePieces = memento.getPlayerOnePieces();
-        this.playerTwoPieces = memento.getPlayerTwoPieces();
+        GamePage gamePage = (GamePage) (memento.getStartPosition() != null ? memento.getStartPosition().getPage() : memento.getEndPosition().getPage());
+        if(memento.getStartPosition()==null && memento.getEndPosition()!=null) { // revert placing
+            this.removePiece(memento.getEndPosition());
+            memento.getPlayer().changePiecesInHand(1);
+            if(gamePage.getMill()==null) {gamePage.nextTurn();}
+            else {gamePage.setMill(null);}
+        } else if (memento.getStartPosition()!=null && memento.getEndPosition()!=null) { // revert moving
+            this.movePiece(memento.getEndPosition(),memento.getStartPosition());
+            if(gamePage.getMill()==null) {gamePage.nextTurn();}
+            else {gamePage.setMill(null);}
+        } else if (memento.getStartPosition()!=null && memento.getEndPosition()==null) { // revert deleting
+            this.placePiece(memento.getPlayer().getTeam()== Teams.DUCK ? Teams.GOOSE : Teams.DUCK,memento.getStartPosition());
+        }
+        this.millCondition.copyValues(memento.getMillCondition());
+//      this.grid = memento.getSavedBoardState();
+//      this.playerOnePieces = memento.getPlayerOnePieces();
+//      this.playerTwoPieces = memento.getPlayerTwoPieces();
     }
 
 
     public static class Memento {
-        private Position[][] grid;
-        private Integer playerOnePieces;
-        private Integer playerTwoPieces;
-
-        private Memento (Position[][] grid, Integer playerOnePieces, Integer playerTwoPieces) {
-            this.grid = grid;
-            this.playerOnePieces = playerOnePieces;
-            this.playerTwoPieces = playerTwoPieces;
+        private Player player;
+        private Position startPosition;
+        private Position endPosition;
+        private MillCondition millCondition;
+        private Memento (Player player,Position startPosition, Position endPosition, MillCondition millCondition) {
+            this.player = player;
+            this.startPosition = startPosition;
+            this.endPosition = endPosition;
+            this.millCondition = millCondition.clone();
         }
 
-        private Position[][] getSavedBoardState() {
-            return this.grid;
-        }
-
-        private Integer getPlayerOnePieces() {
-            return this.playerOnePieces;
-        }
-
-        private Integer getPlayerTwoPieces() {
-            return this.playerTwoPieces;
-        }
+        public Player getPlayer() {return player;}
+        public Position getStartPosition() {return startPosition;}
+        public Position getEndPosition() {return endPosition;}
+        public MillCondition getMillCondition() {return millCondition;}
     }
 }

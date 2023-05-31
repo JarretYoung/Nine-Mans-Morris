@@ -4,6 +4,8 @@ import game.UndoFunction.GameState;
 import game.Players.Player;
 
 import game.Drawables.Position;
+import game.UndoFunction.GameStateEditor;
+
 // action representing the insertion of a token onto the board
 public class PlaceAction extends Action {
     private Position position;
@@ -20,11 +22,11 @@ public class PlaceAction extends Action {
 
     /**
      * does the action
-     * @param gameState state of the game
+     * @param gameStateEditor state of the game
      */
     @Override
-    public void performAction(GameState gameState) {
-        gameState.placePiece(player, position);
+    public void performAction(GameStateEditor gameStateEditor) {
+        gameStateEditor.placePiece(player, position);
     }
 
     /**

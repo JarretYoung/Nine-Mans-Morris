@@ -4,6 +4,8 @@ import game.UndoFunction.GameState;
 import game.Players.Player;
 
 import game.Drawables.Position;
+import game.UndoFunction.GameStateEditor;
+
 // action representing a token moving only to adjacent locations
 public class MoveAdjAction extends MoveAction {
     /**
@@ -18,11 +20,11 @@ public class MoveAdjAction extends MoveAction {
 
     /**
      * does the action
-     * @param gameState state of the game
+     * @param gameStateEditor state of the game
      */
     @Override
-    public void performAction(GameState gameState) {
-        gameState.movePiece(player, startPosition, endPosition);
+    public void performAction(GameStateEditor gameStateEditor) {
+        gameStateEditor.movePiece(player, startPosition, endPosition);
     }
 }
 

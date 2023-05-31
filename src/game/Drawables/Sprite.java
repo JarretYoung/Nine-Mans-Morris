@@ -165,6 +165,15 @@ public class Sprite extends Drawable {
     }
 
     /**
+     * getter
+     * @return page
+     */
+    @Override
+    public Page getPage() {
+        return super.getPage();
+    }
+
+    /**
      * check if a coordinate is within the sprite
      * @param x horizontal coordinate position of the sprite
      * @param y vertical coordinate position of the sprite

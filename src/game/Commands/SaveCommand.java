@@ -14,5 +14,7 @@ public class SaveCommand implements Command{
     @Override
     public void execute() {
         //do smtg
+        // step 1: do the parsing
+        // step 2: do the saving
     }
 }

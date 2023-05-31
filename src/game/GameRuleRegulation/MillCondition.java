@@ -60,4 +60,20 @@ public class MillCondition {
             }
         }
     }
+    public MillCondition clone() {
+        MillCondition millCondition = new MillCondition(this.board);
+        for(int i = 0; i < this.millList.size(); i++) {
+            Mill mill = this.millList.get(i);
+            Mill millCopy = millCondition.millList.get(i);
+            millCopy.setHasBeenProcessed(mill.hasBeenProcessed());
+        }
+        return millCondition;
+    }
+    public void copyValues(MillCondition millCondition) {
+        for(int i = 0; i < this.millList.size(); i++) {
+            Mill mill = this.millList.get(i);
+            Mill millCopy = millCondition.millList.get(i);
+            mill.setHasBeenProcessed(millCopy.hasBeenProcessed());
+        }
+    }
 }
