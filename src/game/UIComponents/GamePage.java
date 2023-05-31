@@ -152,4 +152,19 @@ public class GamePage extends Page {
 //        this.setMillFormedTextStr(this.mill==null ? "no mills formed" : "mill formed!");
     }
 
+    /**
+     * setter
+     * @param mill active mill
+     */
+    public void setMill(Mill mill) {
+        this.mill = mill;
+    }
+
+    /**
+     * getter
+     * @return active mill if any
+     */
+    public Mill getMill() {
+        return mill;
+    }
 }

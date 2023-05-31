@@ -8,6 +8,8 @@ import game.Teams;
 import game.UIComponents.Board;
 import game.UIComponents.GamePage;
 
+import java.util.Optional;
+
 public class GameState {
     private Position[][] grid;
     private Integer playerOnePieces;
@@ -41,14 +43,17 @@ public class GameState {
     }
 
     public void restore(Memento memento) {
-        if(memento.getStartPosition()==null && memento.getEndPosition()!=null) {
+        GamePage gamePage = (GamePage) (memento.getStartPosition() != null ? memento.getStartPosition().getPage() : memento.getEndPosition().getPage());
+        if(memento.getStartPosition()==null && memento.getEndPosition()!=null) { // revert placing
             this.removePiece(memento.getEndPosition());
             memento.getPlayer().changePiecesInHand(1);
-            ((GamePage) memento.getEndPosition().getPage()).nextTurn();
-        } else if (memento.getStartPosition()!=null && memento.getEndPosition()!=null) {
+            if(gamePage.getMill()==null) {gamePage.nextTurn();}
+            else {gamePage.setMill(null);}
+        } else if (memento.getStartPosition()!=null && memento.getEndPosition()!=null) { // revert moving
             this.movePiece(memento.getEndPosition(),memento.getStartPosition());
-            ((GamePage) memento.getEndPosition().getPage()).nextTurn();
-        } else if (memento.getStartPosition()!=null && memento.getEndPosition()==null) {
+            if(gamePage.getMill()==null) {gamePage.nextTurn();}
+            else {gamePage.setMill(null);}
+        } else if (memento.getStartPosition()!=null && memento.getEndPosition()==null) { // revert deleting
             this.placePiece(memento.getPlayer().getTeam()== Teams.DUCK ? Teams.GOOSE : Teams.DUCK,memento.getStartPosition());
         }
         this.millCondition.copyValues(memento.getMillCondition());
