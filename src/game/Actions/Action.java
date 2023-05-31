@@ -2,6 +2,7 @@ package game.Actions;
 import game.UndoFunction.GameState;
 import game.Drawables.Position;
 import game.Players.Player;
+import game.UndoFunction.GameStateEditor;
 
 import java.time.LocalDateTime;
 // class representing a player doing something
@@ -22,9 +23,9 @@ public abstract class Action {
     // perform the action
     /**
      * does the action
-     * @param gameState state of the game
+     * @param gameStateEditor state of the game
      */
-    public abstract void performAction(GameState gameState);
+    public abstract void performAction(GameStateEditor gameStateEditor);
     /**
      * the starting position of the token (or null if the token doesn't exist yet)
      * @return initial position

@@ -1,10 +1,7 @@
 package game.UIComponents;
 
 
-import game.Commands.GotoConfirmCommand;
-import game.Commands.GotoGameCommand;
-import game.Commands.GotoMenuCommand;
-import game.Commands.SaveCommand;
+import game.Commands.*;
 import game.Drawables.Button;
 import game.Drawables.Sprite;
 import game.Drawables.Token;
@@ -17,6 +14,7 @@ import game.Teams;
 import game.Drawables.Text;
 import game.Players.HumanPlayer;
 import game.Players.Player;
+import game.UndoFunction.GameStateEditor;
 
 import javax.swing.*;
 
@@ -27,7 +25,6 @@ public class GamePage extends Page {
     private Player player2;
     private Player currentPlayer;
     private boolean gameIsRunning;
-    private GameState gameState;
     private Text turnText;
     private Text duckLeftText;
     private Text gooseLeftText;
@@ -37,6 +34,7 @@ public class GamePage extends Page {
     private MillCondition millCondition;
     private Mill mill;
     private WinCondition winCondition;
+    private GameStateEditor gameStateEditor;
     public void setTurnTextStr(String strVal) {this.turnText.setTextStr(strVal);}
     public void setDuckLeftStr(String strVal) {this.duckLeftText.setTextStr(strVal);}
     public void setGooseLeftStr(String strVal) {this.gooseLeftText.setTextStr(strVal);}
@@ -49,7 +47,6 @@ public class GamePage extends Page {
     public GamePage(Panel panel) {
         super(panel, ID);
         this.board = new Board(this);
-        this.gameState = new GameState();
         this.player1 = new HumanPlayer(Teams.DUCK);
         this.player2 = new HumanPlayer(Teams.GOOSE);
         this.currentPlayer = this.player1;
@@ -65,15 +62,18 @@ public class GamePage extends Page {
                 (new ImageIcon(Token.IMG_PATH_DUCK)).getImage(),20,this.player1.checkPiecesInHand(),0,1);
         this.gooseSpriteLine = new SpriteLine(this,550,220, Token.SIZE, Token.SIZE,
                 (new ImageIcon(Token.IMG_PATH_GOOSE)).getImage(),20,this.player2.checkPiecesInHand(),0,1);
-        new Button(this,100,560,180,60,"MAIN MENU",new GotoConfirmCommand(this.getPanel()));
-        new Button(this,500,560,180,60,"SAVE",new SaveCommand(this.getPanel()));
 
+        this.gameStateEditor = new GameStateEditor(this.millCondition);
+
+        new Button(this,100,560,180,60,"MAIN MENU",new GotoConfirmCommand(this.getPanel()));
+        new Button(this,300,560,180,60,"UNDO",new UndoCommand(this.gameStateEditor));
+        new Button(this,500,560,180,60,"SAVE",new SaveCommand(this.getPanel()));
     }
 
     /**
      * handle everything related to changing the turn
      */
-    protected void nextTurn() {
+    public void nextTurn() {
         // set current player
         if(this.currentPlayer==this.player1) {
             this.currentPlayer = this.player2;
@@ -124,7 +124,7 @@ public class GamePage extends Page {
             // if an action is selected
             if(playedMove!=null) {
                 // do the action
-                playedMove.performAction(this.gameState);
+                playedMove.performAction(this.gameStateEditor);
                 // update player tokens accordingly
                 player1.updateTokenCount(this.board);
                 player2.updateTokenCount(this.board);

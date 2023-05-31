@@ -64,7 +64,7 @@ public abstract class Page {
      * run drawable info every frame
      */
     public void tick() {
-        for(Drawable drawable : drawables) {
+        for(Drawable drawable : (ArrayList<Drawable>) drawables.clone()) {
             drawable.tick();
         }
     };

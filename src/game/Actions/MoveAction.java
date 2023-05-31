@@ -4,6 +4,8 @@ import game.UndoFunction.GameState;
 import game.Players.Player;
 
 import game.Drawables.Position;
+import game.UndoFunction.GameStateEditor;
+
 // abstract action handling movements for tokens from one place to another
 public abstract class MoveAction extends Action {
     protected Position startPosition;
@@ -24,10 +26,10 @@ public abstract class MoveAction extends Action {
 
     /**
      * does the action
-     * @param gameState state of the game
+     * @param gameStateEditor state of the game
      */
     @Override
-    public abstract void performAction(GameState gameState);
+    public abstract void performAction(GameStateEditor gameStateEditor);
 
     /**
      * the starting position of the token (or null if the token doesn't exist yet)
