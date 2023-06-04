@@ -6,6 +6,7 @@ import game.Drawables.Button;
 import game.Drawables.Sprite;
 import game.Drawables.Token;
 import game.GameRuleRegulation.WinCondition;
+import game.Players.ComputerPlayer;
 import game.UndoFunction.GameState;
 import game.Actions.Action;
 import game.GameRuleRegulation.Mill;
@@ -44,11 +45,11 @@ public class GamePage extends Page {
      * constructor
      * @param panel game panel
      */
-    public GamePage(Panel panel) {
+    public GamePage(Panel panel, boolean singleplayer) {
         super(panel, ID);
         this.board = new Board(this);
         this.player1 = new HumanPlayer(Teams.DUCK);
-        this.player2 = new HumanPlayer(Teams.GOOSE);
+        this.player2 = singleplayer ? new ComputerPlayer(Teams.GOOSE) : new HumanPlayer(Teams.GOOSE);
         this.currentPlayer = this.player1;
         this.gameIsRunning = true;
         this.turnText = new Text(this,String.format("%s's turn",this.currentPlayer.getTeam()),300,50,true);

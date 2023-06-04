@@ -2,6 +2,7 @@ package game.UIComponents;
 
 
 import game.Commands.GotoGameCommand;
+import game.Commands.GotoNewGameCommand;
 import game.Commands.LoadCommand;
 import game.Drawables.Button;
 import game.Commands.ExitCommand;
@@ -30,8 +31,8 @@ public class MainMenuPage extends Page {
         this.goose =new DecorativeSprite(this, 500, 110, IMG_PATH_GOOSE);
         new Text(this, "NINE MAN", 300, 100, true, Color.DARK_GRAY,"Engravers MT",35);
         new Text(this, "MORRIS", 300, 150, true, Color.DARK_GRAY,"Engravers MT",35);
-        new Button(this,300,250,180,60,"SINGLE PLAYER",new GotoGameCommand(this.getPanel()));
-        new Button(this,300,325,180,60,"MULTIPLAYER",new GotoGameCommand(this.getPanel()));
+        new Button(this,300,250,180,60,"SINGLE PLAYER",new GotoNewGameCommand(this.getPanel(),true));
+        new Button(this,300,325,180,60,"MULTIPLAYER",new GotoNewGameCommand(this.getPanel(),false));
         new Button(this,300,400,180,60,"LOAD GAME",new LoadCommand(this.getPanel()));
         new Button(this,300,475,180,60,"EXIT",new ExitCommand(this.getPanel()));
     }

@@ -20,11 +20,10 @@ public class Panel extends JPanel implements ActionListener {
     public Panel(Frame frame) {
         this.frame = frame;
         setBackground(new Color(128,128,128));
-        this.DELAY = 20; // 50 fps
+        this.DELAY = 20;
         this.pageHash = new HashMap<>();
         // start at main menu
         this.registerPage(new MainMenuPage(this));
-        this.registerPage(new GamePage(this));
         this.registerPage(new ConfirmPage(this));
         this.setCurrentPage(MainMenuPage.ID); // goto game page directly for now
         // timer for running things every frame

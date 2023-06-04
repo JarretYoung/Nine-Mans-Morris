@@ -20,7 +20,6 @@ public class GotoMenuCommand implements Command{
      */
     @Override
     public void execute() {
-        this.panel.registerPage(new GamePage(this.panel));
         this.panel.setCurrentPage(MainMenuPage.ID);
     }
 }

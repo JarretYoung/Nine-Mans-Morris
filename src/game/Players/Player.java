@@ -69,65 +69,7 @@ abstract public class Player {
     /**
      *  Play the turn of this player
      */
-    public Action playTurn(Board board, boolean millFormed) {
-        // get a list of allowed actions
-        this.allowableActions = this.getAllowableActions(board,millFormed);
-        // find the number of pieces on the board
-        //check valid move
-        if (isHuman == true) { // If player is human player
-            Position pos = board.getClickedPosition();
-            if(millFormed) { // Deleting phase
-                if (pos == null) {
-                    return null;
-                } else {
-                    return checkValidMove(pos, null);
-                }
-            }
-            else if (this.piecesInHand > 0) { // Placing Phase
-                if (pos == null) {
-                    return null;
-                } else {
-                    return checkValidMove(null, pos);
-                }
-            } else { // Moving or Flying Phase
-                if (pos == null) {
-                    return null;
-                } else {
-                    if (this.firstClickedLocation == null && pos.getToken()!=null) {
-                        this.firstClickedLocation = pos;
-                        if(this.firstClickedLocation.getToken()!=null) {
-                            this.firstClickedLocation.getToken().setSelected(true);
-                        }
-                        return null;
-
-                    }
-                    else if (this.firstClickedLocation != null && this.secondClickedLocation == null) {
-                        this.secondClickedLocation = pos;
-                        Action action = checkValidMove(this.firstClickedLocation, this.secondClickedLocation);
-                        if(this.firstClickedLocation.getToken()!=null) {
-                            this.firstClickedLocation.getToken().setSelected(false);
-                        }
-                        this.firstClickedLocation = null;
-                        this.secondClickedLocation = null;
-                        return action;
-                    }
-                    else {
-                        if(this.firstClickedLocation != null && this.firstClickedLocation.getToken()!=null) {
-                            this.firstClickedLocation.getToken().setSelected(false);
-                        }
-                        this.firstClickedLocation = null;
-                        this.secondClickedLocation = null;
-                    }
-                }
-            }
-
-        } else { // If player is AI player
-            Random random = new Random();
-            int randIndex = random.nextInt(this.allowableActions.size());
-            return this.allowableActions.get(randIndex);
-        }
-        return null;
-    }
+    public abstract Action playTurn(Board board, boolean millFormed);
     public void updateTokenCount(Board board) {
         this.piecesLeft = board.getTokenCount(this.team);
     }
@@ -166,5 +108,13 @@ abstract public class Player {
     public Enum<Teams> getTeam() {
         return team;
     }
-    public ArrayList<Action> getAllowableActions(Board board, boolean millFormed) {return this.legalMoves.getAllowableActions(this,board,millFormed);}
+    public ArrayList<Action> generateAllowableActions(Board board, boolean millFormed) {return this.legalMoves.getAllowableActions(this,board,millFormed);}
+
+    protected ArrayList<Action> getAllowableActions() {
+        return allowableActions;
+    }
+
+    protected void setAllowableActions(ArrayList<Action> allowableActions) {
+        this.allowableActions = allowableActions;
+    }
 }

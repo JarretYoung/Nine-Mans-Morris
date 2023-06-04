@@ -32,6 +32,6 @@ public class WinCondition {
      * @return whether a stalemate has occurred
      */
     public boolean checkStalemate(Player currentPlayer, Board board, boolean millFormed) {
-        return currentPlayer.getAllowableActions(board,millFormed).size()==0;
+        return currentPlayer.generateAllowableActions(board,millFormed).size()==0;
     }
 }
