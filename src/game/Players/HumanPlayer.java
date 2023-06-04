@@ -17,7 +17,7 @@ public class HumanPlayer extends Player {
     /**
      * Constructor for multiplayer where player is assigned a "colour"
      *
-     * @param colour
+     * @param colour is the team that the current player is a part of
      */
     public HumanPlayer(Teams colour) {
         super(true, colour);
