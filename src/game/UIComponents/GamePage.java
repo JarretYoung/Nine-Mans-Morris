@@ -83,10 +83,7 @@ public class GamePage extends Page {
         else {
             this.currentPlayer = this.player1;
         }
-        // set UI elements
-        this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
-        this.updateTurnText();
-
+        this.updateUI();
         // check if a stalemate is occurring
         if(this.winCondition.checkStalemate(currentPlayer,this.board,this.mill!=null)) {
             this.setGameEndTextStr("game over! stalemate occurred");
@@ -98,6 +95,11 @@ public class GamePage extends Page {
             this.setGameEndTextStr(String.format("game over! %s wins!",winner));
             this.gameIsRunning = false;
         }
+    }
+    public void updateUI() {
+        // set UI elements
+        this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
+        this.updateTurnText();
     }
 
     /**

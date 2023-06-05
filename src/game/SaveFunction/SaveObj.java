@@ -51,6 +51,7 @@ public class SaveObj implements Saveable {
     public void restore(LinkedTreeMap<String, Object> data) {
         this.gamePage.setSingleplayer((boolean) data.get("singleplayer"));
         this.gamePage.setCurrentPlayer(data.get("currentPlayerTeam").equals("DUCK") ? this.player1 : this.player2);
+        this.gamePage.updateUI();
         this.board.restore((LinkedTreeMap<String, Object>) data.get("board"));
         this.player1.restore((LinkedTreeMap<String, Object>) data.get("player1"));
         this.player2.restore((LinkedTreeMap<String, Object>) data.get("player2"));
