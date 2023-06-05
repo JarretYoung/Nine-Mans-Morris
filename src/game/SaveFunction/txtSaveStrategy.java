@@ -52,7 +52,6 @@ public class txtSaveStrategy extends SaveStrategy {
     public void saveProgress() {
         String filePath = getDirectorySaveProgress();
         Object result = getSaveObj().shelve();
-        System.out.println(result);
         String json = objectToJson(result);
 
         // Check if the file exists

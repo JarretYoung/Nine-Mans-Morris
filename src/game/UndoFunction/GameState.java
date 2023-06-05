@@ -10,6 +10,7 @@ import game.Teams;
 import game.UIComponents.Board;
 import game.UIComponents.GamePage;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Optional;
  */
 public class GameState {
     private MillCondition millCondition;
-    private  GamePage gamePage;
+    private static GamePage gamePage;
 
 //    public GameState(Board board, Integer playerOnePieces, Integer playerTwoPieces) {
 //        this.board = board;
@@ -36,7 +37,7 @@ public class GameState {
      */
     public GameState(MillCondition millCondition, GamePage gamePage) {
         this.millCondition = millCondition;
-        this.gamePage = gamePage;
+        GameState.gamePage = gamePage;
     }
 
     /**
@@ -167,13 +168,39 @@ public class GameState {
 
         @Override
         public void restore(LinkedTreeMap<String, Object> data) {
-
+            Enum<Teams> teams = ((LinkedTreeMap<String, Object>) data.get("player")).get("team").equals("DUCK") ? Teams.DUCK : Teams.GOOSE;
+            this.player = teams==Teams.DUCK ? GameState.gamePage.getPlayer1() : GameState.gamePage.getPlayer2();
+            ArrayList<Position> posList = GameState.gamePage.getBoard().getPositionsCopy();
+            this.startPosition = null;
+            this.endPosition = null;
+            double startX = -1; double startY = -1; double endX = -1; double endY = -1;
+            boolean startIsNull = true; boolean endIsNull = true;
+            if(data.get("startPosition") != null) {
+                startX = (double) ((LinkedTreeMap<String, Object>) data.get("startPosition")).get("x");
+                startY = (double) ((LinkedTreeMap<String, Object>) data.get("startPosition")).get("y");
+                startIsNull = false;
+            }
+            if(data.get("endPosition") != null) {
+                endX = (double) ((LinkedTreeMap<String, Object>) data.get("endPosition")).get("x");
+                endY = (double) ((LinkedTreeMap<String, Object>) data.get("endPosition")).get("y");
+                endIsNull = false;
+            }
+            for(Position position : posList) {
+                if(!startIsNull && position.getX()==startX && position.getY()==startY) {
+                    this.startPosition = position;
+                }
+                if(!endIsNull && position.getX()==endX && position.getY()==endY) {
+                    this.endPosition = position;
+                }
+            }
+            this.millCondition = new MillCondition(GameState.gamePage.getBoard());
+            this.millCondition.restore((LinkedTreeMap<String, Object>) data.get("millCondition"));
         }
     }
 
     public static Memento getMementoFromData(LinkedTreeMap<String, Object> data) {
         Memento memento = new Memento();
-//        memento.restore(data);
+        memento.restore(data);
         return memento;
     }
 }

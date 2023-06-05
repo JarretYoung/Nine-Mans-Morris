@@ -174,6 +174,14 @@ public class GamePage extends Page {
 
     public Player getCurrentPlayer() {return currentPlayer;}
 
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
     /**
      * creates a SaveObj
      * @return save object
@@ -184,5 +192,8 @@ public class GamePage extends Page {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+    public void setSingleplayer(boolean singleplayer) {
+        this.player2 = singleplayer ? new ComputerPlayer(Teams.GOOSE) : new HumanPlayer(Teams.GOOSE);
     }
 }

@@ -71,7 +71,7 @@ public class GameStateEditor implements Saveable {
     public void restore(LinkedTreeMap<String, Object> data) {
         ArrayList<Object> stateHistoryList = (ArrayList<Object>) data.get("stateHistory");
         for(int i = stateHistoryList.size()-1; i >= 0; i--) {
-            this.stateHistory.add(GameState.getMementoFromData(data));
+            this.stateHistory.add(GameState.getMementoFromData((LinkedTreeMap<String, Object>) stateHistoryList.get(i)));
         }
     }
 }

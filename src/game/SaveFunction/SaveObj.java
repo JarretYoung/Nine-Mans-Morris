@@ -2,6 +2,7 @@ package game.SaveFunction;
 
 import com.google.gson.internal.LinkedTreeMap;
 import game.GameRuleRegulation.MillCondition;
+import game.Players.ComputerPlayer;
 import game.Players.Player;
 import game.UIComponents.Board;
 import game.UIComponents.GamePage;
@@ -37,6 +38,7 @@ public class SaveObj implements Saveable {
     public LinkedTreeMap<String, Object> shelve() {
         LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
         data.put("currentPlayerTeam",this.gamePage.getCurrentPlayer().getTeam());
+        data.put("singleplayer",this.gamePage.getPlayer2() instanceof ComputerPlayer);
         data.put("board",this.board.shelve());
         data.put("player1",this.player1.shelve());
         data.put("player2",this.player2.shelve());
@@ -47,6 +49,7 @@ public class SaveObj implements Saveable {
 
     @Override
     public void restore(LinkedTreeMap<String, Object> data) {
+        this.gamePage.setSingleplayer((boolean) data.get("singleplayer"));
         this.gamePage.setCurrentPlayer(data.get("currentPlayerTeam").equals("DUCK") ? this.player1 : this.player2);
         this.board.restore((LinkedTreeMap<String, Object>) data.get("board"));
         this.player1.restore((LinkedTreeMap<String, Object>) data.get("player1"));
