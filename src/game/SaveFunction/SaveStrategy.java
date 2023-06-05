@@ -1,6 +1,12 @@
 package game.SaveFunction;
 
+import game.GameRuleRegulation.Mill;
+import game.GameRuleRegulation.MillCondition;
+import game.Players.Player;
+import game.Teams;
+import game.UIComponents.Board;
 import game.UIComponents.GamePage;
+import game.UndoFunction.GameStateEditor;
 
 /**
  * This class is the abstract class that will be used as a template for other save
@@ -12,32 +18,27 @@ import game.UIComponents.GamePage;
 public abstract class SaveStrategy {
 
     // The current gamepage
-    private GamePage gamePage;
+    private SaveObj saveObj;
 
     /**
      * Constructor for the saveStrategy
      *
-     * @param gamePage is the current gamepage
      */
-    public void saveStrategy(GamePage gamePage) {
-        this.gamePage = gamePage;
+    public void saveStrategy(SaveObj saveObj) {
+        this.saveObj = saveObj;
     }
 
     /**
      * Method used to restore progress of a saved 9MM game
      */
-    public abstract GamePage restoreToProgress();
+    public abstract SaveObj restoreToProgress();
 
     /**
      * Method used to save progress of the current 9MM game
      */
     public abstract void saveProgress();
 
-    /** Getter and setter for gamepage */
-    public GamePage getGamePage() {
-        return gamePage;
-    }
-    public void setGamePage(GamePage gamePage) {
-        this.gamePage = gamePage;
+    public SaveObj getSaveObj() {
+        return saveObj;
     }
 }

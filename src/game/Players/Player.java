@@ -1,6 +1,8 @@
 package game.Players;
 
+import com.google.gson.internal.LinkedTreeMap;
 import game.GameRuleRegulation.LegalMoves;
+import game.SaveFunction.Saveable;
 import game.Teams;
 
 import game.Actions.Action;
@@ -16,7 +18,7 @@ import java.util.Random;
  * @author Garret Yong Shern Min
  * @version 1.0 18/4/2023
  */
-abstract public class Player {
+abstract public class Player implements Saveable {
 
     // The status of whether the player is human
     private boolean isHuman;
@@ -117,4 +119,18 @@ abstract public class Player {
     protected void setAllowableActions(ArrayList<Action> allowableActions) {
         this.allowableActions = allowableActions;
     }
+    @Override
+    public LinkedTreeMap<String, Object> shelve() {
+        LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
+        data.put("piecesInHand",this.piecesInHand);
+        data.put("team",this.team);
+        return data;
+    }
+
+    @Override
+    public void restore(LinkedTreeMap<String, Object> data) {
+        this.piecesInHand = Integer.parseInt(String.valueOf(Math.round((double) data.get("piecesInHand"))));
+        this.team = data.get("team").equals("DUCK") ? Teams.DUCK : Teams.GOOSE;
+    }
+
 }

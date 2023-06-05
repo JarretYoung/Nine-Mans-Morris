@@ -1,9 +1,11 @@
 package game.UndoFunction;
 
+import com.google.gson.internal.LinkedTreeMap;
 import game.Drawables.Position;
 import game.Drawables.Token;
 import game.GameRuleRegulation.MillCondition;
 import game.Players.Player;
+import game.SaveFunction.Saveable;
 import game.Teams;
 import game.UIComponents.Board;
 import game.UIComponents.GamePage;
@@ -17,10 +19,8 @@ import java.util.Optional;
  * @version 2.0 2/8/2023
  */
 public class GameState {
-    private Position[][] grid;
-    private Integer playerOnePieces;
-    private Integer playerTwoPieces;
     private MillCondition millCondition;
+    private  GamePage gamePage;
 
 //    public GameState(Board board, Integer playerOnePieces, Integer playerTwoPieces) {
 //        this.board = board;
@@ -32,9 +32,11 @@ public class GameState {
      * Constructor for the Gamestate
      *
      * @param millCondition is whether a mill is in effect
+     * @param gamePage the game page
      */
-    public GameState(MillCondition millCondition) {
+    public GameState(MillCondition millCondition, GamePage gamePage) {
         this.millCondition = millCondition;
+        this.gamePage = gamePage;
     }
 
     /**
@@ -110,7 +112,7 @@ public class GameState {
      * @author Garret Yong Shern Min
      * @version 2.2 2/6/2023
      */
-    public static class Memento {
+    public static class Memento implements Saveable {
         private Player player;
         private Position startPosition;
         private Position endPosition;
@@ -120,6 +122,9 @@ public class GameState {
             this.startPosition = startPosition;
             this.endPosition = endPosition;
             this.millCondition = millCondition.clone();
+        }
+        private Memento() {
+
         }
 
         /**
@@ -149,5 +154,26 @@ public class GameState {
          * @return the current mill condition
          */
         public MillCondition getMillCondition() {return millCondition;}
+
+        @Override
+        public LinkedTreeMap<String, Object> shelve() {
+            LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
+            data.put("player",this.player.shelve());
+            data.put("startPosition",startPosition!=null ? this.startPosition.shelve() : null);
+            data.put("endPosition",endPosition!=null? this.endPosition.shelve() : null);
+            data.put("millCondition",this.millCondition.shelve());
+            return data;
+        }
+
+        @Override
+        public void restore(LinkedTreeMap<String, Object> data) {
+
+        }
+    }
+
+    public static Memento getMementoFromData(LinkedTreeMap<String, Object> data) {
+        Memento memento = new Memento();
+//        memento.restore(data);
+        return memento;
     }
 }

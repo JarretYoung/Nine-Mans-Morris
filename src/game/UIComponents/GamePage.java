@@ -7,6 +7,7 @@ import game.Drawables.Sprite;
 import game.Drawables.Token;
 import game.GameRuleRegulation.WinCondition;
 import game.Players.ComputerPlayer;
+import game.SaveFunction.SaveObj;
 import game.UndoFunction.GameState;
 import game.Actions.Action;
 import game.GameRuleRegulation.Mill;
@@ -64,11 +65,11 @@ public class GamePage extends Page {
         this.gooseSpriteLine = new SpriteLine(this,550,220, Token.SIZE, Token.SIZE,
                 (new ImageIcon(Token.IMG_PATH_GOOSE)).getImage(),20,this.player2.checkPiecesInHand(),0,1);
 
-        this.gameStateEditor = new GameStateEditor(this.millCondition);
+        this.gameStateEditor = new GameStateEditor(this.millCondition,this);
 
         new Button(this,100,560,180,60,"MAIN MENU",new GotoConfirmCommand(this.getPanel()));
         new Button(this,300,560,180,60,"UNDO",new UndoCommand(this.gameStateEditor));
-        new Button(this,500,560,180,60,"SAVE",new SaveCommand(this.getPanel()));
+        new Button(this,500,560,180,60,"SAVE",new SaveCommand(this));
     }
 
     /**
@@ -167,5 +168,21 @@ public class GamePage extends Page {
      */
     public Mill getMill() {
         return mill;
+    }
+
+    public Board getBoard() {return board;}
+
+    public Player getCurrentPlayer() {return currentPlayer;}
+
+    /**
+     * creates a SaveObj
+     * @return save object
+     */
+    public SaveObj genSaveObj() {
+        return new SaveObj(this,board,player1,player2,millCondition,gameStateEditor);
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 }

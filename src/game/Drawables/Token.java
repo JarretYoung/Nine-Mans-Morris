@@ -1,12 +1,14 @@
 package game.Drawables;
 
+import com.google.gson.internal.LinkedTreeMap;
+import game.SaveFunction.Saveable;
 import game.Teams;
 import game.UIComponents.*;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Token extends Sprite {
+public class Token extends Sprite implements Saveable {
     // attributes
     public final static double SIZE = 64;
     public final static String IMG_PATH_DUCK = "images/duck.png"; // default duck image
@@ -109,5 +111,18 @@ public class Token extends Sprite {
                 this.setBaseImg((new ImageIcon(player== Teams.DUCK ? IMG_PATH_DUCK: IMG_PATH_GOOSE)).getImage());
             }
         }
+    }
+
+    @Override
+    public LinkedTreeMap<String, Object> shelve() {
+        LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
+        data.put("player",this.player);
+        return data;
+    }
+
+    @Override
+    public void restore(LinkedTreeMap<String, Object> data) {
+        this.setPlayer(data.get("player").equals("DUCK") ? Teams.DUCK : Teams.GOOSE);
+        this.updateImg();
     }
 }

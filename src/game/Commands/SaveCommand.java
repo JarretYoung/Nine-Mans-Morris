@@ -1,20 +1,26 @@
 package game.Commands;
 
+import game.GameRuleRegulation.MillCondition;
+import game.Players.Player;
+import game.SaveFunction.SaveObj;
+import game.SaveFunction.SaveStrategy;
+import game.SaveFunction.txtSaveStrategy;
+import game.UIComponents.Board;
+import game.UIComponents.GamePage;
 import game.UIComponents.Panel;
+import game.UndoFunction.GameStateEditor;
 
 public class SaveCommand implements Command{
-    private Panel panel;
+    private SaveStrategy saveStrategy;
 
-    public SaveCommand(Panel panel) {
-        this.panel = panel;
+    public SaveCommand(GamePage gamePage) {
+        this.saveStrategy = new txtSaveStrategy(gamePage.genSaveObj());
     }
     /**
      * run the command
      */
     @Override
     public void execute() {
-        //do smtg
-        // step 1: do the parsing
-        // step 2: do the saving
+        this.saveStrategy.saveProgress();
     }
 }

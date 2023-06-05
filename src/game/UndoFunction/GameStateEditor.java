@@ -1,23 +1,27 @@
 package game.UndoFunction;
 
+import com.google.gson.internal.LinkedTreeMap;
 import game.Drawables.Position;
 import game.Drawables.Token;
 import game.GameRuleRegulation.Mill;
 import game.GameRuleRegulation.MillCondition;
 import game.Players.Player;
+import game.SaveFunction.Saveable;
 import game.UIComponents.Board;
+import game.UIComponents.GamePage;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class GameStateEditor {
+public class GameStateEditor implements Saveable {
     private Stack<GameState.Memento> stateHistory;
     private GameState gameState;
 
-    public GameStateEditor(MillCondition millCondition) {
+    public GameStateEditor(MillCondition millCondition, GamePage gamePage) {
         stateHistory = new Stack<>();
-        gameState = new GameState(millCondition);
+        gameState = new GameState(millCondition, gamePage);
     }
 
 
@@ -48,6 +52,26 @@ public class GameStateEditor {
         gameState.restore(memento);
         if(memento.getStartPosition()!=null && memento.getEndPosition()==null) { // if deleting a piece, undo again
             this.undo();
+        }
+    }
+
+    @Override
+    public LinkedTreeMap<String, Object> shelve() {
+        LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
+        Stack<GameState.Memento> copyStack = (Stack<GameState.Memento>) stateHistory.clone();
+        ArrayList<Object> stateHistoryList = new ArrayList<>();
+        while(!copyStack.empty()) {
+            stateHistoryList.add(copyStack.pop().shelve());
+        }
+        data.put("stateHistory",stateHistoryList);
+        return data;
+    }
+
+    @Override
+    public void restore(LinkedTreeMap<String, Object> data) {
+        ArrayList<Object> stateHistoryList = (ArrayList<Object>) data.get("stateHistory");
+        for(int i = stateHistoryList.size()-1; i >= 0; i--) {
+            this.stateHistory.add(GameState.getMementoFromData(data));
         }
     }
 }

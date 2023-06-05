@@ -1,12 +1,14 @@
 package game.GameRuleRegulation;
 
+import com.google.gson.internal.LinkedTreeMap;
 import game.Drawables.Position;
+import game.SaveFunction.Saveable;
 import game.Teams;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class Mill {
+public class Mill implements Saveable {
     ArrayList<Position> positions;
     private boolean hasBeenProcessed; // represents whether a token has already been deleted because of the mill
 
@@ -75,5 +77,17 @@ public class Mill {
         for(Position pos : this.positions) {
             pos.setMillExists(millExists);
         }
+    }
+
+    @Override
+    public LinkedTreeMap<String, Object> shelve() {
+        LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
+        data.put("hasBeenProcessed",this.hasBeenProcessed);
+        return data;
+    }
+
+    @Override
+    public void restore(LinkedTreeMap<String, Object> data) {
+        this.hasBeenProcessed = (boolean) data.get("hasBeenProcessed");
     }
 }

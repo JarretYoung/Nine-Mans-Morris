@@ -1,7 +1,12 @@
 package game.SaveFunction;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import game.GameRuleRegulation.MillCondition;
+import game.Players.Player;
+import game.UIComponents.Board;
 import game.UIComponents.GamePage;
+import game.UndoFunction.GameStateEditor;
 
 import java.io.*;
 
@@ -12,9 +17,11 @@ import java.io.*;
  * @version 1.0 3/6/2023
  */
 public class txtSaveStrategy extends SaveStrategy {
-
+    public txtSaveStrategy(SaveObj saveObj) {
+        super.saveStrategy(saveObj);
+    }
     @Override
-    public GamePage restoreToProgress() {
+    public SaveObj restoreToProgress() {
         String filePath = getDirectorySaveProgress();
 
         try {
@@ -30,9 +37,10 @@ public class txtSaveStrategy extends SaveStrategy {
             Gson gson = new Gson();
 
             // Parse the JSON string into an object
-            GamePage gamePage = gson.fromJson(jsonString, GamePage.class);
+            LinkedTreeMap<String,Object> data = gson.fromJson(jsonString, LinkedTreeMap.class);
+            this.getSaveObj().restore(data);
 
-            return gamePage;
+            return this.getSaveObj();
 
         } catch (IOException e) {
             System.out.println("Error reading the text file: " + e.getMessage());
@@ -43,8 +51,9 @@ public class txtSaveStrategy extends SaveStrategy {
     @Override
     public void saveProgress() {
         String filePath = getDirectorySaveProgress();
-
-        String json = objectToJson(getGamePage());
+        Object result = getSaveObj().shelve();
+        System.out.println(result);
+        String json = objectToJson(result);
 
         // Check if the file exists
         File file = new File(filePath);
