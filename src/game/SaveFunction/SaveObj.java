@@ -38,7 +38,7 @@ public class SaveObj implements Saveable {
     public LinkedTreeMap<String, Object> shelve() {
         LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
         data.put("currentPlayerTeam",this.gamePage.getCurrentPlayer().getTeam());
-        data.put("singleplayer",this.gamePage.getPlayer2() instanceof ComputerPlayer);
+        data.put("singleplayer",this.gamePage.isSingleplayer());
         data.put("board",this.board.shelve());
         data.put("player1",this.player1.shelve());
         data.put("player2",this.player2.shelve());

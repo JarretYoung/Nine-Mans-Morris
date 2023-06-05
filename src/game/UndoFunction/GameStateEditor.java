@@ -46,11 +46,16 @@ public class GameStateEditor implements Saveable {
 //        gameState.set(board.getGrid(), playerOnePieces, playerTwoPieces);
 //        stateHistory.add(gameState.takeSnapshot());
 //    }
-
     public void undo() {
+        this.undo(false);
+    }
+    public void undo(boolean repeatOnce) {
         GameState.Memento memento = stateHistory.pop();
         gameState.restore(memento);
         if(memento.getStartPosition()!=null && memento.getEndPosition()==null) { // if deleting a piece, undo again
+            this.undo();
+        }
+        if(repeatOnce) {
             this.undo();
         }
     }

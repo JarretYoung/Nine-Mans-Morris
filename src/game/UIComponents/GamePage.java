@@ -68,7 +68,7 @@ public class GamePage extends Page {
         this.gameStateEditor = new GameStateEditor(this.millCondition,this);
 
         new Button(this,100,560,180,60,"MAIN MENU",new GotoConfirmCommand(this.getPanel()));
-        new Button(this,300,560,180,60,"UNDO",new UndoCommand(this.gameStateEditor));
+        new Button(this,300,560,180,60,"UNDO",new UndoCommand(this.gameStateEditor,this));
         new Button(this,500,560,180,60,"SAVE",new SaveCommand(this));
     }
 
@@ -195,5 +195,8 @@ public class GamePage extends Page {
     }
     public void setSingleplayer(boolean singleplayer) {
         this.player2 = singleplayer ? new ComputerPlayer(Teams.GOOSE) : new HumanPlayer(Teams.GOOSE);
+    }
+    public boolean isSingleplayer() {
+        return this.player2 instanceof ComputerPlayer;
     }
 }
