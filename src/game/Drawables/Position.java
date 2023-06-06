@@ -1,5 +1,8 @@
 package game.Drawables;
 
+import com.google.gson.internal.LinkedTreeMap;
+import game.SaveFunction.Saveable;
+import game.Teams;
 import game.UIComponents.*;
 import javafx.geometry.Pos;
 
@@ -8,7 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.ArrayList;
 
-public class Position extends Sprite {
+public class Position extends Sprite implements Saveable {
     // attributes
     public final static double SIZE = 16; // width and height of the position
     public final static String IMG_PATH = "images/blackCircle.png"; // default image
@@ -147,4 +150,26 @@ public class Position extends Sprite {
      * @return whether this position is part of a mill
      */
     public boolean isMillExists() {return millExists;}
+
+    @Override
+    public LinkedTreeMap<String, Object> shelve() {
+        LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
+        data.put("token",this.token!=null ? this.token.shelve() : null);
+        data.put("x",this.getX());
+        data.put("y",this.getY());
+        return data;
+    }
+
+    @Override
+    public void restore(LinkedTreeMap<String, Object> data) {
+        if(data.get("token")!=null) {
+            if(this.token!=null) {
+                this.token.restore((LinkedTreeMap<String, Object>) data.get("token"));
+            }
+            else {
+                this.token = new Token(this.getPage(),this.getX(),this.getY(), Teams.DUCK);
+                this.token.restore((LinkedTreeMap<String, Object>) data.get("token"));
+            }
+        }
+    }
 }

@@ -7,6 +7,7 @@ import game.Drawables.Sprite;
 import game.Drawables.Token;
 import game.GameRuleRegulation.WinCondition;
 import game.Players.ComputerPlayer;
+import game.SaveFunction.SaveObj;
 import game.UndoFunction.GameState;
 import game.Actions.Action;
 import game.GameRuleRegulation.Mill;
@@ -64,11 +65,11 @@ public class GamePage extends Page {
         this.gooseSpriteLine = new SpriteLine(this,550,220, Token.SIZE, Token.SIZE,
                 (new ImageIcon(Token.IMG_PATH_GOOSE)).getImage(),20,this.player2.checkPiecesInHand(),0,1);
 
-        this.gameStateEditor = new GameStateEditor(this.millCondition);
+        this.gameStateEditor = new GameStateEditor(this.millCondition,this);
 
         new Button(this,100,560,180,60,"MAIN MENU",new GotoConfirmCommand(this.getPanel()));
-        new Button(this,300,560,180,60,"UNDO",new UndoCommand(this.gameStateEditor));
-        new Button(this,500,560,180,60,"SAVE",new SaveCommand(this.getPanel()));
+        new Button(this,300,560,180,60,"UNDO",new UndoCommand(this.gameStateEditor,this));
+        new Button(this,500,560,180,60,"SAVE",new SaveCommand(this));
     }
 
     /**
@@ -82,10 +83,7 @@ public class GamePage extends Page {
         else {
             this.currentPlayer = this.player1;
         }
-        // set UI elements
-        this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
-        this.updateTurnText();
-
+        this.updateUI();
         // check if a stalemate is occurring
         if(this.winCondition.checkStalemate(currentPlayer,this.board,this.mill!=null)) {
             this.setGameEndTextStr("game over! stalemate occurred");
@@ -97,6 +95,11 @@ public class GamePage extends Page {
             this.setGameEndTextStr(String.format("game over! %s wins!",winner));
             this.gameIsRunning = false;
         }
+    }
+    public void updateUI() {
+        // set UI elements
+        this.board.updateBoardFromCurrentTeam(this.currentPlayer.getTeam());
+        this.updateTurnText();
     }
 
     /**
@@ -167,5 +170,35 @@ public class GamePage extends Page {
      */
     public Mill getMill() {
         return mill;
+    }
+
+    public Board getBoard() {return board;}
+
+    public Player getCurrentPlayer() {return currentPlayer;}
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    /**
+     * creates a SaveObj
+     * @return save object
+     */
+    public SaveObj genSaveObj() {
+        return new SaveObj(this,board,player1,player2,millCondition,gameStateEditor);
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+    public void setSingleplayer(boolean singleplayer) {
+        this.player2 = singleplayer ? new ComputerPlayer(Teams.GOOSE) : new HumanPlayer(Teams.GOOSE);
+    }
+    public boolean isSingleplayer() {
+        return this.player2 instanceof ComputerPlayer;
     }
 }

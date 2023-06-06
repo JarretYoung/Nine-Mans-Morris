@@ -1,14 +1,16 @@
 package game.UIComponents;
 
+import com.google.gson.internal.LinkedTreeMap;
 import game.Drawables.Line;
 import game.Drawables.Position;
 import game.Drawables.Sprite;
+import game.SaveFunction.Saveable;
 import game.Teams;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Board extends Sprite {
+public class Board extends Sprite implements Saveable {
     public final static double SIZE = 400;
     public final static String IMG_PATH_DUCK = "images/greenSquare.png"; // background when it is the duck's turn
     public final static String IMG_PATH_GOOSE = "images/redSquare.png"; // background when it is the goose's turn
@@ -69,6 +71,23 @@ public class Board extends Sprite {
      */
     private double gridPosYtoCoordY(int gridPosY) {
         return this.getY1() + gridPosY/((double) GRID_SIZE_Y-1) * this.getHeight();
+    }
+    /**
+     * convert coordinate to grid position
+     * @param coordX x pos corresponding to coordinate
+     * @return grid position
+     */
+    public int coordXToGridPosX(double coordX) {
+        return (int) Math.round((coordX - this.getX1())/this.getWidth() * (GRID_SIZE_X - 1));
+    }
+
+    /**
+     * convert coordinate to grid position
+     * @param coordY y pos corresponding to coordinate
+     * @return grid position
+     */
+    public int coordYToGridPosY(double coordY) {
+        return (int) Math.round((coordY - this.getY1())/this.getHeight() * (GRID_SIZE_Y - 1));
     }
 
     /**
@@ -246,6 +265,28 @@ public class Board extends Sprite {
     public void resetPositionAllowed() {
         for(Position pos : positions) {
             pos.setAllowed(false);
+        }
+    }
+
+    @Override
+    public LinkedTreeMap<String, Object> shelve() {
+        LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
+        ArrayList<Object> posArray = new ArrayList<>();
+        for(Position pos : positions) {
+            posArray.add(pos.shelve());
+        }
+        data.put("positions",posArray);
+        return data;
+    }
+
+    @Override
+    public void restore(LinkedTreeMap<String, Object> data) {
+        ArrayList<Object> posArray = (ArrayList<Object>) data.get("positions");
+        for(Object posDataObj: posArray) {
+            LinkedTreeMap<String, Object> posData = (LinkedTreeMap<String, Object> ) posDataObj;
+            int x = this.coordXToGridPosX(Integer.parseInt(String.valueOf(Math.round((double) posData.get("x")))));
+            int y = this.coordYToGridPosY(Integer.parseInt(String.valueOf(Math.round((double) posData.get("y")))));
+            this.grid[x][y].restore(posData);
         }
     }
 }
