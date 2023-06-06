@@ -19,11 +19,9 @@ public class LoadCommand implements Command {
     @Override
     public void execute() {
         GamePage gamePage = new GamePage(this.panel,false);
-        if(this.saveStrategy==null) {
-            saveStrategy = new txtSaveStrategy(gamePage.genSaveObj());
-        }
-        saveStrategy.restoreToProgress();
         this.panel.registerPage(gamePage);
+        saveStrategy = new txtSaveStrategy(gamePage.genSaveObj());
+        saveStrategy.restoreToProgress();
         this.panel.setCurrentPage(gamePage.getId());
     }
 }
