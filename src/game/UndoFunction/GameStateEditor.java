@@ -89,7 +89,6 @@ public class GameStateEditor implements Saveable {
         }
     }
 
-    // TODO: ADD DOCUMENTATION 
     @Override
     public LinkedTreeMap<String, Object> shelve() {
         LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
@@ -102,7 +101,6 @@ public class GameStateEditor implements Saveable {
         return data;
     }
 
-    // TODO: ADD DOCUMENTATION 
     @Override
     public void restore(LinkedTreeMap<String, Object> data) {
         ArrayList<Object> stateHistoryList = (ArrayList<Object>) data.get("stateHistory");
