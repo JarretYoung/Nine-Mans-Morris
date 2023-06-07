@@ -11,6 +11,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.ArrayList;
 
+/**
+ *  Position class which extends Sprite and implements Saveable which is used to determine positions on the game
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 25/4/2023
+ */
 public class Position extends Sprite implements Saveable {
     // attributes
     public final static double SIZE = 16; // width and height of the position

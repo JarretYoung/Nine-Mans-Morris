@@ -153,7 +153,6 @@ public class GamePage extends Page {
         this.gooseSpriteLine.setSpriteCount(this.player2.checkPiecesInHand());
         this.updateTurnText();
         super.tick();
-//        this.setMillFormedTextStr(this.mill==null ? "no mills formed" : "mill formed!");
     }
 
     /**

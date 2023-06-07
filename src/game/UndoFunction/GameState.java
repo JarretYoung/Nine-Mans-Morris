@@ -23,12 +23,6 @@ public class GameState {
     private MillCondition millCondition;
     private static GamePage gamePage;
 
-//    public GameState(Board board, Integer playerOnePieces, Integer playerTwoPieces) {
-//        this.board = board;
-//        this.playerOnePieces = playerOnePieces;
-//        this.playerTwoPieces = playerTwoPieces;
-//    }
-
     /**
      * Constructor for the Gamestate
      *
@@ -156,6 +150,7 @@ public class GameState {
          */
         public MillCondition getMillCondition() {return millCondition;}
 
+        // TODO: ADD DOCUMENTATION
         @Override
         public LinkedTreeMap<String, Object> shelve() {
             LinkedTreeMap<String,Object> data = new LinkedTreeMap<>();
@@ -166,6 +161,7 @@ public class GameState {
             return data;
         }
 
+        // TODO: ADD DOCUMENTATION 
         @Override
         public void restore(LinkedTreeMap<String, Object> data) {
             Enum<Teams> teams = ((LinkedTreeMap<String, Object>) data.get("player")).get("team").equals("DUCK") ? Teams.DUCK : Teams.GOOSE;
@@ -198,6 +194,7 @@ public class GameState {
         }
     }
 
+    // TODO: ADD DOCUMENTATION 
     public static Memento getMementoFromData(LinkedTreeMap<String, Object> data) {
         Memento memento = new Memento();
         memento.restore(data);

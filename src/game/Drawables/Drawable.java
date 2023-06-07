@@ -3,6 +3,12 @@ package game.Drawables;
 import game.UIComponents.*;
 import java.awt.*;
 
+/**
+ *  Drawable abstract class which is used for all displayed images and texts
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 19/4/2023
+ */
 public abstract class Drawable {
     // page that the drawable is on
     private Page page;

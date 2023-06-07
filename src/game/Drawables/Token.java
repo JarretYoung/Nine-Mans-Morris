@@ -8,6 +8,12 @@ import game.UIComponents.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *  Token class which extends Sprite and implements Saveable to have tokens for players
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 19/4/2023
+ */
 public class Token extends Sprite implements Saveable {
     // attributes
     public final static double SIZE = 64;

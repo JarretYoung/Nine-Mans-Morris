@@ -21,7 +21,7 @@ public class MillCondition implements Saveable {
         this.genMillCombos();
     }
     /**
-     * is there an activated mill that hasn't been handled yet?
+     * Finding any formed mills that has not been activated yet
      * @return activated mill
      */
     public Mill findFormedMill() {
