@@ -5,7 +5,14 @@ import game.Players.Player;
 import game.UndoFunction.GameStateEditor;
 
 import java.time.LocalDateTime;
-// class representing a player doing something
+
+
+/**
+ *  Class representing a player doing something
+ *
+ * @author Syed Zubin Hafiz
+ * @version 1.1 16/4/2023
+ */
 public abstract class Action {
     protected ActionType actionType;
     protected Player player;
