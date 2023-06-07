@@ -14,6 +14,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 
+/**
+ *  MainMenuPage which extends Page, which is the page they first see when they enter the application
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 10/5/2023
+ */
 public class MainMenuPage extends Page {
     public static final String ID = "mainMenu";
     public final static String IMG_PATH_DUCK = "images/duck.png";

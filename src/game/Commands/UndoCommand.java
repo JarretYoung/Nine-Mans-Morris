@@ -10,6 +10,10 @@ public class UndoCommand implements Command {
         this.gameStateEditor = gameStateEditor;
         this.gamePage = gamePage;
     }
+
+    /**
+     * run the command
+     */
     @Override
     public void execute() {
         gameStateEditor.undo(gamePage.isSingleplayer());

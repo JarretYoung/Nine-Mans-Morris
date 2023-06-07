@@ -6,7 +6,13 @@ import game.UIComponents.*;
 
 import javax.swing.*;
 import java.awt.*;
-// class to represent buttons that can be pressed
+
+/**
+ *  Button class that extends Sprite superclass which will be used to display buttons on the UI
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 10/5/2023
+ */
 public class Button extends Sprite {
     // attributes
     public final static String IMG_PATH = "images/button.png"; // image for buttons by default

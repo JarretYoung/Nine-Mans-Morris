@@ -3,6 +3,12 @@ package game.Drawables;
 import game.UIComponents.*;
 import java.awt.*;
 
+/**
+ *  Text class which extends Drawable which deals with texts
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 19/4/2023
+ */
 public class Text extends Drawable {
     private static Color defaultColor = new Color(255,255,255);
     private static String defaultFontStr = "Arial";

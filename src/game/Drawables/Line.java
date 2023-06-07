@@ -5,6 +5,12 @@ import game.UIComponents.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *  Line class which extends Sprite used to display lines on the game
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 25/4/2023
+ */
 public class Line extends Sprite {
     // attributes
     public static final double LINE_WIDTH = 8; // how large the line is

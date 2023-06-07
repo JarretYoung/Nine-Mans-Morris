@@ -5,6 +5,12 @@ import game.UIComponents.Page;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *  DecorativeSprite which extends Sprite which is used to display image that is used as decorations
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 16/5/2023
+ */
 public class DecorativeSprite extends Sprite {
     public final static double SIZE = 120;
     Image img;

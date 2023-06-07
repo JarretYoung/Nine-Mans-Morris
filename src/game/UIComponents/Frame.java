@@ -6,7 +6,7 @@ public class Frame extends JFrame {
     private Panel panel;
 
     /**
-     * game frame
+     * Constructor for game frame
      */
     public Frame() {
         super("Nine Man Morris");

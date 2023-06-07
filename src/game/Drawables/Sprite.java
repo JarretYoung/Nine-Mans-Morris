@@ -3,6 +3,12 @@ package game.Drawables;
 import game.UIComponents.*;
 import java.awt.*;
 
+/**
+ *  Sprite class which extends Drawable which deals with images
+ *
+ * @author Ong Chien Ming
+ * @version 1.0 19/4/2023
+ */
 public class Sprite extends Drawable {
     double x; // horizontal midpoint
     double y; // vertical midpoint
