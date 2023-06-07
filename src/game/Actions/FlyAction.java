@@ -6,7 +6,11 @@ import game.Players.Player;
 import game.Drawables.Position;
 import game.UndoFunction.GameStateEditor;
 
-// action representing a token moving anywhere
+/**
+ *  Action representing a token moving anywhere
+ * @author Syed Zubin Hafiz
+ * @version 1.1
+ */
 public class FlyAction extends MoveAction {
     /**
      * constructor

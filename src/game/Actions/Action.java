@@ -9,9 +9,8 @@ import java.time.LocalDateTime;
 
 /**
  *  Class representing a player doing something
- *
  * @author Syed Zubin Hafiz
- * @version 1.1 16/4/2023
+ * @version 1.1
  */
 public abstract class Action {
     protected ActionType actionType;

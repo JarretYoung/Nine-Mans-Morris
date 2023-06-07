@@ -11,7 +11,7 @@ import game.UndoFunction.GameStateEditor;
  *  Action representing the deletion of a token
  *
  * @author Syed Zubin Hafiz
- * @version 1.2 20/4/2023
+ * @version 1.2
  */
 public class DeleteAction extends Action {
     private Position position;

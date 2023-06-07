@@ -6,7 +6,12 @@ import game.Players.Player;
 import game.Drawables.Position;
 import game.UndoFunction.GameStateEditor;
 
-// action representing a token moving only to adjacent locations
+
+/**
+ * Action representing a token moving only to adjacent locations
+ * @author Syed Zubin Hafiz
+ * @version 1.2
+ */
 public class MoveAdjAction extends MoveAction {
     /**
      * constructor
