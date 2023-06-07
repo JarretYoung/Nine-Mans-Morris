@@ -6,7 +6,13 @@ import game.Players.Player;
 import game.Drawables.Position;
 import game.UndoFunction.GameStateEditor;
 
-// action representing the deletion of a token
+//
+/**
+ *  Action representing the deletion of a token
+ *
+ * @author Syed Zubin Hafiz
+ * @version 1.2
+ */
 public class DeleteAction extends Action {
     private Position position;
 

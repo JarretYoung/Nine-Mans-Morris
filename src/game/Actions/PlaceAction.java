@@ -6,10 +6,14 @@ import game.Players.Player;
 import game.Drawables.Position;
 import game.UndoFunction.GameStateEditor;
 
-// action representing the insertion of a token onto the board
+//
 public class PlaceAction extends Action {
     private Position position;
-
+/**
+ * Action representing the insertion of a token onto the board
+ * @author Syed Zubin Hafiz
+ * @version 1.1
+ */
     /**
      * constructor
      * @param player player that will place the token
