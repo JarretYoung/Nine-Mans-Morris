@@ -72,9 +72,23 @@ abstract public class Player implements Saveable {
      *  Play the turn of this player
      */
     public abstract Action playTurn(Board board, boolean millFormed);
+
+    /**
+     * This method is used to update the number of tokens in hand based on the actions of the board
+     *
+     * @param board the game board
+     */
     public void updateTokenCount(Board board) {
         this.piecesLeft = board.getTokenCount(this.team);
     }
+
+    /**
+     * This action is used to check if a valid move was selected
+     *
+     * @param initialLocation the initial location of the piece
+     * @param finalLocation the final location of the piece
+     * @return the legal action given said legal action was made
+     */
     public Action checkValidMove(Position initialLocation, Position finalLocation) { //parameter subject to change
         for (Action action: this.allowableActions){
             // check
@@ -97,6 +111,7 @@ abstract public class Player implements Saveable {
     public int checkPiecesInHand() {
         return piecesInHand;
     }
+
     /**
      *  Getter for the pieces that are left on the board / total pieces for this player
      *
@@ -111,7 +126,6 @@ abstract public class Player implements Saveable {
         return team;
     }
     public ArrayList<Action> generateAllowableActions(Board board, boolean millFormed) {return this.legalMoves.getAllowableActions(this,board,millFormed);}
-
     protected ArrayList<Action> getAllowableActions() {
         return allowableActions;
     }
